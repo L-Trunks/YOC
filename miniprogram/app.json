@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/scenery/index",
+    "pages/plan/index",
+    "pages/scenery/sceneryDetail/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "YOC自由行",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#fdb975",
+    "backgroundColor": "#fff",
+    "list": [{
+        "pagePath": "pages/index/index",
+        "text": "个人行程",
+        "iconPath": "images/first/user1.png",
+        "selectedIconPath": "images/first/user2.png"
+      },
+      {
+        "pagePath": "pages/scenery/index",
+        "text": "喜欢的景点",
+        "iconPath": "images/first/xin1.png",
+        "selectedIconPath": "images/first/xin2.png"
+      },
+      {
+        "pagePath": "pages/plan/index",
+        "text": "旅行计划",
+        "iconPath": "images/first/plan1.png",
+        "selectedIconPath": "images/first/plan2.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

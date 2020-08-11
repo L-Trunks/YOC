@@ -1,0 +1,74 @@
+.main{
+    text-align: center;
+    margin-bottom: 150rpx;
+}
+
+/* 请求用户数据按钮 */
+#btn_user{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    opacity: 0;
+}
+
+/* logo */
+
+.logo{
+    width: 40%;
+    height: 180rpx;
+}
+.logo_box{
+    /* margin-top: 40rpx; */
+    padding: 40rpx;
+    padding-bottom: 0;
+}
+.logo_box:after{
+    position: relative;
+    top: -45rpx;
+    /* left: 180rpx; */
+    font-weight: 900;
+    content: '自由行';
+    color:#6fb5f3;
+    font-size: 32rpx;
+}
+
+.form_box{
+    font-size: 28rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.form_item{
+    color: rgba(161, 161, 161);
+    border-radius: 30rpx;
+    box-shadow: rgb(230, 230, 230) 0px 0px 16rpx;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    padding: 10rpx 20rpx;
+    margin-top: 50rpx;
+}
+.form_img{
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 10rpx;
+}
+
+.start_btn{
+    color: #fff;
+    font-weight: 800;
+    background: #6fb5f3;
+    padding: 5rpx 60rpx;
+    border-radius: 30rpx;
+    margin-top: 40rpx;
+}
+
+.picker{
+    width: 100%;
+    margin-left: 28rpx;
+}

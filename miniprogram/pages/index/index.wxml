@@ -1,0 +1,82 @@
+<view class="main" hover-class="none" hover-stop-propagation="false">
+	<view class="" hover-class="none" hover-stop-propagation="false">
+		<view class="logo_box" hover-class="none" hover-stop-propagation="false">
+			<image
+			 class="logo"
+			 src="../../images/first/logo.png"
+			 binderror=""
+			 bindload=""
+			/>
+		</view>
+
+	</view>
+	<view class="form_box" hover-class="none" hover-stop-propagation="false">
+		<view class="form_item" hover-class="none" hover-stop-propagation="false">
+			<image class="form_img" src="../../images/first/arrive.png" />
+			到达地点:
+			<picker bindchange="bindCityChange" value="{{cityIndex}}" range="{{cityArray}}">
+				<view class="picker">
+					{{cityArray[cityIndex]}}
+				</view>
+			</picker>
+		</view>
+		<view class="form_item" hover-class="none" hover-stop-propagation="false">
+			<image class="form_img" src="../../images/first/plane.png" />
+			交通工具:
+			<picker bindchange="bindTransportChange" value="{{transIndex}}" range="{{transArray}}">
+				<view class="picker">
+					{{transArray[transIndex]}}
+				</view>
+			</picker>
+		</view>
+		<view class="form_item" hover-class="none" hover-stop-propagation="false">
+			<image class="form_img" src="../../images/first/go_time.png" />
+			出行时间:
+			<picker
+			 mode="date"
+			 value="{{goDate}}"
+			 start="{{nowDate}}"
+			 end="{{endDate}}"
+			 bindchange="bindGoDateChange"
+			>
+				<view class="picker">
+					{{goDate}}
+				</view>
+			</picker>
+		</view>
+		<view class="form_item" hover-class="none" hover-stop-propagation="false">
+			<image class="form_img" src="../../images/first/arrivetime.png" />
+			到达时间:
+			<picker
+			 mode="date"
+			 value="{{arriveDate}}"
+			 start="{{nowDate}}"
+			 end="{{endDate}}"
+			 bindchange="bindArriveDateChange"
+			>
+				<view class="picker">
+					{{arriveDate}}
+				</view>
+			</picker>
+		</view>
+		<view bindtap="start" class="start_btn">
+			开 始
+		</view>
+		<image
+		 class="main_people"
+		 src="../../images/first/people.png"
+		 mode="aspectFit|aspectFill|widthFix"
+		 lazy-load="false"
+		 binderror=""
+		 bindload=""
+		/>
+	</view>
+	<button
+	 wx:if="{{!isLogin}}"
+	 id="btn_user"
+	 open-type="getUserInfo"
+	 bindgetuserinfo='onGetUserInfo'
+	/>
+	<tabbar activeIdx="{{activeIdx}}" />
+</view>
+

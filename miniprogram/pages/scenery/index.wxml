@@ -1,0 +1,141 @@
+<import src="../../templates/main.wxml" />
+<view class="scenery" hover-class="none" hover-stop-propagation="false">
+	<view
+	 class="scenery_top flex j_center"
+	 style="{{isTop?'height:0':''}}"
+	 hover-class="none"
+	 hover-stop-propagation="false"
+	>
+		<image wx:if="{{!isTop}}" class='background' src="../../images/scenery/bg.png" />
+		<view id="search" class="search_box flex j_center {{isTop? 'search_top' :''}}">
+			<image
+			 wx:if="{{isTop}}"
+			 bindtap='backMain'
+			 class="search_back"
+			 src="../../images/scenery/back.png"
+			/>
+			<view class='scenery_search flex j_start'>
+				<image src="../../images/scenery/search.png" />
+				<input
+				 class=""
+				 value=""
+				 type="text"
+				 placeholder="请输入景点名称"
+				 placeholder-style="color:#888"
+				 bindinput=""
+				 bindfocus="onSearchFocus"
+				 bindblur="onSearchBlur"
+				 bindconfirm=""
+				/>
+			</view>
+		</view>
+	</view>
+	<view class='main_box' style="{{isTop?'margin-top:140rpx':''}}">
+		<view class="flex j_around category_box {{isTop? 'cate_top' :''}}" hover-class="none" hover-stop-propagation="false">
+			<view
+			 class="{{isCategory===item._id?'category_item_active':'category_item'}}"
+			 bindtap="changeCategory"
+			 data-cate='{{item._id}}'
+			 wx:for="{{categoryArr}}"
+			 wx:key='{{index}}'
+			>
+				{{item.categoryName}}
+			</view>
+		</view>
+		<view class="flex column scenery_box" hover-class="none" hover-stop-propagation="false">
+			<view class='flex j_start scenery_item' wx:for="{{sceneryArr}}" wx:key="{{index}}">
+				<image
+				 bindtap="goDetail"
+				 data-id='{{item._id}}'
+				 mode='scaleToFill'
+				 class="s_item_left"
+				 src="{{item.picList[0].picUrl || '../../images/scenery/noImage.jpg'}}"
+				/>
+				<view
+				 bindtap="goDetail"
+				 data-id='{{item._id}}'
+				 class="s_item_model"
+				 hover-class="none"
+				 hover-stop-propagation="false"
+				>
+					<view class="" hover-class="none" hover-stop-propagation="false">
+						{{item.name}}
+					</view>
+					<text class="s_item_text">
+					{{item.summary || item.content || ''}}
+					</text>
+				</view>
+				<image
+				 class="s_item_right"
+				 data-id="{{item._id}}"
+				 data-index="{{index}}"
+				 src="{{item.isSelect ? '../../images/scenery/heart.png':'../../images/scenery/heart_uncheck.png'}}"
+				 mode="aspectFit|aspectFill|widthFix"
+				 lazy-load="false"
+				 binderror=""
+				 bindtap="selectScenery"
+				/>
+			</view>
+		</view>
+	</view>
+	<template is="noMoreData" class='flex j_center' wx:if="{{isBottom}}" />
+	<view catchtouchmove="return" wx:if="{{!hasHour}}" class='hours_box flex j_center column'>
+		<view style='width:80%;background:#fff;padding:50rpx'>
+			<view style="width:100%" class="flex j_end">
+				<image bindtap="closeHours" src="../../images/scenery/55555_03.png" style="width:36rpx;height:36rpx;position:relative;left:36rpx" />
+			</view>
+			<view style='font-size:40rpx;font-weight:800;color:#000'>
+				您的每天预计游玩时间
+				<view style="width:100%" class="flex j_end">
+					<image src="../../images/scenery/picture_07.png" style="width:200rpx;height:140rpx;top:40rpx" />
+				</view>
+			</view>
+			<view style="" class="hours">
+				<image class="lock" src="../../images/scenery/lock_07.png" />
+				<view class="hours_main flex j_center">
+					<view class="flex column j_center">
+						<view style="font-size:60rpx;font-weight:900">
+							每天
+						</view>
+						<view style="font-size:40rpx">
+							daily
+						</view>
+					</view>
+					<picker-view
+					 indicator-style="height: 50px;"
+					 style="width: 20%; height: 240rpx;margin:0 80rpx;"
+					 mask-class='hour_mask'
+					 value="{{hours}}"
+					 bindchange="hourChange"
+					>
+						<picker-view-column>
+							<view wx:for="{{hours}}" wx:key="{{hours}}" class="picker_hours" style="line-height: 50px;text-align: center;font-size:70rpx;font-weight:900;">
+								{{item}}
+							</view>
+						</picker-view-column>
+					</picker-view>
+					<view class="flex column j_center">
+						<view style="font-size:60rpx;font-weight:900">
+							小时
+						</view>
+						<view style="font-size:40rpx">
+							hours
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="flex j_center" style="width:100%;margin-top:60rpx">
+				<view bindtap='hourNext' class="next_hour">
+					下一步
+				</view>
+			</view>
+		</view>
+
+	</view>
+	<view catchtap="confirmScenery" class='scenery_submit'>
+		确 认
+	</view>
+</view>
+
+<tabbar activeIdx="{{activeIdx}}" />
+

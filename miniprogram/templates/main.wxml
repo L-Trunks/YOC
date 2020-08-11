@@ -1,0 +1,5 @@
+<template name="noMoreData">
+  <view class='noMoreData flex j_center'>
+    已加载全部数据
+  </view>
+</template>

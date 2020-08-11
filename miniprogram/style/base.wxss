@@ -1,0 +1,281 @@
+/**
+ * flex布局
+ */
+
+.flex {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.flex.j_center {
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.flex.j_start {
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+}
+
+.flex.j_end {
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+}
+
+.flex.j_around {
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+}
+
+.flex.a_start {
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+}
+
+.flex.a_end {
+    align-items: flex-end;
+    -webkit-align-items: flex-end;
+}
+
+.flex.a_baseline {
+    align-items: baseline;
+    -webkit-align-items: baseline;
+}
+
+.flex.wrap {
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+.flex.column {
+    flex-direction: column;
+    -webkit-flex-direction: column;
+}
+
+.flex .row-1 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.flex .row-2 {
+    -webkit-flex: 2;
+    flex: 2;
+}
+
+.flex .row-3 {
+    -webkit-flex: 3;
+    flex: 3;
+}
+
+.flex .row-4 {
+    -webkit-flex: 4;
+    flex: 4;
+}
+
+.flex .row-5 {
+    -webkit-flex: 5;
+    flex: 5;
+}
+
+.flex_inline {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.flex_inline.j_center {
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.flex_inline.j_start {
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+}
+
+.flex_inline.j_end {
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+}
+
+.flex_inline.j_around {
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+}
+
+.flex_inline.a_start {
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+}
+
+.flex_inline.a_end {
+    align-items: flex-end;
+    -webkit-align-items: flex-end;
+}
+
+.flex_inline.a_baseline {
+    align-items: baseline;
+    -webkit-align-items: baseline;
+}
+
+.flex_inline.wrap {
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+.flex_inline.column {
+    flex-direction: column;
+    -webkit-flex-direction: column;
+}
+
+/* 按钮背景色 */
+
+.btn_bg {
+    background: #f04f48;
+}
+
+/* 主题背景色 */
+
+.main_bg {
+    background: #f04f48 !important
+}
+
+/* 红色按钮 */
+
+.btn_red {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 694rpx;
+    height: 88rpx;
+    background: #f04f48;
+    border-radius: 10rpx;
+    color: #fff;
+    font-weight: bold;
+    font-size: 36rpx;
+}
+
+/* 文本大小 */
+
+.txt_36 {
+    font-size: 36rpx;
+}
+
+.txt_30 {
+    font-size: 30rpx;
+}
+
+.txt_26 {
+    font-size: 26rpx
+}
+
+.txt_24 {
+    font-size: 24rpx
+}
+
+.txt_22 {
+    font-size: 22rpx
+}
+
+.txt_20 {
+    font-size: 20rpx
+}
+
+.txt_28 {
+    font-size: 28rpx
+}
+
+.txt_32 {
+    font-size: 32rpx;
+}
+
+.txt_34 {
+    font-size: 34rpx;
+}
+
+.txt_44 {
+    font-size: 44rpx;
+}
+
+.txt_48 {
+    font-size: 48rpx;
+}
+
+.txt_18 {
+    font-size: 18rpx;
+}
+
+/* 字重 */
+
+.txt_bold {
+    font-weight: bold
+}
+
+.txt_medium {
+    font-weight: 500
+}
+
+/* 字体颜色 */
+
+.txt_222 {
+    color: #222;
+}
+
+.txt_333 {
+    color: #333;
+}
+
+.txt_999 {
+    color: #999
+}
+
+.txt_666 {
+    color: #666
+}
+
+.txt_fff {
+    color: #fff
+}
+
+.txt_bd {
+    color: #bdbdbd
+}
+
+.txt_b7 {
+    color: #b7b7b7
+}
+
+.txt_red {
+    color: #f04f48
+}
+
+.txt_ccc {
+    color: #cccccc
+}
+
+/* 行内块元素 */
+
+.inline_block {
+    display: inline-block
+}
+
+.inline {
+    display: inline
+}
+
+/* 已加载全部数据 */
+
+.noMoreData {
+    padding: 30rpx;
+    color: gray;
+    background: #ddd;
+    font-size: 24rpx;
+    text-align: center;
+}

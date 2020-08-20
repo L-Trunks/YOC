@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="park_container">
+	<view class="park_hotel_list">
+		<block wx:for="{{hotelList}}" wx:key="index">
+			<view bindtap="selectHotel" data-index="{{index}}" class='list_item flex txt_26 txt_medium txt_999'>
+				<view class="flex column a_start j_start list_item_left">
+					<view class="txt_bold txt_30 txt_333">
+						{{item.title}}
+					</view>
+					<view>
+						<image class="" src="../../../images/scenery/positon_small@3x.png"
+							mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+						{{item.address}}
+					</view>
+				</view>
+				<view catchtap="goLocation" data-index="{{index}}"
+					class="list_item_right flex column j_center txt_26 txt_medium txt_999">
+					<image class="" src="../../../images/scenery/nav_small@3x.png" mode="aspectFit|aspectFill|widthFix"
+						lazy-load="false" binderror="" bindload="" />
+					<view>
+						{{item.distance}}km
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>

@@ -105,3 +105,16 @@ export const dateDiff = (sDate1, sDate2) => {    //sDate1和sDate2是2002-12-18�
     iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24)    //把相差的毫秒数转换为天数 
     return iDays
 }
+
+//根据经纬度计算距离
+export const distance = (la1, lo1, la2, lo2) => {
+    var La1 = la1 * Math.PI / 180.0;
+    var La2 = la2 * Math.PI / 180.0;
+    var La3 = La1 - La2;
+    var Lb3 = lo1 * Math.PI / 180.0 - lo2 * Math.PI / 180.0;
+    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+    s = s * 6378.137;
+    s = Math.round(s * 10000) / 10000;
+    s = s.toFixed(2);
+    return s;
+}

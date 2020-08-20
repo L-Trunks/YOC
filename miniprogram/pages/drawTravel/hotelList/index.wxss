@@ -1,0 +1,33 @@
+/**index.wxss**/
+@import "../../../style/base.wxss";
+
+page {
+  background: #f6f6f6
+}
+
+.park_hotel_list {
+  margin-bottom: 40rpx;
+  padding: 0 30rpx;
+}
+
+.list_item_left image {
+  width: 20rpx;
+  height: 26rpx;
+}
+
+.list_item_right image {
+  width: 50rpx;
+  height: 50rpx;
+  margin-bottom: 22rpx
+}
+
+.list_item {
+  margin-top: 10rpx;
+  border-radius: 20rpx;
+  background: #fff;
+  padding: 36rpx 28rpx;
+}
+
+.list_item_left view:first-child {
+  margin-bottom: 20rpx;
+}

@@ -17,9 +17,33 @@ Page({
     days: 0,
     nowDay: 1,
     isTravel: true,
+    showPolyLine: [],
     polyline: [],
-    lineColor: [],//线的背景色数组
+    imageItems: [
+      {
+        url: '../../images/scenery/btn1_03.png',
+        isCheck: true
+      },
+      {
+        url: '../../images/scenery/btn2_03.png',
+        isCheck: false
+      },
+      {
+        url: '../../images/scenery/btn3_03.png',
+        isCheck: false
+      },
+      {
+        url: '../../images/scenery/btn4_03.png',
+        isCheck: false
+      },
+      {
+        url: '../../images/scenery/btn5_03.png',
+        isCheck: false
+      }
+    ],
     nowLine: [],//当前线坐标数组
+    nowIndex: 0,//当前线索引
+    lineColorMap: ['#F45755', '#FFDE17', '#FE7A0B', '#9CDB3D', '#F5A8E4'],//线的背景色数组
   },
   onLoad: function () {
     // this.setLocation()
@@ -83,23 +107,72 @@ Page({
   onClickMarker: function (e) {
     console.log(e)
     let id = e.markerId
-    if (this.data.markers[id].isCheck) {
+    let _this = this
+    let polyline = []
+    let isClick = false //是否点击过
+    polyline = _this.data.polyline
+    let poi = {
+      latitude: _this.data.markers[id].latitude,
+      longitude: _this.data.markers[id].longitude,
+    }
+    polyline.map(i => {
+      i.polyline ? i.polyline.map(j => {
+        console.log(j, poi)
+        if (JSON.stringify(j) == JSON.stringify(poi)) {
+          isClick = true
+        }
+      }) : ''
+    })
+    console.log(isClick)
+    if (isClick) {
       return
     }
-    let temp = this.data.nowLine
+    let temp = []
+    temp = this.data.nowLine
     temp.push({
       latitude: this.data.markers[id].latitude,
       longitude: this.data.markers[id].longitude,
     })
+    let nowIndex = this.data.nowIndex
     this.setData({
       nowLine: temp,
       [`markers[${id}].isCheck`]: true,
-      [`polyline[0]`]: {
-        points:temp,
-        color:'#000000',
-        width:5
+      [`showPolyLine[${nowIndex}]`]: {
+        points: temp,
+        color: this.data.lineColorMap[this.data.nowIndex],
+        width: 8
+      },
+      [`polyline[${nowIndex}]`]: {
+        points: temp,
+        color: this.data.lineColorMap[this.data.nowIndex],
+        width: 8
       }
     })
+  },
+  //点击旁边图片items
+  onClickImageItem: function (e) {
+    let index = e.currentTarget.dataset.index
+    this.setData({
+      nowIndex: index,
+      nowDay: index + 1,
+      [`imageItems[${index}].isCheck`]: !this.data.imageItems[index].isCheck
+    })
+    let _this = this
+    let tempArr = []
+    tempArr = _this.data.imageItems
+    tempArr.map((i, index) => {
+      if (i.isCheck) {
+        _this.setData({
+          [`showPolyLine[${index}]`]: this.data.polyline[index] || [],
+          nowLine: this.data.polyline[index] || []
+        })
+      } else {
+        _this.setData({
+          [`showPolyLine[${index}]`]: []
+        })
+      }
+    })
+    console.log(this.data.showPolyLine)
   },
   //计算天数
   calDays: function (travelInfo) {
@@ -126,7 +199,7 @@ Page({
               id: j,
               latitude: i.location.lat,
               longitude: i.location.lon,
-              iconPath: '../../images/scenery/blue1_11.png',
+              iconPath: i.picList[0] && i.picList[0].picUrl || '../../images/scenery/noImage.jpg',
               width: 36,
               height: 36,
               callout: {
@@ -149,7 +222,7 @@ Page({
               longitude: i.location.lon,
               color: '#6fb5f3',
               fillColor: '#ffffff',
-              radius: 5,
+              radius: 1,
               strokeWidth: 1,
             }
           })

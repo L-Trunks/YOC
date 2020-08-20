@@ -31,7 +31,7 @@
 		</view>
 		<view class="form_item" hover-class="none" hover-stop-propagation="false">
 			<image class="form_img" src="../../images/first/go_time.png" />
-			出行时间:
+			开始时间:
 			<picker
 			 mode="date"
 			 value="{{goDate}}"
@@ -46,7 +46,7 @@
 		</view>
 		<view class="form_item" hover-class="none" hover-stop-propagation="false">
 			<image class="form_img" src="../../images/first/arrivetime.png" />
-			到达时间:
+			结束时间:
 			<picker
 			 mode="date"
 			 value="{{arriveDate}}"

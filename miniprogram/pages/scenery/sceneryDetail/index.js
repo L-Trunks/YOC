@@ -1,6 +1,13 @@
 //index.js
 const app = getApp()
 const db = wx.cloud.database()
+// 引入SDK核心类
+const QQMapWX = require('../../../util/qqmap-wx-jssdk1.2/qqmap-wx-jssdk');
+
+// 实例化API核心类
+const qqmapsdk = new QQMapWX({
+  key: '375BZ-RAXWU-NJOVW-BX74F-W4HHK-LXBC7' // 必填
+});
 Page({
   data: {
     selectArr: [],
@@ -70,10 +77,62 @@ Page({
       complete: () => { }
     });
   },
+  //转到导航
+  goLocation(e) {
+    let _this = this;
+    //调用地址解析接口
+    // 获取用户位置
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              // 用户已经同意小程序使用定位功能，后续调用 wx.startRecord 接口不会弹窗询问
+              _this.addressCoder()
+            }
+          })
+        } else {
+          _this.addressCoder()
+        }
+      }
+    })
+
+  },
+  //地址解析
+  addressCoder: function () {
+    let _this = this
+    qqmapsdk.geocoder({
+      //获取表单传入地址
+      address: _this.data.sceneryInfo.address, //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+      success: function (res) {//成功后的回调
+        console.log(res);
+        let result = res.result;
+        let latitude = result.location.lat;
+        let longitude = result.location.lng;
+        wx.openLocation({
+          latitude: latitude, // 纬度，范围为-90~90，负数表示南纬
+          longitude: longitude, // 经度，范围为-180~180，负数表示西经
+          scale: 18, // 缩放比例
+          // name: 'name', // 位置名
+          address: _this.data.sceneryInfo.address, // 地址的详细说明
+        })
+      },
+      fail: function (error) {
+        console.error(error);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    })
+  },
   //获取景点信息及格式化
   getSceneryInfo: function () {
     let _this = this
     console.log(this.data.id)
+    wx.showLoading({
+      title: '加载中'
+    })
     db.collection('scenery').where({
       _id: _this.data.id
     }).get().then(res => {
@@ -96,7 +155,9 @@ Page({
         listItem: tempList
       })
       console.log('格式化之后的景点信息', _this.data.sceneryInfo)
+      wx.hideLoading()
     }).catch(err => {
+      wx.hideLoading()
       wx.showToast({
         title: err,
         icon: "none"

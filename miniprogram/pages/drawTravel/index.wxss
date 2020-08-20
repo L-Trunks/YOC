@@ -1,0 +1,44 @@
+@import '../../style/base.wxss';
+
+.map{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.dt_top{
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 24rpx 80rpx 24rpx 44rpx;
+}
+
+.image_top{
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.btn_top{
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+    background: #fff;
+    margin: 0 10rpx;
+}
+
+.btn_next_view{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 42rpx;
+}
+
+.btn_next{
+    padding: 14rpx 60rpx;
+    color: #fff;
+    font-weight: 400;
+    font-size: 24rpx;
+    border-radius: 35rpx;
+}

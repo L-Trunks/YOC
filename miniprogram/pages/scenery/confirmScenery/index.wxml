@@ -1,0 +1,74 @@
+<view class="cs_container">
+	<image class="cs_img_top" src="../../../images/scenery/background_02.png" mode="aspectFit|aspectFill|widthFix"
+		lazy-load="false" binderror="" bindload="" />
+	<image class="cs_img_right" src="../../../images/scenery/bird_03.png" mode="aspectFit|aspectFill|widthFix"
+		lazy-load="false" binderror="" bindload="" />
+	<view class="cs_main">
+		<view class="cs_head txt_333 txt_bold txt_36">
+			我们要去哪里？
+			<view class="txt_22 txt_999 txt_medium">
+				{{showText}}
+			</view>
+		</view>
+		<view class="cs_tips txt_333 txt_22 txt_medium">
+			<view class="txt_24 flex j_start">
+				<image class="" src="../../../images/scenery/info_02.png" mode="aspectFit|aspectFill|widthFix"
+					lazy-load="false" binderror="" bindload="">
+				</image>
+				信息提示
+			</view>
+			<view class="" hover-class="none" hover-stop-propagation="false">
+				已选景点数量：{{sceneryList.length}}个
+			</view>
+			<view class="" hover-class="none" hover-stop-propagation="false">
+				推荐游玩时间：{{adviseHours||'0'}}小时
+			</view>
+			<view class="" hover-class="none" hover-stop-propagation="false">
+				已选游玩时间：{{hours}}小时×{{days||'1'}}天
+			</view>
+		</view>
+		<view class="cs_main_scenery" hover-class="none" hover-stop-propagation="false">
+			<view bindtap="addScenery" class="flex j_start txt_22 txt_medium main_txt" hover-class="none"
+				hover-stop-propagation="false">
+				<image class="" src="../../../images/scenery/add_icon.png" mode="aspectFit|aspectFill|widthFix"
+					lazy-load="false" binderror="" bindload="" />
+				添加景点
+			</view>
+			<scroll-view enable-flex="true" class="flex j_start cs_scroll " style="width: 100%;" scroll-x="{{scrollDir}}">
+				<block wx:for="{{sceneryList}}" wx:key="index">
+					<view data-id="{{item._id}}" bindtap="goDetail" class="cs_item flex a_start column txt_medium txt_333 txt_26" hover-class="none"
+						hover-stop-propagation="false">
+						<image class="" src="{{item.picList[0].picUrl||'../../../images/scenery/noImage.jpg'}}"
+							mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
+						</image>
+						<view class="cs_item_txt" hover-class="none" hover-stop-propagation="false">
+							{{item.name||''}}
+							<view class="cs_item_bottom flex txt_999 txt_22" hover-class="none"
+								hover-stop-propagation="false">
+								<text class="" hover-class="none" hover-stop-propagation="false">{{item.summary || item.content || ''}}</text>
+								<view catchtap="deleteSelect" data-id="{{item._id}}" class="flex j_start main_txt txt_24" hover-class="none"
+									hover-stop-propagation="false">
+									删除 <image class="" src="../../../images/scenery/delete_icon.png"
+										mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
+									</image>
+								</view>
+							</view>
+						</view>
+
+					</view>
+				</block>
+				<view wx:if="{{!sceneryList||sceneryList.length===0}}"
+					class="flex j_center txt_36 main_txt cs_no_select" hover-class="none"
+					hover-stop-propagation="false">
+					您还没有选择景点哦
+				</view>
+			</scroll-view>
+		</view>
+		<view class="flex j_end" hover-class="none" hover-stop-propagation="false">
+			<view bindtap="onClickNext" class="flex j_center cs_next_btn main_bg txt_bold txt_24 txt_fff" hover-class="none" hover-stop-propagation="false">
+				下一步
+			</view>
+		</view>
+	</view>
+
+</view>

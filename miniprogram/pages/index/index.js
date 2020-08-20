@@ -17,14 +17,14 @@ Page({
     cityIndex: 0,
     transIndex: 0,
     nowDate: '', //当前时间
-    goDate: '',//出行时间
+    goDate: '',//开始时间
     endDate: '',//选择器截止时间
-    arriveDate: '',//到达时间
+    arriveDate: '',//结束时间
   },
 
   onLoad: function () {
     let now = new Date()
-    let end = +now + 1000 * 60 * 60 * 24 * 365 * 10
+    let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
     this.setData({
       nowDate: formatDateTime(now, 'yy-mm-dd'),
       goDate: formatDateTime(now, 'yy-mm-dd'),
@@ -50,6 +50,46 @@ Page({
           })
         }
       }
+    })
+  },
+  onShow() {
+    this.formatData()
+  },
+  //页面加载，加载数据
+  formatData: function () {
+    wx.showLoading({
+      title: '加载中'
+    })
+    let _this = this
+    let info = wx.getStorageSync('travelInfo')
+    console.log(info)
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 7000)
+    if (info && JSON.parse(info).place) {
+      let travelInfo = JSON.parse(wx.getStorageSync('travelInfo'))
+      _this.setFormData(travelInfo)
+      wx.hideLoading()
+    } else {
+      db.collection('user').where({ _openid: app.globalData.openid }).get().then(res => {
+        if (res.data[0].travelInfo) {
+          _this.setFormData(res.data[0].travelInfo)
+          wx.hideLoading()
+        }
+      })
+    }
+  },
+  //设置表格数据
+  setFormData: function (data) {
+    let now = new Date()
+    let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
+    this.setData({
+      nowDate: formatDateTime(now, 'yy-mm-dd'),
+      endDate: formatDateTime(end, 'yy-mm-dd'),
+      goDate: formatDateTime(dateTimeStamp(data.goDate), 'yy-mm-dd'),
+      arriveDate: formatDateTime(dateTimeStamp(data.arriveDate), 'yy-mm-dd'),
+      cityIndex: this.data.cityArray.indexOf(data.place),
+      transIndex: this.data.transArray.indexOf(data.transport),
     })
   },
   //城市选择改变事件
@@ -117,7 +157,9 @@ Page({
         place: _this.cityArray[_this.cityIndex],
         transport: _this.transArray[_this.transIndex],
         goDate: _this.goDate,
-        arriveDate: _this.arriveDate
+        arriveDate: _this.arriveDate,
+        hours: '',
+        selectArr: []
       }
       app.globalData.travelInfo = travelInfo
       wx.setStorageSync('travelInfo', JSON.stringify(travelInfo))
@@ -186,19 +228,12 @@ Page({
           if (res.data && res.data.length > 0) {
             console.log('用户已存在，不再存入数据库')
             if (res.data[0].travelInfo) {
+              if (res.data[0].travelInfo.selectArr && res.data[0].travelInfo.selectArr.length > 0) {
+                wx.setStorageSync('selectArr', JSON.stringify(res.data[0].travelInfo.selectArr))
+              }
               wx.setStorageSync('travelInfo', JSON.stringify(res.data[0].travelInfo))
               wx.switchTab({
-                url: '../../pages/scenery/index',
-                success: function (res) {
-                  // success
-                  console.log('gogogo:', res)
-                },
-                fail: function () {
-                  // fail
-                },
-                complete: function () {
-                  // complete
-                }
+                url: '../../pages/scenery/index'
               })
             }
           } else {

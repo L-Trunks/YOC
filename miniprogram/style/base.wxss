@@ -141,12 +141,14 @@
     background: #f04f48;
 }
 
-/* 主题背景色 */
+/* 主题色 */
 
 .main_bg {
-    background: #f04f48 !important
+    background: #6fb5f3 !important;
 }
-
+.main_txt{
+    color: #6fb5f3;
+}
 /* 红色按钮 */
 
 .btn_red {

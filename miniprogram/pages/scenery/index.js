@@ -29,6 +29,9 @@ Page({
   },
 
   onLoad: function () {
+    this.getCategory()
+  },
+  onShow: function () {
     if (wx.getStorageSync('selectArr')) {
       this.setData({
         selectArr: JSON.parse(wx.getStorageSync('selectArr'))
@@ -41,10 +44,6 @@ Page({
     }
     console.log('本地缓存中的游玩时间', wx.getStorageSync('travelHour'))
     console.log('本地缓存中的已选景点', wx.getStorageSync('selectArr'))
-    this.getCategory()
-  },
-  onShow: function () {
-    console.log(app.globalData)
     this.setData({
       statusBarHeight: app.globalData.statusBarHeight
     })

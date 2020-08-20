@@ -37,13 +37,13 @@
 			 bindtap="changeCategory"
 			 data-cate='{{item._id}}'
 			 wx:for="{{categoryArr}}"
-			 wx:key='{{index}}'
+			 wx:key='index'
 			>
 				{{item.categoryName}}
 			</view>
 		</view>
 		<view class="flex column scenery_box" hover-class="none" hover-stop-propagation="false">
-			<view class='flex j_start scenery_item' wx:for="{{sceneryArr}}" wx:key="{{index}}">
+			<view class='flex j_start scenery_item' wx:for="{{sceneryArr}}" wx:key="index">
 				<image
 				 bindtap="goDetail"
 				 data-id='{{item._id}}'
@@ -109,7 +109,7 @@
 					 bindchange="hourChange"
 					>
 						<picker-view-column>
-							<view wx:for="{{hours}}" wx:key="{{hours}}" class="picker_hours" style="line-height: 50px;text-align: center;font-size:70rpx;font-weight:900;">
+							<view wx:for="{{hours}}" wx:key="index" class="picker_hours" style="line-height: 50px;text-align: center;font-size:70rpx;font-weight:900;">
 								{{item}}
 							</view>
 						</picker-view-column>

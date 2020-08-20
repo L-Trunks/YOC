@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/drawTravel/index",
     "pages/index/index",
     "pages/scenery/index",
     "pages/plan/index",
@@ -16,7 +17,8 @@
     "color": "#333",
     "selectedColor": "#fdb975",
     "backgroundColor": "#fff",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "text": "个人行程",
         "iconPath": "images/first/user1.png",
@@ -35,6 +37,11 @@
         "selectedIconPath": "images/first/plan2.png"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

@@ -1,72 +1,44 @@
 <view class="dt_container" hover-class="none" hover-stop-propagation="false">
-	<cover-view class="dt_top flex txt_24 main_txt" hover-class="none" hover-stop-propagation="false">
-		<cover-image
-		 class="image_top"
-		 src="../../images/scenery/save_12.png"
-		 mode="aspectFit|aspectFill|widthFix"
-		 lazy-load="false"
-		 binderror=""
-		 bindload=""
-		/>
-		<cover-view class="flex" hover-class="none" hover-stop-propagation="false">
-			<cover-view
-			 bindtap='onClickTopBtn'
-			 data-id="0"
-			 class="btn_top {{isTravel?'main_bg txt_fff':''}}"
-			 hover-class="none"
-			 hover-stop-propagation="false"
-			>
-				制定行程
-			</cover-view>
-			<cover-view
-			 bindtap='onClickTopBtn'
-			 data-id="1"
-			 class="btn_top {{isTravel?'':'main_bg txt_fff'}}"
-			 hover-class="none"
-			 hover-stop-propagation="false"
-			>
-				选择酒店
-			</cover-view>
-		</cover-view>
-	</cover-view>
-	<cover-view class="dt_img_items flex column" scroll-top="0">
-		<block wx:for="{{imageItems}}" wx:key='index'>
-			<cover-view class="dt_img_item flex j_start txt_22 txt_bold" style="color:{{lineColorMap[index]}}" scroll-top="0">
-				<cover-image
-				 class="img_item"
-				 bindtap='onClickImageItem'
-				 src="{{item.url}}"
-				 data-index="{{index}}"
-				 mode="aspectFit|aspectFill|widthFix"
-				 lazy-load="false"
-				 binderror=""
-				 bindload=""
-				/>
-				<cover-view>
-					{{item.isCheck?'第'+(index+1)+'天':''}}
-				</cover-view>
-			</cover-view>
-		</block>
-	</cover-view>
-	<map
-	 id="map"
-	 class="map"
-	 subkey="{{key}}"
-	 longitude="{{poi.longitude}}"
-	 latitude="{{poi.latitude}}"
-	 scale="14"
-	 markers="{{markers}}"
-	 polyline="{{showPolyLine}}"
-	 bindmarkertap="onClickMarker"
-	 include-points="{{markers}}"
-	 circles="{{circles}}"
-	 layer-style='1'
-	/>
-
-	<cover-view class="btn_next_view flex j_center" hover-class="none" hover-stop-propagation="false">
-		<cover-view class="main_bg btn_next" hover-class="none" hover-stop-propagation="false">
-			下一步
-		</cover-view>
-	</cover-view>
+    <cover-view class="dt_top flex txt_24 main_txt" hover-class="none" hover-stop-propagation="false">
+        <cover-image class="image_top" src="../../images/scenery/save_12.png" mode="aspectFit|aspectFill|widthFix"
+            lazy-load="false" binderror="" bindload="" />
+        <cover-view class="flex" hover-class="none" hover-stop-propagation="false">
+            <cover-view bindtap='onClickTopBtn' data-id="0" class="btn_top {{isTravel?'main_bg txt_fff':''}}"
+                hover-class="none" hover-stop-propagation="false">
+                制定行程
+            </cover-view>
+            <cover-view bindtap='onClickTopBtn' data-id="1" class="btn_top {{isTravel?'':'main_bg txt_fff'}}"
+                hover-class="none" hover-stop-propagation="false">
+                选择酒店
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class="dt_img_items flex column" scroll-top="0">
+        <block wx:for="{{imageItems}}" wx:key='index'>
+            <cover-view class="dt_img_item flex j_start txt_24 txt_bold" style="color:{{lineColorMap[index]}}"
+                scroll-top="0">
+                <cover-image class="img_item" bindtap='onClickImageItem' src="{{item.url}}" data-index="{{index}}"
+                    mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+                <cover-view>
+                    {{item.isCheck?'第'+(index+1)+'天':''}}
+                </cover-view>
+            </cover-view>
+        </block>
+    </cover-view>
+    <map id="map" class="map" subkey="{{key}}" longitude="{{poi.longitude}}" latitude="{{poi.latitude}}" scale="14"
+        markers="{{markers}}" polyline="{{showPolyLine}}" bindmarkertap="onClickMarker" include-points="{{markers}}"
+        circles="{{circles}}" layer-style='1' />
+    <cover-view class="dt_left_btn flex column txt_28 txt_medium" scroll-top="0">
+        <cover-view bindtap='onClickLeftBtn' data-id="0" class="dt_left {{isShow?'dt_left_active ':''}}" scroll-top="0">
+            形成方案
+        </cover-view>
+        <cover-view bindtap='onClickLeftBtn' data-id="1" class="dt_left {{isShow?'':'dt_left_active'}}" scroll-top="0">
+            隐藏线路
+        </cover-view>
+    </cover-view>
+    <cover-view class="btn_next_view flex j_center" hover-class="none" hover-stop-propagation="false">
+        <cover-view class="main_bg btn_next" hover-class="none" hover-stop-propagation="false">
+            下一步
+        </cover-view>
+    </cover-view>
 </view>
-

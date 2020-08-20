@@ -6,7 +6,7 @@ let qqmapsdk = new QQMapWX({
 });
 const db = wx.cloud.database({})
 const _ = db.command
-import { dateDiff } from '../../util/util'
+import { dateDiff, distance } from '../../util/util'
 Page({
   data: {
     key: '375BZ-RAXWU-NJOVW-BX74F-W4HHK-LXBC7',
@@ -41,14 +41,28 @@ Page({
         isCheck: false
       }
     ],
+    nowHotel: [],
+    isShow: true,
+    hotelIndex: 0,
     nowLine: [],//当前线坐标数组
     nowIndex: 0,//当前线索引
     lineColorMap: ['#F45755', '#FFDE17', '#FE7A0B', '#9CDB3D', '#F5A8E4'],//线的背景色数组
   },
-  onLoad: function () {
+  onLoad: function (options) {
     // this.setLocation()
     this.onGetUserInfo()
   },
+  onShow() {
+    let pages = getCurrentPages();
+    let currPage = pages[pages.length - 1];
+    if (currPage.data.hotelIndex>=0) {
+      this.setData({//将携带的参数赋值
+        hotelIndex: currPage.data.hotelIndex
+      });
+    }
+    console.log(`第${this.data.nowDay}天选择酒店`, this.data.nowHotel[this.data.hotelIndex])
+  },
+  //点击顶部按钮
   onClickTopBtn: function (e) {
     let id = e.currentTarget.dataset.id
     let idMap = {
@@ -58,6 +72,56 @@ Page({
     this.setData({
       isTravel: idMap[id]
     })
+    let _this = this
+    if (this.data.isTravel && this.data.isShow) {
+      let [...temp] = _this.data.polyline
+      _this.data.imageItems.map((i, j) => {
+        _this.setData({
+          [`imageItems[${j}].isCheck`]: false
+        })
+      })
+      _this.setData({
+        showPolyLine: temp,
+        nowIndex: 0,
+        nowDay: 1,
+        [`imageItems[0].isCheck`]: true
+      })
+    } else {
+      _this.setData({
+        showPolyLine: [],
+        [`imageItems[0].isCheck`]: true
+      })
+    }
+  },
+  //点击左边按钮
+  onClickLeftBtn: function (e) {
+    let id = e.currentTarget.dataset.id
+    let idMap = {
+      '0': true,
+      '1': false,
+    }
+    let _this = this
+    _this.setData({
+      isShow: idMap[id]
+    })
+    if (!_this.data.isShow) {
+      _this.setData({
+        showPolyLine: []
+      })
+      _this.data.imageItems.map((i, j) => {
+        _this.setData({
+          [`imageItems[${j}].isCheck`]: false
+        })
+      })
+    } else if (_this.data.isTravel) {
+      let [...temp] = _this.data.polyline
+      _this.setData({
+        showPolyLine: temp,
+        nowIndex: 0,
+        nowDay: 1,
+        [`imageItems[0].isCheck`]: true
+      })
+    }
   },
   //设置中间坐标
   setLocation: function (address) {
@@ -115,9 +179,43 @@ Page({
       latitude: _this.data.markers[id].latitude,
       longitude: _this.data.markers[id].longitude,
     }
+    if (!this.data.isShow || !this.data.isTravel) {
+      if (!this.data.isTravel) {
+        wx.showLoading()
+        qqmapsdk.search({
+          keyword: '酒店',  //搜索关键词
+          location: { ...poi },  //设置周边搜索中心点
+          success: function (res) { //搜索成功后的回调
+            console.log('酒店列表', res)
+            let [...temp] = res.data
+            temp.map(i => {
+              i.distance = distance(poi.latitude, poi.longitude, i.location.lat, i.location.lng)
+            })
+            console.log('格式化之后的酒店列表', temp)
+            _this.setData({
+              hotelList: temp
+            })
+            wx.hideLoading()
+            wx.navigateTo({
+              url: `./hotelList/index?latitude=${poi.latitude}&longitude=${poi.longitude}`,
+            })
+          },
+          fail: function (res) {
+            console.log(res);
+            wx.hideLoading()
+          },
+          complete: function (res) {
+            console.log(res);
+            wx.hideLoading()
+          }
+        });
+
+      }
+      return
+    }
+
     polyline.map(i => {
-      i.polyline ? i.polyline.map(j => {
-        console.log(j, poi)
+      i.points ? i.points.map(j => {
         if (JSON.stringify(j) == JSON.stringify(poi)) {
           isClick = true
         }
@@ -127,8 +225,7 @@ Page({
     if (isClick) {
       return
     }
-    let temp = []
-    temp = this.data.nowLine
+    let [...temp] = this.data.nowLine
     temp.push({
       latitude: this.data.markers[id].latitude,
       longitude: this.data.markers[id].longitude,
@@ -139,12 +236,12 @@ Page({
       [`markers[${id}].isCheck`]: true,
       [`showPolyLine[${nowIndex}]`]: {
         points: temp,
-        color: this.data.lineColorMap[this.data.nowIndex],
+        color: this.data.lineColorMap[nowIndex],
         width: 8
       },
       [`polyline[${nowIndex}]`]: {
         points: temp,
-        color: this.data.lineColorMap[this.data.nowIndex],
+        color: this.data.lineColorMap[nowIndex],
         width: 8
       }
     })
@@ -160,15 +257,17 @@ Page({
     let _this = this
     let tempArr = []
     tempArr = _this.data.imageItems
+    console.log(tempArr, this.data.polyline)
     tempArr.map((i, index) => {
       if (i.isCheck) {
+        console.log(index)
         _this.setData({
-          [`showPolyLine[${index}]`]: this.data.polyline[index] || [],
-          nowLine: this.data.polyline[index] || []
+          [`showPolyLine[${index}]`]: _this.data.polyline[index] || {},
+          nowLine: _this.data.polyline[index] && _this.data.polyline[index].points || []
         })
       } else {
         _this.setData({
-          [`showPolyLine[${index}]`]: []
+          [`showPolyLine[${index}]`]: {}
         })
       }
     })

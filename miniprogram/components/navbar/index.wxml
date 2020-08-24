@@ -3,7 +3,7 @@
 	 wx:if='{{_auth >= item.auth}}'
 	 class='tabbar-item'
 	 wx:for='{{tabbarList}}'
-	 wx:key='{{index}}'
+	 wx:key='index'
 	 bindtap='handleItemTap'
 	 data-path='{{item.pagePath}}'
 	 data-idx='{{index}}'

@@ -22,7 +22,7 @@ Page({
     },
     isBottom: false,
     times: 0,
-    travelHours: 0,
+    travelHour: 0,
     hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     hasHour: false,
     selectArr: []
@@ -52,20 +52,20 @@ Page({
   hourChange(e) {
     const val = e.detail.value
     this.setData({
-      travelHours: this.data.hours[val[0]],
+      travelHour: this.data.hours[val[0]],
     })
-    console.log(val, this.data.travelHours)
+    console.log(val, this.data.travelHour)
   },
   //关闭弹窗
   closeHours: function () {
-    if (this.data.travelHours === 0) {
+    if (this.data.travelHour === 0) {
       wx.showToast({
         title: '请选择游玩时间',
         icon: 'none'
       })
       return
     } else {
-      wx.setStorageSync('travelHour', this.data.travelHours)
+      wx.setStorageSync('travelHour', this.data.travelHour)
       this.setData({
         hasHour: true
       })
@@ -73,14 +73,14 @@ Page({
   },
   //选择时间下一步事件
   hourNext: function () {
-    if (this.data.travelHours === 0) {
+    if (this.data.travelHour === 0) {
       wx.showToast({
         title: '请选择游玩时间',
         icon: 'none'
       })
       return
     } else {
-      wx.setStorageSync('travelHour', this.data.travelHours)
+      wx.setStorageSync('travelHour', this.data.travelHour)
       this.setData({
         hasHour: true
       })

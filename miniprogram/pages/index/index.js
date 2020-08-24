@@ -231,6 +231,9 @@ Page({
               if (res.data[0].travelInfo.selectArr && res.data[0].travelInfo.selectArr.length > 0) {
                 wx.setStorageSync('selectArr', JSON.stringify(res.data[0].travelInfo.selectArr))
               }
+              if (res.data[0].travelInfo.hours) {
+                wx.setStorageSync('travelHour', res.data[0].travelInfo.hours)
+              }
               wx.setStorageSync('travelInfo', JSON.stringify(res.data[0].travelInfo))
               wx.switchTab({
                 url: '../../pages/scenery/index'

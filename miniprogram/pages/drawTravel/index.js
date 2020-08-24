@@ -51,7 +51,8 @@ Page({
     lineColorMap: [],
     isEdit: false,
     travelPlan: [],
-    sceneryList: []
+    sceneryList: [],
+    hotelList: []
   },
   onLoad: function (options) {
     // this.setLocation()
@@ -60,12 +61,16 @@ Page({
   onShow() {
     let pages = getCurrentPages();
     let currPage = pages[pages.length - 1];
+    console.log(currPage)
     if (currPage.data.hotelIndex >= 0) {
       this.setData({//将携带的参数赋值
-        hotelIndex: currPage.data.hotelIndex
+        hotelIndex: currPage.data.hotelIndex,
+        [`travelPlan[${this.data.nowIndex}].hotelInfo`]: this.data.hotelList.length > 0 && this.data.hotelList[currPage.data.hotelIndex] || {}
       });
+      console.log(`第${this.data.nowDay}天选择酒店`, this.data.hotelList.length > 0 && this.data.hotelList[this.data.hotelIndex] || '暂无')
+      console.log('行程计划', this.data.travelPlan)
     }
-    console.log(`第${this.data.nowDay}天选择酒店`, this.data.nowHotel[this.data.hotelIndex])
+
   },
   //点击顶部按钮
   onClickTopBtn: function (e) {
@@ -173,6 +178,39 @@ Page({
       }
     })
   },
+  //进入酒店列表
+  enterHotel: function (poi) {
+    wx.showLoading()
+    let _this = this
+    qqmapsdk.search({
+      keyword: '酒店',  //搜索关键词
+      location: { ...poi },  //设置周边搜索中心点
+      success: function (res) { //搜索成功后的回调
+        console.log('酒店列表', res)
+        let [...temp] = res.data
+        temp.map(i => {
+          i.distance = distance(poi.latitude, poi.longitude, i.location.lat, i.location.lng)
+        })
+        console.log('格式化之后的酒店列表', temp)
+        _this.setData({
+          hotelList: temp,
+          nowHotel: temp[_this.data.nowIndex]
+        })
+        wx.hideLoading()
+        wx.navigateTo({
+          url: `./hotelList/index?latitude=${poi.latitude}&longitude=${poi.longitude}`,
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+        wx.hideLoading()
+      },
+      complete: function (res) {
+        console.log(res);
+        wx.hideLoading()
+      }
+    });
+  },
   //点击景点
   onClickMarker: function (e) {
     console.log(e)
@@ -188,37 +226,35 @@ Page({
     _this.setData({
       isEdit: true
     })
-    if (!this.data.isShow || !this.data.isTravel) {
-      if (!this.data.isTravel) {
-        wx.showLoading()
-        qqmapsdk.search({
-          keyword: '酒店',  //搜索关键词
-          location: { ...poi },  //设置周边搜索中心点
-          success: function (res) { //搜索成功后的回调
-            console.log('酒店列表', res)
-            let [...temp] = res.data
-            temp.map(i => {
-              i.distance = distance(poi.latitude, poi.longitude, i.location.lat, i.location.lng)
-            })
-            console.log('格式化之后的酒店列表', temp)
-            _this.setData({
-              hotelList: temp
-            })
-            wx.hideLoading()
-            wx.navigateTo({
-              url: `./hotelList/index?latitude=${poi.latitude}&longitude=${poi.longitude}`,
-            })
-          },
-          fail: function (res) {
-            console.log(res);
-            wx.hideLoading()
-          },
-          complete: function (res) {
-            console.log(res);
-            wx.hideLoading()
-          }
-        });
-
+    if (!_this.data.isShow || !_this.data.isTravel) {
+      if (!_this.data.isTravel) {
+        if (!_this.data.travelPlan[_this.data.nowIndex] || _this.data.travelPlan[_this.data.nowIndex].length === 0) {
+          wx.showToast({
+            title: `第${_this.data.nowDay}天行程路线未制定`,
+            icon: 'none'
+          });
+          return
+        }
+        if (_this.data.travelPlan.length > 0 && _this.data.travelPlan[_this.data.nowIndex].hotelInfo && _this.data.travelPlan[_this.data.nowIndex].hotelInfo && _this.data.travelPlan[_this.data.nowIndex].hotelInfo.title) {
+          wx.showModal({
+            title: '提示',
+            content: `确定重新选择第${_this.data.nowDay}天的酒店吗？`,
+            showCancel: true,
+            cancelText: '取消',
+            cancelColor: '#000000',
+            confirmText: '确定',
+            confirmColor: '#3CC51F',
+            success: (result) => {
+              if (result.confirm) {
+                _this.enterHotel(poi)
+              } else {
+                return
+              }
+            }
+          });
+        } else {
+          _this.enterHotel(poi)
+        }
       }
       return
     }
@@ -230,7 +266,7 @@ Page({
         }
       }) : ''
     })
-    console.log(isClick)
+    console.log('是否已选择?', isClick)
     if (isClick) {
       return
     }
@@ -255,9 +291,8 @@ Page({
         color: this.data.lineColorMap[nowIndex],
         width: 8
       },
-      [`travelPlan[${nowIndex}]`]: {
-        sceneryInfo: nowScenery || []
-      },
+      [`travelPlan[${nowIndex}].sceneryInfo`]: nowScenery || [],
+      [`travelPlan[${nowIndex}].hotelInfo`]: {},
     })
   },
   //点击旁边图片items
@@ -269,12 +304,10 @@ Page({
       [`imageItems[${index}].isCheck`]: !this.data.imageItems[index].isCheck
     })
     let _this = this
-    let tempArr = []
-    tempArr = _this.data.imageItems
+    let [...tempArr] = _this.data.imageItems
     console.log(tempArr, this.data.polyline)
-    tempArr.map((i, index) => {
+    tempArr.forEach((i, index) => {
       if (i.isCheck) {
-        console.log(index)
         _this.setData({
           [`showPolyLine[${index}]`]: _this.data.polyline[index] || {},
           nowLine: _this.data.polyline[index] && _this.data.polyline[index].points || []
@@ -357,6 +390,42 @@ Page({
           wx.hideLoading()
         }
       })
+  },
+  //删除路线
+  removeTravelInfo: function () {
+    let _this = this
+    if (!_this.data.travelPlan[_this.data.nowIndex] || _this.data.travelPlan[_this.data.nowIndex].length === 0) {
+      wx.showToast({
+        title: `第${_this.data.nowDay}天行程路线未制定`,
+        icon: 'none'
+      });
+      return
+    }
+    wx.showModal({
+      title: '提示',
+      content: `确定删除第${_this.data.nowDay}天的路线吗？`,
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#f04f48',
+      success: (result) => {
+        if (result.confirm) {
+          wx.showLoading()
+          _this.setData({
+            [`showPolyLine[${_this.data.nowIndex}]`]: [],
+            [`polyline[${_this.data.nowIndex}]`]: [],
+          })
+          wx.hideLoading()
+        } else {
+          return
+        }
+      }
+    });
+  },
+  //点击下一步
+  enterTravelPlan: function () {
+
   },
   //获取openid
   onGetUserInfo: function () {

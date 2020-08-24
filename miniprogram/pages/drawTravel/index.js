@@ -19,7 +19,7 @@ Page({
     isTravel: true,
     showPolyLine: [],
     polyline: [],
-    imageItems: [
+    allImageItems: [
       {
         url: '../../images/scenery/btn1_03.png',
         isCheck: true
@@ -41,12 +41,17 @@ Page({
         isCheck: false
       }
     ],
+    imageItems: [],
     nowHotel: [],
     isShow: true,
     hotelIndex: 0,
     nowLine: [],//当前线坐标数组
     nowIndex: 0,//当前线索引
-    lineColorMap: ['#F45755', '#FFDE17', '#FE7A0B', '#9CDB3D', '#F5A8E4'],//线的背景色数组
+    allLineColorMap: ['#F45755', '#FFDE17', '#FE7A0B', '#9CDB3D', '#F5A8E4'],//线的背景色数组
+    lineColorMap: [],
+    isEdit: false,
+    travelPlan: [],
+    sceneryList: []
   },
   onLoad: function (options) {
     // this.setLocation()
@@ -55,7 +60,7 @@ Page({
   onShow() {
     let pages = getCurrentPages();
     let currPage = pages[pages.length - 1];
-    if (currPage.data.hotelIndex>=0) {
+    if (currPage.data.hotelIndex >= 0) {
       this.setData({//将携带的参数赋值
         hotelIndex: currPage.data.hotelIndex
       });
@@ -116,9 +121,10 @@ Page({
     } else if (_this.data.isTravel) {
       let [...temp] = _this.data.polyline
       _this.setData({
-        showPolyLine: temp,
+        showPolyLine: temp.slice(0, 1),
         nowIndex: 0,
         nowDay: 1,
+        nowLine: temp[0] && temp[0].points && temp[0].points || [],
         [`imageItems[0].isCheck`]: true
       })
     }
@@ -179,6 +185,9 @@ Page({
       latitude: _this.data.markers[id].latitude,
       longitude: _this.data.markers[id].longitude,
     }
+    _this.setData({
+      isEdit: true
+    })
     if (!this.data.isShow || !this.data.isTravel) {
       if (!this.data.isTravel) {
         wx.showLoading()
@@ -231,6 +240,8 @@ Page({
       longitude: this.data.markers[id].longitude,
     })
     let nowIndex = this.data.nowIndex
+    let [...nowScenery] = this.data.travelPlan[nowIndex] && this.data.travelPlan[nowIndex].sceneryInfo && this.data.travelPlan[nowIndex].sceneryInfo || []
+    nowScenery.push(_this.data.sceneryList[id])
     this.setData({
       nowLine: temp,
       [`markers[${id}].isCheck`]: true,
@@ -243,7 +254,10 @@ Page({
         points: temp,
         color: this.data.lineColorMap[nowIndex],
         width: 8
-      }
+      },
+      [`travelPlan[${nowIndex}]`]: {
+        sceneryInfo: nowScenery || []
+      },
     })
   },
   //点击旁边图片items
@@ -275,8 +289,14 @@ Page({
   },
   //计算天数
   calDays: function (travelInfo) {
+    let days = dateDiff(travelInfo.goDate, travelInfo.arriveDate) + 1
+    let [...imageItems] = this.data.allImageItems
+    let [...lineItems] = this.data.allLineColorMap
+
     this.setData({
-      days: dateDiff(travelInfo.goDate, travelInfo.arriveDate) + 1
+      days: days,
+      lineColorMap: lineItems.slice(0, days),
+      imageItems: imageItems.slice(0, days)
     })
   },
   //获取已选择景点详情并初始化
@@ -327,7 +347,8 @@ Page({
           })
           _this.setData({
             markers: markers,
-            circles: circles
+            circles: circles,
+            sceneryList: res.data || []
           })
           wx.hideLoading()
         },

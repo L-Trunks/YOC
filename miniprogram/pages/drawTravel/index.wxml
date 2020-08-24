@@ -26,8 +26,8 @@
         </block>
     </cover-view>
     <map id="map" class="map" subkey="{{key}}" longitude="{{poi.longitude}}" latitude="{{poi.latitude}}" scale="14"
-        markers="{{markers}}" polyline="{{showPolyLine}}" bindmarkertap="onClickMarker" include-points="{{markers}}"
-        circles="{{circles}}" layer-style='1' />
+        markers="{{markers}}" polyline="{{showPolyLine}}" bindmarkertap="onClickMarker"
+        include-points="{{isEdit?'':markers}}" circles="{{circles}}" layer-style='1' />
     <cover-view class="dt_left_btn flex column txt_28 txt_medium" scroll-top="0">
         <cover-view bindtap='onClickLeftBtn' data-id="0" class="dt_left {{isShow?'dt_left_active ':''}}" scroll-top="0">
             形成方案

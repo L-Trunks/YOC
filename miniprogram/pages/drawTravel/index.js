@@ -533,7 +533,9 @@ Page({
   },
   //格式化用户行程计划
   initTravelPlan() {
-    wx.showLoading()
+    wx.showLoading({
+      title: '加载中'
+    })
     let _this = this
     console.log('接口获取的用户行程计划', _this.data.travelPlan)
     let [...tempPlan] = _this.data.travelPlan

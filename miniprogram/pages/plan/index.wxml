@@ -1,1 +1,16 @@
+<view class="flex column j_center txt_36 txt_bold plan_container">
+	开发中...
+	<view class="txt_26 txt_medium">
+		我们正在开发更多更好玩的功能，下次再来就能看见了~
+	</view>
+	<view class="txt_24 txt_medium flex j_center">
+		查看旅行计划目前可从
+		<view class="main_txt">
+			喜欢的景点-->确认-->下一步-->制定行程
+		</view>
+		看到
+	</view>
+</view>
+
 <tabbar activeIdx="{{activeIdx}}" />
+

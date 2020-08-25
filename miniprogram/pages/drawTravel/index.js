@@ -6,7 +6,7 @@ let qqmapsdk = new QQMapWX({
 });
 const db = wx.cloud.database({})
 const _ = db.command
-import { dateDiff, distance } from '../../util/util'
+import { dateDiff, distance, dateTimeStamp } from '../../util/util'
 Page({
   data: {
     key: '375BZ-RAXWU-NJOVW-BX74F-W4HHK-LXBC7',
@@ -61,7 +61,6 @@ Page({
   onShow() {
     let pages = getCurrentPages();
     let currPage = pages[pages.length - 1];
-    console.log(currPage)
     if (currPage.data.hotelIndex >= 0) {
       this.setData({//将携带的参数赋值
         hotelIndex: currPage.data.hotelIndex,
@@ -170,7 +169,8 @@ Page({
       if (res.data && res.data.length > 0) {
         if (res.data[0].travelInfo) {
           _this.setData({
-            travelInfo: res.data[0].travelInfo
+            travelInfo: res.data[0].travelInfo,
+            travelPlan: res.data[0].travelPlan && res.data[0].travelPlan || {}
           })
           _this.calDays(res.data[0].travelInfo)
           _this.initSceneryList()
@@ -243,7 +243,7 @@ Page({
             cancelText: '取消',
             cancelColor: '#000000',
             confirmText: '确定',
-            confirmColor: '#3CC51F',
+            confirmColor: '#6fb5f3',
             success: (result) => {
               if (result.confirm) {
                 _this.enterHotel(poi)
@@ -383,7 +383,11 @@ Page({
             circles: circles,
             sceneryList: res.data || []
           })
+          console.log('marker', _this.data.markers)
+
           wx.hideLoading()
+          _this.initTravelPlan()
+
         },
         fail: (err) => {
           console.error(err)
@@ -415,6 +419,7 @@ Page({
           _this.setData({
             [`showPolyLine[${_this.data.nowIndex}]`]: [],
             [`polyline[${_this.data.nowIndex}]`]: [],
+            [`travelPlan[${_this.data.nowIndex}].sceneryInfo`]: [],
             nowLine: []
           })
           wx.hideLoading()
@@ -426,7 +431,156 @@ Page({
   },
   //点击下一步
   enterTravelPlan: function () {
+    let _this = this
+    let allowNext = true
+    let [...tempMarkers] = _this.data.markers
+    Array.from(tempMarkers, i => {
+      if (!i.isCheck) {
+        allowNext = false
+      }
+    })
+    if (!allowNext) {
+      wx.showToast({
+        title: "还有景点未选择哦",
+        icon: 'none'
+      })
+      return
+    }
+    let [...travelPlan] = _this.data.travelPlan
+    let [...imageItems] = _this.data.imageItems
 
+    console.log(travelPlan)
+    let noTravelArr = []
+    let noHotelArr = []
+    Array.from(imageItems, (i, j) => {
+      if (!travelPlan[j] || !travelPlan[j].sceneryInfo || travelPlan[j].sceneryInfo.length <= 0) {
+        noTravelArr.push(j + 1)
+      }
+      if (travelPlan[j] && travelPlan[j].sceneryInfo && travelPlan[j].sceneryInfo.length > 0 && JSON.stringify(travelPlan[j].hotelInfo) === '{}') {
+        noHotelArr.push(j + 1)
+      }
+    })
+    if (noHotelArr.length > 0) {
+      wx.showToast({
+        title: `第${noHotelArr.join(',')}天酒店未选择`,
+        icon: 'none'
+      })
+      return
+    }
+    wx.showModal({
+      title: '提示',
+      content: '确定使用该行程计划吗？',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#6fb5f3',
+      success: (result) => {
+        if (result.confirm) {
+          if (noTravelArr.length > 0) {
+            wx.showModal({
+              title: '提示',
+              content: `第${noTravelArr.join(',')}天未制定行程，是否使用系统推荐行程？`,
+              showCancel: true,
+              cancelText: '取消',
+              cancelColor: '#000000',
+              confirmText: '确定',
+              confirmColor: '#6fb5f3',
+              success: (result) => {
+                if (result.confirm) {
+                  console.log('使用系统推荐行程')
+                  _this.useSystemTravel(noTravelArr)
+                } else {
+                  console.log('不使用系统推荐行程')
+                  _this.saveTravel()
+                }
+              }
+            });
+          } else {
+            _this.saveTravel()
+          }
+
+        } else {
+          return
+        }
+      }
+    });
+  },
+  //使用系统推荐行程
+  useSystemTravel: function () {
+    this.saveTravel()
+  },
+  //保存用户行程
+  saveTravel: function () {
+    let _this = this
+    db.collection('user').where({ _openid: app.globalData.openid }).update({
+      data: {
+        tPUpdateTime: dateTimeStamp(new Date()) || '',
+        travelPlan: _this.data.travelPlan
+      }
+    }).then(res => {
+      console.log('更新用户旅行计划返回值:', res)
+      wx.reLaunch({
+        url: '../plan/index'
+      })
+    }).catch(err => {
+      console.log(err)
+      wx.showToast({
+        title: '提交失败，请稍后再试',
+        icon: 'none'
+      })
+    })
+  },
+  //格式化用户行程计划
+  initTravelPlan() {
+    wx.showLoading()
+    let _this = this
+    console.log('接口获取的用户行程计划', _this.data.travelPlan)
+    let [...tempPlan] = _this.data.travelPlan
+    let [...imageItems] = _this.data.imageItems
+    let polyLine = []
+    let tempMarkers = []
+    Array.from(imageItems, (i, j) => {
+      _this.setData({
+        [`imageItems[${j}].isCheck`]: true,
+        nowDay: 1,
+        nowIndex: 0,
+      })
+    })
+    Array.from(tempPlan, (i, j) => {
+      i && i.sceneryInfo && i.sceneryInfo.length > 0 ? Array.from(i.sceneryInfo, k => {
+        let points = polyLine[j] && polyLine[j].points && polyLine[j].points || []
+        points.push({
+          latitude: k.location.lat || '',
+          longitude: k.location.lon || '',
+        })
+        polyLine[j] = {
+          points: points,
+          color: _this.data.lineColorMap[j],
+          width: 8,
+        }
+        tempMarkers.push(k)
+      }) : polyLine[j] = {
+        points: [],
+      }
+    })
+    Array.from(_this.data.markers, (i, j) => {
+      Array.from(tempMarkers, k => {
+        if (i.latitude === k.location.lat && i.longitude === k.location.lon) {
+          _this.setData({
+            [`markers[${j}].isCheck`]: true
+          })
+        }
+      })
+    })
+    console.log('格式化之后的marker', _this.data.markers)
+    _this.setData({
+      polyline: polyLine,
+      showPolyLine: polyLine,
+      nowLine: polyLine[0]
+    })
+    console.log('格式化之后的线列表', polyLine)
+    wx.hideLoading()
   },
   //获取openid
   onGetUserInfo: function () {

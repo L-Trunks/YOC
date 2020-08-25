@@ -29,6 +29,7 @@ Page({
   },
 
   onLoad: function () {
+    wx.hideTabBar()
     this.getCategory()
   },
   onShow: function () {

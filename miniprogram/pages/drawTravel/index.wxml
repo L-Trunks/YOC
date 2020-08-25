@@ -87,6 +87,7 @@
 		 catchtap="enterTravelPlan"
 		 class="main_bg btn_next"
 		 hover-class="none"
+		 catchtap="enterTravelPlan"
 		 hover-stop-propagation="false"
 		>
 			下一步

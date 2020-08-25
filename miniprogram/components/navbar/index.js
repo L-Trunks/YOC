@@ -1,5 +1,6 @@
 // zh_tcwq/pubcoms/navbar/navbar.js
 import tabbarList from "../../config/router.js"
+const app = getApp();
 Component({
 
   /**
@@ -47,6 +48,8 @@ Component({
         idx,
         path
       } = e.currentTarget.dataset
+      app.globalData.nowIndex = this.data.activeIdx
+      app.globalData.nextIndex = idx
       console.log('tab索引', idx, this.data.activeIdx)
       let _this = this
       if (idx === this.data.activeIdx) {
@@ -69,10 +72,9 @@ Component({
             }
           })
         } else if (idx === 2) {
-          wx.showToast({
-            title: '还未制定行程计划哦',
-            icon: 'none',
-          });
+          wx.switchTab({
+            url: `/${path}`,
+          })
         }
       } else if (this.data.activeIdx === 1) {
         if (idx === 0) {
@@ -90,10 +92,9 @@ Component({
             }
           })
         } else if (idx === 2) {
-          wx.showToast({
-            title: '还未制定行程计划哦',
-            icon: 'none',
-          });
+          wx.switchTab({
+            url: `/${path}`,
+          })
         }
       } else if (this.data.activeIdx === 2) {
         if (idx === 0) {
@@ -111,7 +112,9 @@ Component({
             }
           })
         } else if (idx === 1) {
-
+          wx.switchTab({
+            url: `/${path}`,
+          })
         }
       }
 

@@ -23,6 +23,7 @@ Page({
   },
 
   onLoad: function () {
+    wx.hideTabBar()
     let now = new Date()
     let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
     this.setData({
@@ -159,7 +160,8 @@ Page({
         goDate: _this.goDate,
         arriveDate: _this.arriveDate,
         hours: '',
-        selectArr: []
+        selectArr: [],
+        tIUpdateTime: dateTimeStamp(new Date()) || ''
       }
       app.globalData.travelInfo = travelInfo
       wx.setStorageSync('travelInfo', JSON.stringify(travelInfo))
@@ -235,9 +237,17 @@ Page({
                 wx.setStorageSync('travelHour', res.data[0].travelInfo.hours)
               }
               wx.setStorageSync('travelInfo', JSON.stringify(res.data[0].travelInfo))
-              wx.switchTab({
-                url: '../../pages/scenery/index'
-              })
+              if (app.globalData.nowIndex === 0) {
+                if (res.data[0].travelPlan) {
+                  wx.switchTab({
+                    url: '../plan/index'
+                  })
+                } else if (res.data[0].travelInfo) {
+                  wx.switchTab({
+                    url: '../scenery/index'
+                  })
+                }
+              }
             }
           } else {
             this.createUser()

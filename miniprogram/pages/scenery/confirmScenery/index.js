@@ -3,7 +3,7 @@ const app = getApp()
 const db = wx.cloud.database({
 })
 const _ = db.command
-import { dateDiff } from '../../../util/util'
+import { dateDiff, dateTimeStamp } from '../../../util/util'
 Page({
   data: {
     showText: '愿你风月温柔，爱恨浪漫',
@@ -96,26 +96,27 @@ Page({
   },
   //点击下一步
   onClickNext: function () {
-    if(this.data.sceneryList.length>0){
+    if (this.data.sceneryList.length > 0) {
       db.collection('user').where({ _openid: app.globalData.openid }).update({
-      data: {
-        travelInfo: {
-          hours: wx.getStorageSync('travelHour'),
-          selectArr: JSON.parse(wx.getStorageSync('selectArr'))
+        data: {
+          travelInfo: {
+            hours: wx.getStorageSync('travelHour'),
+            selectArr: JSON.parse(wx.getStorageSync('selectArr')),
+            sHUpdateTime: dateTimeStamp(new Date()) || ''
+          }
         }
-      }
-    }).then(res => {
-      console.log('更新用户行程返回值:', res)
-      wx.navigateTo({
-        url: '../../drawTravel/index'
+      }).then(res => {
+        console.log('更新用户行程返回值:', res)
+        wx.navigateTo({
+          url: '../../drawTravel/index'
+        })
       })
-    })
-    }else{
+    } else {
       wx.showToast({
         title: '您还没有选择游玩景点哦',
         icon: 'none'
       });
     }
-    
+
   }
 })

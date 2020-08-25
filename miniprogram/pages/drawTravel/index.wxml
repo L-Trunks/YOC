@@ -83,12 +83,29 @@
 		</cover-view>
 	</cover-view>
 	<cover-view class="btn_next_view flex j_center" hover-class="none" hover-stop-propagation="false">
-		<cover-view catchtap="enterTravelPlan" class="main_bg btn_next" hover-class="none" hover-stop-propagation="false">
+		<cover-view
+		 catchtap="enterTravelPlan"
+		 class="main_bg btn_next"
+		 hover-class="none"
+		 hover-stop-propagation="false"
+		>
 			下一步
 		</cover-view>
 	</cover-view>
-	<cover-view catchtap="removeTravelInfo" class="flex j_center txt_24 txt_fff btn_remove" hover-class="none" hover-stop-propagation="false">
-		删除路线
+	<cover-view
+	 catchtap=""
+	 class="flex j_center txt_24 txt_fff btn_remove"
+	 hover-class="none"
+	 hover-stop-propagation="false"
+	>
+		<cover-view
+		 catchtap="removeTravelInfo"
+		 class="btn_remove_view"
+		 hover-class="none"
+		 hover-stop-propagation="false"
+		>
+			删除路线
+		</cover-view>
 	</cover-view>
 </view>
 

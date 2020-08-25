@@ -415,6 +415,7 @@ Page({
           _this.setData({
             [`showPolyLine[${_this.data.nowIndex}]`]: [],
             [`polyline[${_this.data.nowIndex}]`]: [],
+            nowLine: []
           })
           wx.hideLoading()
         } else {

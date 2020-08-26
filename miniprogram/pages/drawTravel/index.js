@@ -305,12 +305,12 @@ Page({
     })
     let _this = this
     let [...tempArr] = _this.data.imageItems
-    console.log(tempArr, this.data.polyline)
+    let [...tempPolyLine] = _this.data.polyline
     tempArr.forEach((i, index) => {
       if (i.isCheck) {
         _this.setData({
-          [`showPolyLine[${index}]`]: _this.data.polyline[index] || {},
-          nowLine: _this.data.polyline[index] && _this.data.polyline[index].points || []
+          [`showPolyLine[${index}]`]: tempPolyLine[index] || {},
+          nowLine: tempPolyLine[index] && tempPolyLine[index].points || []
         })
       } else {
         _this.setData({
@@ -318,7 +318,7 @@ Page({
         })
       }
     })
-    console.log(this.data.showPolyLine)
+    console.log(this.data.showPolyLine, tempPolyLine, this.data.polyline)
   },
   //计算天数
   calDays: function (travelInfo) {
@@ -538,6 +538,10 @@ Page({
     })
     let _this = this
     console.log('接口获取的用户行程计划', _this.data.travelPlan)
+    if (JSON.stringify(_this.data.travelPlan) === '{}') {
+      wx.hideLoading()
+      return
+    }
     let [...tempPlan] = _this.data.travelPlan
     let [...imageItems] = _this.data.imageItems
     let polyLine = []
@@ -577,8 +581,8 @@ Page({
     })
     console.log('格式化之后的marker', _this.data.markers)
     _this.setData({
-      polyline: polyLine,
-      showPolyLine: polyLine,
+      polyline: [...polyLine],
+      showPolyLine: [...polyLine],
       nowLine: polyLine[0]
     })
     console.log('格式化之后的线列表', polyLine)

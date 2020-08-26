@@ -24,6 +24,7 @@ Page({
 
   onLoad: function () {
     wx.hideTabBar()
+    let _this = this.data
     let now = new Date()
     let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
     this.setData({
@@ -32,6 +33,17 @@ Page({
       endDate: formatDateTime(end, 'yy-mm-dd'),
       arriveDate: formatDateTime(now, 'yy-mm-dd'),
     })
+    let travelInfo = {
+      place: _this.cityArray[_this.cityIndex],
+      transport: _this.transArray[_this.transIndex],
+      goDate: _this.goDate,
+      arriveDate: _this.arriveDate,
+      hours: '',
+      selectArr: [],
+      tIUpdateTime: dateTimeStamp(new Date()) || ''
+    }
+    app.globalData.travelInfo = travelInfo
+    wx.setStorageSync('travelInfo', JSON.stringify(travelInfo))
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -73,8 +85,10 @@ Page({
       wx.hideLoading()
     } else {
       db.collection('user').where({ _openid: app.globalData.openid }).get().then(res => {
-        if (res.data[0].travelInfo) {
+        if (res.data[0] && res.data[0].travelInfo) {
           _this.setFormData(res.data[0].travelInfo)
+          wx.hideLoading()
+        } else {
           wx.hideLoading()
         }
       })

@@ -3,6 +3,7 @@
 .plan_container {
   position: relative;
   padding: 46rpx 70rpx;
+
 }
 
 .plan_top text {

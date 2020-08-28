@@ -1,21 +1,26 @@
 <view class="plan_container">
-		<view class='plan_top flex column a_start j_start txt_333 txt_48 txt_medium'>
+	<view class='plan_top flex column a_start j_start txt_333 txt_48 txt_medium'>
 		{{year}}
-			<text class="txt_36">{{date+' '+weekDay}}</text>
-		</view>
-		<view class="plan_items flex wrap">
-			<block wx:for="{{leftItems}}" wx:key="index">
-				<view class="plan_item">
-					<view class="plan_item_top">
-						{{'第'+item.day+'天'}}
-						<image class="" src="" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
-					</view>
-					<view>
-						
-					</view>
+		<text class="txt_36">{{date+' '+weekDay}}</text>
+	</view>
+	<view class="plan_items flex wrap">
+		<block wx:for="{{leftItems}}" wx:key="index">
+			<view class="plan_item">
+				<view class="plan_item_top">
+					{{'第'+item.day+'天'}}
+					<image
+					 class=""
+					 src=""
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
 				</view>
-			</block>
-		</view>
+				<view/>
+			</view>
+		</block>
+	</view>
 </view>
-
 <tabbar activeIdx="{{activeIdx}}" />
+

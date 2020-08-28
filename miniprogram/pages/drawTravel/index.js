@@ -299,11 +299,19 @@ Page({
   onClickImageItem: function (e) {
     let index = e.currentTarget.dataset.index
     this.setData({
-      nowIndex: index,
-      nowDay: index + 1,
       [`imageItems[${index}].isCheck`]: !this.data.imageItems[index].isCheck
     })
+    if (this.data.imageItems[index].isCheck) {
+      this.setData({
+        nowIndex: index,
+        nowDay: index + 1
+      })
+    }
     let _this = this
+    wx.showToast({
+      title: `当前第${_this.data.nowDay}天`,
+      icon: 'none'
+    })
     let [...tempArr] = _this.data.imageItems
     let [...tempPolyLine] = _this.data.polyline
     tempArr.forEach((i, index) => {
@@ -546,13 +554,7 @@ Page({
     let [...imageItems] = _this.data.imageItems
     let polyLine = []
     let tempMarkers = []
-    Array.from(imageItems, (i, j) => {
-      _this.setData({
-        [`imageItems[${j}].isCheck`]: true,
-        nowDay: 1,
-        nowIndex: 0,
-      })
-    })
+
     Array.from(tempPlan, (i, j) => {
       i && i.sceneryInfo && i.sceneryInfo.length > 0 ? Array.from(i.sceneryInfo, k => {
         let points = polyLine[j] && polyLine[j].points && polyLine[j].points || []
@@ -570,6 +572,24 @@ Page({
         points: [],
       }
     })
+    //初始化
+    _this.setData({
+      nowDay: 1,
+      nowIndex: 0,
+    })
+    Array.from(imageItems, (k, g) => {
+      Array.from(_this.data.travelPlan, (i, j) => {
+        if (i && i.sceneryInfo && i.sceneryInfo.length > 0) {
+          _this.setData({
+            [`imageItems[${j}].isCheck`]: true,
+          })
+        } else {
+          _this.setData({
+            [`imageItems[${j}].isCheck`]: false,
+          })
+        }
+      })
+    })
     Array.from(_this.data.markers, (i, j) => {
       Array.from(tempMarkers, k => {
         if (i.latitude === k.location.lat && i.longitude === k.location.lon) {
@@ -583,7 +603,7 @@ Page({
     _this.setData({
       polyline: [...polyLine],
       showPolyLine: [...polyLine],
-      nowLine: polyLine[0]
+      nowLine: polyLine[0] && polyLine[0].points && polyLine[0].points || []
     })
     console.log('格式化之后的线列表', polyLine)
     wx.hideLoading()

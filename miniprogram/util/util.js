@@ -15,7 +15,8 @@ export const formatDateTime = function (inputTime, type) {
     let resultMap = {
         'yy-mm-dd-hh-mm-ss': y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second,
         'yy-mm': y + '-' + m,
-        'yy-mm-dd': y + '-' + m + '-' + d
+        'yy-mm-dd': y + '-' + m + '-' + d,
+        'mm.dd': `${m}.${d}`
     }
     return resultMap[type];
 };
@@ -117,4 +118,12 @@ export const distance = (la1, lo1, la2, lo2) => {
     s = Math.round(s * 10000) / 10000;
     s = s.toFixed(2);
     return s;
+}
+
+//根据时间判断周几
+
+export const weekDay = (date) => {
+    let weekArray = ["日", "一", "二", "三", "四", "五", "六"];
+    let week = weekArray[new Date(date).getDay()];
+    return `周${week}`
 }

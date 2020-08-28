@@ -1,16 +1,21 @@
-<view class="flex column j_center txt_36 txt_bold plan_container">
-	开发中...
-	<view class="txt_26 txt_medium">
-		我们正在开发更多更好玩的功能，下次再来就能看见了~
-	</view>
-	<view class="txt_24 txt_medium flex j_center">
-		查看旅行计划目前可从
-		<view class="main_txt">
-			喜欢的景点-->确认-->下一步-->制定行程
+<view class="plan_container">
+		<view class='plan_top flex column a_start j_start txt_333 txt_48 txt_medium'>
+		{{year}}
+			<text class="txt_36">{{date+' '+weekDay}}</text>
 		</view>
-		看到
-	</view>
+		<view class="plan_items flex wrap">
+			<block wx:for="{{leftItems}}" wx:key="index">
+				<view class="plan_item">
+					<view class="plan_item_top">
+						{{'第'+item.day+'天'}}
+						<image class="" src="" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+					</view>
+					<view>
+						
+					</view>
+				</view>
+			</block>
+		</view>
 </view>
 
 <tabbar activeIdx="{{activeIdx}}" />
-

@@ -40,7 +40,8 @@ Page({
     }
     if (wx.getStorageSync('travelHour')) {
       this.setData({
-        hasHour: true
+        hasHour: true,
+        travelHour: wx.getStorageSync('travelHour')
       })
     }
     console.log('本地缓存中的游玩时间', wx.getStorageSync('travelHour'))

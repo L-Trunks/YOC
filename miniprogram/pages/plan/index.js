@@ -10,7 +10,9 @@ Page({
     rightItems: [],//右边渲染
     nowDate: '',
     year: '',
-    date: ''
+    date: '',
+    leftBgColor: ['#A9EDEE', '#F6EAAE'],
+    rightBgColor: ['#EEC0AB', '#BBF5CF'],
   },
 
   onLoad: function () {
@@ -59,7 +61,7 @@ Page({
           ...i,
           day: j + 1,
           week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
-          date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')
+          date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd'),
         })
       } else {
         right.push({
@@ -68,6 +70,20 @@ Page({
           week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
           date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')
         })
+      }
+    })
+    Array.from(left, (i, j) => {
+      if (j % 2 === 0) {
+        i.bgColor = _this.data.leftBgColor[0]
+      } else {
+        i.bgColor = _this.data.leftBgColor[1]
+      }
+    })
+    Array.from(right, (i, j) => {
+      if (j % 2 === 0) {
+        i.bgColor = _this.data.rightBgColor[0]
+      } else {
+        i.bgColor = _this.data.rightBgColor[1]
       }
     })
     console.log('左边渲染列表', left)

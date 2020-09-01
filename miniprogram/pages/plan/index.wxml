@@ -3,24 +3,67 @@
 		{{year}}
 		<text class="txt_36">{{date+' '+weekDay}}</text>
 	</view>
-	<view class="plan_items flex wrap">
-		<block wx:for="{{leftItems}}" wx:key="index">
-			<view class="plan_item">
-				<view class="plan_item_top">
-					{{'第'+item.day+'天'}}
-					<image
-					 class=""
-					 src=""
-					 mode="aspectFit|aspectFill|widthFix"
-					 lazy-load="false"
-					 binderror=""
-					 bindload=""
-					/>
-				</view>
-				<view/>
-			</view>
-		</block>
+	<view class="plan_items flex a_start">
+		<view class='plan_left flex column j_start'>
+			<block wx:for="{{leftItems}}" wx:key="index">
+				<view class="plan_item" style="background:{{item.bgColor}}">
+					<view class="txt_28 txt_fff txt_medium plan_item_top">
+						{{'第'+item.day+'天'}}
+						<image
+						 class=""
+						 src=""
+						 mode="aspectFit|aspectFill|widthFix"
+						 lazy-load="false"
+						 binderror=""
+						 bindload=""
+						/>
+					</view>
+					<view>
+						<text class="txt_fff txt_regular txt_24" selectable="false" space="false" decode="false">
+					 酒店: {{item.hotelInfo.title||'未选择'}}
+
+					 路线:  <block wx:for="{{item.sceneryInfo}}" wx:for-item="itm" wx:for-index="idx" wx:key="idx">
+														<text class="" selectable="false" space="false" decode="false"> {{itm.name||'未制定'}}{{idx===item.sceneryInfo.length-1?'':' -->'}}</text>
+			</block>
+			</text>
+		</view>
+		<view class="plan_item_bottom flex j_end txt_24">
+			>更多
+		</view>
+
 	</view>
+	</block>
+</view>
+<view class="plan_right flex column j_start">
+	<block wx:for="{{rightItems}}" wx:key="index">
+		<view class="plan_item" style="background:{{item.bgColor}}">
+			<view class="plan_item_top txt_28 txt_fff txt_medium">
+				{{'第'+item.day+'天'}}
+				<image
+				 class=""
+				 src=""
+				 mode="aspectFit|aspectFill|widthFix"
+				 lazy-load="false"
+				 binderror=""
+				 bindload=""
+				/>
+			</view>
+			<view>
+				<text class="txt_fff txt_regular txt_24" selectable="false" space="false" decode="false">
+					 酒店:{{item.hotelInfo.title||'未选择'}}
+
+					 路线:  <block wx:for="{{item.sceneryInfo}}" wx:for-item="itm" wx:for-index="idx" wx:key="idx">
+						<text class="" selectable="false" space="false" decode="false">{{itm.name||'未制定'}}{{idx===item.sceneryInfo.length-1?'':' -->'}}</text>
+	</block>
+	</text>
+</view>
+<view class="plan_item_bottom flex j_end txt_24">
+	>更多
+</view>
+</view>
+</block>
+</view>
+</view>
 </view>
 <tabbar activeIdx="{{activeIdx}}" />
 

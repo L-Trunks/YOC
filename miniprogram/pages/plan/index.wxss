@@ -14,4 +14,25 @@
   margin-top: 70rpx;
 }
 
-.plan_item_top image {}
+.plan_item_top image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.plan_left,
+.plan_right {
+  min-width: 270rpx;
+  flex-basis: 270rpx;
+}
+
+.plan_item {
+  margin-top: 40rpx;
+  border-radius: 15rpx;
+  padding: 15rpx 18rpx 10rpx 18rpx;
+  width: 234rpx;
+}
+
+.plan_item_bottom {
+  margin-top: 60rpx;
+  color: #6FB5F4;
+}

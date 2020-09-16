@@ -246,6 +246,7 @@ Page({
             if (res.data[0].travelInfo) {
               if (res.data[0].travelInfo.selectArr && res.data[0].travelInfo.selectArr.length > 0) {
                 wx.setStorageSync('selectArr', JSON.stringify(res.data[0].travelInfo.selectArr))
+                app.globalData.selectArr = res.data[0].travelInfo.selectArr
               }
               if (res.data[0].travelInfo.hours) {
                 wx.setStorageSync('travelHour', res.data[0].travelInfo.hours)
@@ -253,9 +254,21 @@ Page({
               wx.setStorageSync('travelInfo', JSON.stringify(res.data[0].travelInfo))
               if (app.globalData.nowIndex === 0) {
                 if (res.data[0].travelPlan) {
-                  wx.switchTab({
-                    url: '../plan/index'
-                  })
+                  if (res.data[0].travelPlan.length) {
+                    wx.switchTab({
+                      url: '../plan/index'
+                    })
+                  } else {
+                    wx.showToast({
+                      title: '还未制定行程计划哦',
+                      icon: 'none'
+                    })
+                    setTimeout(() => {
+                      wx.navigateTo({
+                        url: '../drawTravel/index'
+                      });
+                    }, 500)
+                  }
                 } else if (res.data[0].travelInfo) {
                   wx.switchTab({
                     url: '../scenery/index'

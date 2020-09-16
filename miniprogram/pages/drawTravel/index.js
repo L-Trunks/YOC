@@ -447,34 +447,34 @@ Page({
         allowNext = false
       }
     })
-    if (!allowNext) {
-      wx.showToast({
-        title: "还有景点未选择哦",
-        icon: 'none'
-      })
-      return
-    }
+    // if (!allowNext) {
+    //   wx.showToast({
+    //     title: "还有景点未选择哦",
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
     let [...travelPlan] = _this.data.travelPlan
     let [...imageItems] = _this.data.imageItems
 
     console.log(travelPlan)
     let noTravelArr = []
-    let noHotelArr = []
+    // let noHotelArr = []
     Array.from(imageItems, (i, j) => {
       if (!travelPlan[j] || !travelPlan[j].sceneryInfo || travelPlan[j].sceneryInfo.length <= 0) {
         noTravelArr.push(j + 1)
       }
-      if (travelPlan[j] && travelPlan[j].sceneryInfo && travelPlan[j].sceneryInfo.length > 0 && JSON.stringify(travelPlan[j].hotelInfo) === '{}') {
-        noHotelArr.push(j + 1)
-      }
+      // if (travelPlan[j] && travelPlan[j].sceneryInfo && travelPlan[j].sceneryInfo.length > 0 && JSON.stringify(travelPlan[j].hotelInfo) === '{}') {
+      //   noHotelArr.push(j + 1)
+      // }
     })
-    if (noHotelArr.length > 0) {
-      wx.showToast({
-        title: `第${noHotelArr.join(',')}天酒店未选择`,
-        icon: 'none'
-      })
-      return
-    }
+    // if (noHotelArr.length > 0) {
+    //   wx.showToast({
+    //     title: `第${noHotelArr.join(',')}天酒店未选择`,
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
     wx.showModal({
       title: '提示',
       content: '确定使用该行程计划吗？',
@@ -489,6 +489,25 @@ Page({
             wx.showModal({
               title: '提示',
               content: `第${noTravelArr.join(',')}天未制定行程，是否使用系统推荐行程？`,
+              showCancel: true,
+              cancelText: '取消',
+              cancelColor: '#000000',
+              confirmText: '确定',
+              confirmColor: '#6fb5f3',
+              success: (result) => {
+                if (result.confirm) {
+                  console.log('使用系统推荐行程')
+                  _this.useSystemTravel(noTravelArr)
+                } else {
+                  console.log('不使用系统推荐行程')
+                  _this.saveTravel()
+                }
+              }
+            });
+          } else if (!allowNext) {
+            wx.showModal({
+              title: '提示',
+              content: `还有景点未选择，是否使用系统推荐行程？`,
               showCancel: true,
               cancelText: '取消',
               cancelColor: '#000000',

@@ -23,7 +23,7 @@
 			>
 				制定行程
 			</cover-view>
-			<cover-view
+		<!--	<cover-view
 			 bindtap='onClickTopBtn'
 			 data-id="1"
 			 class="btn_top {{isTravel?'':'main_bg txt_fff'}}"
@@ -31,7 +31,7 @@
 			 hover-stop-propagation="false"
 			>
 				选择酒店
-			</cover-view>
+			</cover-view> -->
 		</cover-view>
 	</cover-view>
 	<cover-view class="dt_img_items flex column" scroll-top="0">

@@ -137,6 +137,9 @@ Page({
   //获取分类
   getCategory: function () {
     let _this = this
+    wx.showLoading({
+      title: '加载中'
+    })
     wx.cloud.callFunction({
       name: 'getSceneryCategory',
       data: {
@@ -148,10 +151,12 @@ Page({
           isCategory: res.result.data[0]._id || '',
           sceneryConfig: { page: 1, sortId: res.result.data[0]._id }
         })
+        wx.hideLoading()
         console.log(res.result.data[0]._id)
         _this.getScenery({ ..._this.data.sceneryConfig, sortId: res.result.data[0]._id })
       },
       fail: err => {
+        wx.hideLoading()
         console.error('[云函数] [getSceneryCategory] 调用失败', err)
       }
     })

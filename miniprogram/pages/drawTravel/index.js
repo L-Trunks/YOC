@@ -314,7 +314,7 @@ Page({
     })
     let [...tempArr] = _this.data.imageItems
     let [...tempPolyLine] = _this.data.polyline
-    tempArr.forEach((i, index) => {
+    Array.from(tempArr, (i, index) => {
       if (i.isCheck) {
         _this.setData({
           [`showPolyLine[${index}]`]: tempPolyLine[index] || {},
@@ -440,13 +440,14 @@ Page({
   //点击下一步
   enterTravelPlan: function () {
     let _this = this
-    let allowNext = true
+    let allowNext = true //所有景点是否已选择
     let [...tempMarkers] = _this.data.markers
     Array.from(tempMarkers, i => {
       if (!i.isCheck) {
         allowNext = false
       }
     })
+    _this.data.allowNext = allowNext
     // if (!allowNext) {
     //   wx.showToast({
     //     title: "还有景点未选择哦",
@@ -497,7 +498,7 @@ Page({
               success: (result) => {
                 if (result.confirm) {
                   console.log('使用系统推荐行程')
-                  _this.useSystemTravel(noTravelArr)
+                  _this.useSystemTravel()
                 } else {
                   console.log('不使用系统推荐行程')
                   _this.saveTravel()
@@ -516,7 +517,7 @@ Page({
               success: (result) => {
                 if (result.confirm) {
                   console.log('使用系统推荐行程')
-                  _this.useSystemTravel(noTravelArr)
+                  _this.useSystemTravel()
                 } else {
                   console.log('不使用系统推荐行程')
                   _this.saveTravel()
@@ -535,6 +536,7 @@ Page({
   },
   //使用系统推荐行程
   useSystemTravel: function () {
+
     this.saveTravel()
   },
   //保存用户行程

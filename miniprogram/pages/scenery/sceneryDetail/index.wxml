@@ -36,7 +36,7 @@
 								<image src='{{item.src}}' mode='widthFix' />
 							</view>
 							<view class='middle'>
-								<text>{{item.text}}</text>
+								<text decode="true">{{item.text}}</text>
 							</view>
 							<view bindtap="showDetail" data-detail="{{item.label}}" class='label'>{{item.label || ""}}</view>
 							<view class='right'>

@@ -3,7 +3,6 @@
 .plan_container {
   position: relative;
   padding: 46rpx 70rpx;
-
 }
 
 .plan_top text {
@@ -11,7 +10,7 @@
 }
 
 .plan_items {
-  margin-top: 70rpx;
+  margin: 70rpx 0;
 }
 
 .plan_item_top image {

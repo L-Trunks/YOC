@@ -17,7 +17,7 @@
 			<view class='scenery_search flex j_start'>
 				<image src="../../images/scenery/search.png" />
 				<input
-				 class=""
+				 class="txt_24"
 				 value=""
 				 type="text"
 				 placeholder="请输入景点名称"
@@ -66,7 +66,7 @@
 					</text>
 				</view>
 				<image
-				 class="s_item_right"
+				 class="s_item_right {{item.isSelect?'img_is_check':'img_un_check'}}"
 				 data-id="{{item._id}}"
 				 data-index="{{index}}"
 				 src="{{item.isSelect ? '../../images/scenery/heart.png':'../../images/scenery/heart_uncheck.png'}}"

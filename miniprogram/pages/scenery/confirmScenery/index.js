@@ -28,6 +28,14 @@ Page({
     this.getSceneryList()
 
   },
+  onShow: function (options) {
+    if (options && options.type && options.type === 'noselect') {
+      wx.showToast({
+        title: "请选择游玩景点",
+        icon: 'none'
+      })
+    }
+  },
   //计算天数
   calDays: function () {
     let travelInfo = JSON.parse(wx.getStorageSync('travelInfo'))

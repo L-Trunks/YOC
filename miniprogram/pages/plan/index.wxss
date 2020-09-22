@@ -35,3 +35,27 @@
   margin-top: 60rpx;
   color: #6FB5F4;
 }
+
+.no_travel_plan {
+  padding: 50rpx 0;
+}
+
+.plan_click {
+  padding: 10rpx 15rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  display: inline-block;
+  margin-top: 30rpx
+}
+
+.remove_dravel {
+  position: absolute;
+  top: 70rpx;
+  right: 80rpx;
+  font-size: 24rpx;
+  padding: 10rpx 15rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  display: inline-block;
+  background: #f04f48;
+}

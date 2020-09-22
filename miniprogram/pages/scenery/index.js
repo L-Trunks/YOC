@@ -221,9 +221,9 @@ Page({
 
   //搜索框聚焦
   onSearchFocus: function (e) {
-    this.setData({
-      isTop: true
-    })
+    // this.setData({
+    //   isTop: true
+    // })
   },
   //搜索框丢失焦点
   onSearchBlur: function (e) {
@@ -280,6 +280,11 @@ Page({
   //监听屏幕滚动 判断上下滚动  
   onPageScroll: function (ev) {
     let query = wx.createSelectorQuery()
+    if (ev.scrollTop < 5) {
+      this.setData({
+        isTop: false
+      })
+    }
     query.select('#search').boundingClientRect((rect) => {
       let top = rect.top
       if (top <= 5) {  //临界值，根据自己的需求来调整

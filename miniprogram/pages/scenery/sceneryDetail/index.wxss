@@ -1,11 +1,24 @@
 @import '../../../style/base.wxss';
-.info_box{
-    padding: 100rpx 70rpx 0 70rpx;
+
+.info_box {
+    padding: 100rpx 70rpx 120rpx 70rpx;
+    z-index: 3;
+    position: relative;
 }
+.scenery_intro>view:first-child {
+    padding: 10rpx 0;
+
+}
+.scenery_intro>view:last-child {
+    padding: 20rpx;
+
+}
+
 .cellList {
     height: 100rpx;
     width: 100%;
     display: flex;
+    z-index: 3;
     border-bottom: 1rpx solid #f5f5f5;
 }
 
@@ -60,8 +73,8 @@
     position: relative;
 }
 
-.background_img{
-    position: absolute;
+.background_img {
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 380rpx;

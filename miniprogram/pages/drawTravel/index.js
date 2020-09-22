@@ -168,6 +168,12 @@ Page({
       console.log('用户信息', res.data)
       if (res.data && res.data.length > 0) {
         if (res.data[0].travelInfo) {
+          if (!res.data[0].travelInfo.selectArr || !res.data[0].travelInfo.selectArr.length) {
+            wx.switchTab({
+              url: '../scenery/index?type=noselect',
+            });
+
+          }
           _this.setData({
             travelInfo: res.data[0].travelInfo,
             travelPlan: res.data[0].travelPlan && res.data[0].travelPlan || {}
@@ -360,8 +366,8 @@ Page({
               latitude: i.location.lat,
               longitude: i.location.lon,
               iconPath: i.picList[0] && i.picList[0].picUrl || '../../images/scenery/noImage.jpg',
-              width: 36,
-              height: 36,
+              width: 48,
+              height: 48,
               callout: {
                 content: i.name || '',
                 borderRadius: 0,

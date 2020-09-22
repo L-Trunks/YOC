@@ -11,12 +11,15 @@ Page({
     nowDate: '',
     year: '',
     date: '',
+    days: 0,
     leftBgColor: ['#A9EDEE', '#F6EAAE'],
     rightBgColor: ['#EEC0AB', '#BBF5CF'],
   },
 
   onLoad: function () {
     wx.hideTabBar()
+    //计算总天数
+    this.calDays()
     let now = new Date()
     let date = formatDateTime(now, 'mm.dd')
     let year = now.getFullYear()
@@ -25,6 +28,9 @@ Page({
       year,
       weekDay: weekDay(formatDateTime(now, 'yy-mm-dd'))
     })
+
+  },
+  onShow() {
     this.onGetUserInfo()
   },
   initUserData() {
@@ -48,6 +54,51 @@ Page({
       }
     })
   },
+  //制定行程
+  goDrawTravel() {
+    wx.showModal({
+      title: '提示',
+      content: '当前旅行计划将被删除，确定继续吗？',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#3CC51F',
+      success: (result) => {
+        if (result.confirm) {
+          db.collection('user').where({ _openid: app.globalData.openid }).update({
+            data: {
+              travelPlan: []
+            }
+          }).then(res => {
+            console.log('更新用户行程返回值:', res)
+            wx.navigateTo({
+              url: '../drawTravel/index'
+            });
+          }).catch(err => {
+            console.log(err)
+            wx.showToast({
+              title: '出现错误，请稍后再试',
+              icon: 'none'
+            })
+          })
+        }
+      }
+    });
+  },
+  //选择景点
+  selectScenery() {
+    wx.switchTab({
+      url: '../scenery/index?type=noselect',
+    });
+  },
+  //计算天数
+  calDays: function () {
+    let travelInfo = JSON.parse(wx.getStorageSync('travelInfo'))
+    this.setData({
+      days: dateDiff(travelInfo.goDate, travelInfo.arriveDate) + 1
+    })
+  },
   formatItem() {
     let _this = this
     let { ...userData } = _this.data.userData
@@ -55,6 +106,12 @@ Page({
     let right = []
     let startDate = userData.travelInfo.goDate
     let oneDay = 1000 * 60 * 60 * 24
+    for (let i = 0; i < _this.data.days; i++) {
+      if (!userData.travelPlan[i]) {
+        userData.travelPlan[i] = {}
+      }
+    }
+
     Array.from(userData.travelPlan, (i, j) => {
       if (j % 2 === 0) {
         left.push({
@@ -63,7 +120,7 @@ Page({
           week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
           date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd'),
         })
-      } else {
+      } else if (j % 2 !== 0) {
         right.push({
           ...i,
           day: j + 1,

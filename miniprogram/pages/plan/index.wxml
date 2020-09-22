@@ -1,4 +1,7 @@
 <view class="plan_container">
+	<view catchtap="goDrawTravel" class="remove_dravel">
+		重新制定
+	</view>
 	<view class='plan_top flex column a_start j_start txt_333 txt_48 txt_medium'>
 		{{year}}
 		<text class="txt_36">{{date+' '+weekDay}}</text>
@@ -19,16 +22,15 @@
 						/>
 					</view>
 					<view>
-						<text class="txt_fff txt_regular txt_24" selectable="false" space="false" decode="false">
-					 酒店: {{item.hotelInfo.title||'未选择'}}
-
-					 路线:  <block wx:for="{{item.sceneryInfo}}" wx:for-item="itm" wx:for-index="idx" wx:key="idx">
-														<text class="" selectable="false" space="false" decode="false"> {{itm.name||'未制定'}}{{idx===item.sceneryInfo.length-1?'':' -->'}}</text>
+						<text wx:if="{{item.sceneryInfo&&item.sceneryInfo.length}}" class="txt_fff txt_regular txt_24" selectable="false" space="false" decode="false">路线:  
+						<block  wx:for="{{item.sceneryInfo}}" wx:for-item="itm" wx:for-index="idx" wx:key="idx">
+						<text class="" selectable="false" space="false" decode="false">{{itm.name||'未制定'}}{{idx===item.sceneryInfo.length-1?'':' -->'}}</text>
 			</block>
 			</text>
+			<view wx:if="{{!item.sceneryInfo||!item.sceneryInfo.length}}" catchtap="selectScenery" class="txt_24 txt_medium plan_click">还未制定行程计划哦~</view>
 		</view>
 		<view class="plan_item_bottom flex j_end txt_24">
-			>更多
+			>>>更多
 		</view>
 
 	</view>
@@ -37,7 +39,7 @@
 <view class="plan_right flex column j_start">
 	<block wx:for="{{rightItems}}" wx:key="index">
 		<view class="plan_item" style="background:{{item.bgColor}}">
-			<view class="plan_item_top txt_28 txt_fff txt_medium">
+			<view class="txt_28 txt_fff txt_medium plan_item_top">
 				{{'第'+item.day+'天'}}
 				<image
 				 class=""
@@ -49,19 +51,23 @@
 				/>
 			</view>
 			<view>
-				<text class="txt_fff txt_regular txt_24" selectable="false" space="false" decode="false">
-					 酒店:{{item.hotelInfo.title||'未选择'}}
-
-					 路线:  <block wx:for="{{item.sceneryInfo}}" wx:for-item="itm" wx:for-index="idx" wx:key="idx">
-						<text class="" selectable="false" space="false" decode="false">{{itm.name||'未制定'}}{{idx===item.sceneryInfo.length-1?'':' -->'}}</text>
+				<text wx:if="{{item.sceneryInfo&&item.sceneryInfo.length}}" class="txt_fff txt_regular txt_24" selectable="false" space="false" decode="false">路线:  
+				<block wx:for="{{item.sceneryInfo}}" wx:for-item="itm" wx:for-index="idx" wx:key="idx">
+						<text  class="" selectable="false" space="false" decode="false">{{itm.name||'未制定'}}{{idx===item.sceneryInfo.length-1?'':' -->'}}</text>
 	</block>
 	</text>
+	<view wx:if="{{!item.sceneryInfo||!item.sceneryInfo.length}}" catchtap="selectScenery" class="txt_24 txt_medium plan_click">还未制定行程计划哦~</view>
 </view>
 <view class="plan_item_bottom flex j_end txt_24">
-	>更多
+	>>>更多
 </view>
+
 </view>
 </block>
+</view>
+
+<view wx:if="{{!leftItems.length&&!rightItems.length}}" class="no_travel_plan txt_24 txt_999 txt_medium">
+	还未制定行程计划哦~
 </view>
 </view>
 </view>

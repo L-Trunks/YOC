@@ -146,9 +146,11 @@
 .main_bg {
     background: #6fb5f3 !important;
 }
-.main_txt{
+
+.main_txt {
     color: #6fb5f3;
 }
+
 /* 红色按钮 */
 
 .btn_red {
@@ -277,7 +279,14 @@
 .noMoreData {
     padding: 30rpx;
     color: gray;
-    background: #ddd;
+    /* background: #ddd; */
     font-size: 24rpx;
     text-align: center;
+}
+
+.noMoreData>view {
+    height: 2rpx;
+    width: 180rpx;
+    margin: 0 20rpx;
+    background: #f5f5f5;
 }

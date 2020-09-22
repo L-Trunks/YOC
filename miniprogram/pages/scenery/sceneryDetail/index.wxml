@@ -17,7 +17,7 @@
 			</swiper>
 		</view>
 		<view>
-			<view class='flex' style='margin:40rpx 0;'>
+			<view class='flex' style='margin:30rpx 0;'>
 				<view style='font-size:48rpx'>
 					{{sceneryInfo.name || ''}}
 				</view>
@@ -29,6 +29,14 @@
 				</view>
 			</view>
 			<view>
+				<view class="scenery_intro">
+					<view class="txt_bold txt_26 txt_333">
+						简介:
+					</view>
+					<view class="txt_medium txt_24 txt_999">
+						{{sceneryInfo.content ||sceneryInfo.summary ||'暂无简介~'}}
+					</view>
+				</view>
 				<view class='position_box'>
 					<block wx:for="{{listItem}}" wx:key="index">
 						<view class='cellList' bindtap='goPage'>

@@ -59,16 +59,16 @@ Page({
     this.onGetUserInfo()
   },
   onShow() {
-    let pages = getCurrentPages();
-    let currPage = pages[pages.length - 1];
-    if (currPage.data.hotelIndex >= 0) {
-      this.setData({//将携带的参数赋值
-        hotelIndex: currPage.data.hotelIndex,
-        [`travelPlan[${this.data.nowIndex}].hotelInfo`]: this.data.hotelList.length > 0 && this.data.hotelList[currPage.data.hotelIndex] || {}
-      });
-      console.log(`第${this.data.nowDay}天选择酒店`, this.data.hotelList.length > 0 && this.data.hotelList[this.data.hotelIndex] || '暂无')
-      console.log('行程计划', this.data.travelPlan)
-    }
+    // let pages = getCurrentPages();
+    // let currPage = pages[pages.length - 1];
+    // if (currPage.data.hotelIndex >= 0) {
+    //   this.setData({//将携带的参数赋值
+    //     hotelIndex: currPage.data.hotelIndex,
+    //     [`travelPlan[${this.data.nowIndex}].hotelInfo`]: this.data.hotelList.length > 0 && this.data.hotelList[currPage.data.hotelIndex] || {}
+    //   });
+    //   console.log(`第${this.data.nowDay}天选择酒店`, this.data.hotelList.length > 0 && this.data.hotelList[this.data.hotelIndex] || '暂无')
+    //   console.log('行程计划', this.data.travelPlan)
+    // }
 
   },
   //点击顶部按钮
@@ -179,38 +179,38 @@ Page({
     })
   },
   //进入酒店列表
-  enterHotel: function (poi) {
-    wx.showLoading()
-    let _this = this
-    qqmapsdk.search({
-      keyword: '酒店',  //搜索关键词
-      location: { ...poi },  //设置周边搜索中心点
-      success: function (res) { //搜索成功后的回调
-        console.log('酒店列表', res)
-        let [...temp] = res.data
-        temp.map(i => {
-          i.distance = distance(poi.latitude, poi.longitude, i.location.lat, i.location.lng)
-        })
-        console.log('格式化之后的酒店列表', temp)
-        _this.setData({
-          hotelList: temp,
-          nowHotel: temp[_this.data.nowIndex]
-        })
-        wx.hideLoading()
-        wx.navigateTo({
-          url: `./hotelList/index?latitude=${poi.latitude}&longitude=${poi.longitude}`,
-        })
-      },
-      fail: function (res) {
-        console.log(res);
-        wx.hideLoading()
-      },
-      complete: function (res) {
-        console.log(res);
-        wx.hideLoading()
-      }
-    });
-  },
+  // enterHotel: function (poi) {
+  //   wx.showLoading()
+  //   let _this = this
+  //   qqmapsdk.search({
+  //     keyword: '酒店',  //搜索关键词
+  //     location: { ...poi },  //设置周边搜索中心点
+  //     success: function (res) { //搜索成功后的回调
+  //       console.log('酒店列表', res)
+  //       let [...temp] = res.data
+  //       temp.map(i => {
+  //         i.distance = distance(poi.latitude, poi.longitude, i.location.lat, i.location.lng)
+  //       })
+  //       console.log('格式化之后的酒店列表', temp)
+  //       _this.setData({
+  //         hotelList: temp,
+  //         nowHotel: temp[_this.data.nowIndex]
+  //       })
+  //       wx.hideLoading()
+  //       wx.navigateTo({
+  //         url: `./hotelList/index?latitude=${poi.latitude}&longitude=${poi.longitude}`,
+  //       })
+  //     },
+  //     fail: function (res) {
+  //       console.log(res);
+  //       wx.hideLoading()
+  //     },
+  //     complete: function (res) {
+  //       console.log(res);
+  //       wx.hideLoading()
+  //     }
+  //   });
+  // },
   //点击景点
   onClickMarker: function (e) {
     console.log(e)

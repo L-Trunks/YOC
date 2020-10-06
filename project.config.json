@@ -26,17 +26,17 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": true,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "bundle": true
+    "minifyWXSS": true
   },
   "appid": "wxcc70b16488aed11a",
   "projectname": "yoc",
-  "libVersion": "2.11.3",
+  "libVersion": "2.13.0",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

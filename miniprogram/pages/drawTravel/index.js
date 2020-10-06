@@ -558,7 +558,7 @@ Page({
           if (noTravelArr.length > 0) {
             wx.showModal({
               title: '提示',
-              content: `第${noTravelArr.join(',')}天未制定行程，是否使用系统推荐行程？`,
+              content: `第${noTravelArr.join(',')}天未制定行程，让系统帮您规划行程？`,
               showCancel: true,
               cancelText: '取消',
               cancelColor: '#000000',
@@ -577,7 +577,7 @@ Page({
           } else if (!allowNext) {
             wx.showModal({
               title: '提示',
-              content: `还有景点未选择，是否使用系统推荐行程？`,
+              content: `还有景点未选择，让系统帮您规划行程？`,
               showCancel: true,
               cancelText: '取消',
               cancelColor: '#000000',

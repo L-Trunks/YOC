@@ -86,6 +86,24 @@ Page({
       }
     });
   },
+  //编辑行程
+  editorTravel() {
+    wx.navigateTo({
+      url: '../drawTravel/index'
+    });
+  },
+  //保存行程
+  saveTravel(){
+
+  },
+  //进入计划详情
+  goPlanDetail(e){
+    console.log(e)
+    let index = e.currentTarget.dataset.index
+    wx.navigateTo({
+      url: `./planDetail/index?index=${index}`
+    });
+  },
   //选择景点
   selectScenery() {
     wx.switchTab({

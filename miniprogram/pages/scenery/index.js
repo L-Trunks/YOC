@@ -55,6 +55,7 @@ Page({
     const val = e.detail.value
     this.setData({
       travelHour: this.data.hours[val[0]],
+      hoursIndex:val
     })
     console.log(val, this.data.travelHour)
   },
@@ -87,6 +88,13 @@ Page({
         hasHour: true
       })
     }
+  },
+  //打开时间选择
+  showHours() {
+    this.setData({
+      hasHour: false,
+      hoursIndex:[this.data.travelHour-1]
+    })
   },
   //选择景点事件
   selectScenery: function (e) {

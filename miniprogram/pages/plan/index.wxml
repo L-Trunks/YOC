@@ -1,6 +1,46 @@
 <view class="plan_container">
-	<view catchtap="goDrawTravel" class="remove_dravel">
+	<image
+	 class="pc_bg_top"
+	 src="../../images/plan/bg_plan_01@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+	<image
+	 class="pc_bg_right"
+	 src="../../images/plan/bg_plan_03@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+	<!--	<view catchtap="goDrawTravel" class="remove_dravel">
 		重新制定
+	</view> -->
+	<view class="pc_top_btn flex txt_regular main_txt txt_24" hover-class="none" hover-stop-propagation="false">
+		<view class="flex" hover-class="none" hover-stop-propagation="false">
+			保存
+			<image
+			 class=""
+			 src="../../images/plan/save_03@3x.png"
+			 mode="aspectFit|aspectFill|widthFix"
+			 lazy-load="false"
+			 binderror=""
+			 bindload=""
+			/>
+		</view>
+		<view catchtap="editorTravel" class="flex">
+			编辑
+			<image
+			 class=""
+			 src="../../images/plan/edit_05@3x.png"
+			 mode="aspectFit|aspectFill|widthFix"
+			 lazy-load="false"
+			 binderror=""
+			 bindload=""
+			/>
+		</view>
 	</view>
 	<view class='plan_top flex column a_start j_start txt_333 txt_48 txt_medium'>
 		{{year}}
@@ -9,12 +49,17 @@
 	<view class="plan_items flex a_start">
 		<view class='plan_left flex column j_start'>
 			<block wx:for="{{leftItems}}" wx:key="index">
-				<view class="plan_item" style="background:{{item.bgColor}}">
-					<view class="txt_28 txt_fff txt_medium plan_item_top">
+				<view
+				 catchtap="{{!item.sceneryInfo||!item.sceneryInfo.length?'':'goPlanDetail'}}"
+				 data-index="{{item.day-1}}"
+				 class="plan_item"
+				 style="background:{{item.bgColor}}"
+				>
+					<view class="flex txt_26 txt_fff txt_medium plan_item_top">
 						{{'第'+item.day+'天'}}
 						<image
 						 class=""
-						 src=""
+						 src="../../images/plan/time_06@3x.png"
 						 mode="aspectFit|aspectFill|widthFix"
 						 lazy-load="false"
 						 binderror=""
@@ -38,12 +83,17 @@
 </view>
 <view class="plan_right flex column j_start">
 	<block wx:for="{{rightItems}}" wx:key="index">
-		<view class="plan_item" style="background:{{item.bgColor}}">
-			<view class="txt_28 txt_fff txt_medium plan_item_top">
+		<view
+		 catchtap="{{!item.sceneryInfo||!item.sceneryInfo.length?'':'goPlanDetail'}}"
+		 data-index="{{item.day-1}}"
+		 class="plan_item"
+		 style="background:{{item.bgColor}}"
+		>
+			<view class="flex txt_26 txt_fff txt_medium plan_item_top">
 				{{'第'+item.day+'天'}}
 				<image
 				 class=""
-				 src=""
+				 src="../../images/plan/time_06@3x.png"
 				 mode="aspectFit|aspectFill|widthFix"
 				 lazy-load="false"
 				 binderror=""

@@ -59,7 +59,7 @@
 				</view>
 			</picker>
 		</view>
-		<view bindtap="start" class="start_btn">
+		<view bindtap="start" class="txt_30  start_btn">
 			开 始
 		</view>
 		<image

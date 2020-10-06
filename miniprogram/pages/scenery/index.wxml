@@ -105,11 +105,16 @@
 					 indicator-style="height: 50px;"
 					 style="width: 20%; height: 240rpx;margin:0 80rpx;"
 					 mask-class='hour_mask'
-					 value="{{hours}}"
+					 value="{{hoursIndex}}"
 					 bindchange="hourChange"
 					>
 						<picker-view-column>
-							<view wx:for="{{hours}}" wx:key="index" class="picker_hours" style="line-height: 50px;text-align: center;font-size:70rpx;font-weight:900;">
+							<view
+							 wx:for="{{hours}}"
+							 wx:key="index"
+							 class="picker_hours"
+							 style="line-height: 50px;text-align: center;font-size:70rpx;font-weight:900;"
+							>
 								{{item}}
 							</view>
 						</picker-view-column>
@@ -132,9 +137,10 @@
 		</view>
 
 	</view>
-	<view catchtap="confirmScenery" class='scenery_submit'>
+	<view catchtap="confirmScenery" class='txt_30 scenery_submit'>
 		确 认
 	</view>
+	<image catchtap="showHours" class="show_lock" src="../../images/scenery/lock_07.png" />
 </view>
 
 <tabbar activeIdx="{{activeIdx}}" />

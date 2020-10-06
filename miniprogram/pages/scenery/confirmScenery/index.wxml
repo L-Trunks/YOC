@@ -65,7 +65,7 @@
 			</scroll-view>
 		</view>
 		<view class="flex j_end" hover-class="none" hover-stop-propagation="false">
-			<view bindtap="onClickNext" class="flex j_center cs_next_btn main_bg txt_bold txt_24 txt_fff" hover-class="none" hover-stop-propagation="false">
+			<view bindtap="onClickNext" class="flex j_center cs_next_btn main_bg txt_bold txt_30 txt_fff" hover-class="none" hover-stop-propagation="false">
 				下一步
 			</view>
 		</view>

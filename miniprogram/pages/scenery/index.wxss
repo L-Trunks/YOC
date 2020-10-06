@@ -1,5 +1,4 @@
 @import '../../style/base.wxss';
-
 .background {
     width: 100%;
     position: fixed;
@@ -144,7 +143,7 @@
     bottom: 140rpx;
     right: 70rpx;
     padding: 10rpx 80rpx;
-    background: rgba(230, 201, 128);
+    background: #6fb5f3;
     color: #fff;
     border-radius: 30rpx;
 }
@@ -174,6 +173,14 @@
     position: relative;
     top: 20rpx;
     left: 20rpx;
+}
+
+.show_lock {
+    width: 60rpx;
+    height: 60rpx;
+    position: fixed;
+    bottom: 140rpx;
+    left: 40rpx;
 }
 
 .hours {

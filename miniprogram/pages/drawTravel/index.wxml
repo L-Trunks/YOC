@@ -66,15 +66,15 @@
 	/>
 	<cover-view class="dt_left_btn flex column txt_28 txt_medium" scroll-top="0">
 		<cover-view
-		 bindtap='onClickLeftBtn'
+		 bindtap='onClickPlan'
 		 data-id="0"
-		 class="dt_left {{isShow?'dt_left_active ':''}}"
+		 class="dt_left {{isPlan?'dt_left_active ':''}}"
 		 scroll-top="0"
 		>
 			形成方案
 		</cover-view>
 		<cover-view
-		 bindtap='onClickLeftBtn'
+		 bindtap='onClickHidden'
 		 data-id="1"
 		 class="dt_left {{isShow?'':'dt_left_active'}}"
 		 scroll-top="0"

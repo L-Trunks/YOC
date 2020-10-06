@@ -5,6 +5,10 @@
   padding: 46rpx 70rpx;
 }
 
+.plan_top{
+  z-index: 3;
+  position: relative;
+}
 .plan_top text {
   margin-top: 5rpx;
 }
@@ -12,7 +16,9 @@
 .plan_items {
   margin: 70rpx 0;
 }
-
+.plan_item_top{
+  margin-bottom: 30rpx;
+}
 .plan_item_top image {
   width: 28rpx;
   height: 28rpx;
@@ -58,4 +64,40 @@
   color: #fff;
   display: inline-block;
   background: #f04f48;
+}
+
+.pc_bg_top{
+  position: absolute;
+  width: 247rpx;
+  height: 278rpx;
+  top: 0;
+  left: 0;
+}
+
+.pc_bg_right{
+  position: absolute;
+  width: 218rpx;
+  height: 177rpx;
+  top: 87rpx;
+  right: 47rpx;
+}
+
+.pc_top_btn{
+  position: fixed;
+  top: 40rpx;
+  right: 80rpx;
+  z-index: 4;
+}
+.pc_top_btn>view:first-child{
+  margin-right: 54rpx;
+}
+.pc_top_btn>view>image{
+  width: 22rpx;
+  height: 28rpx;
+  margin-left: 10rpx;
+}
+
+.pc_top_btn>view:first-child>image{
+  width: 26rpx;
+  height: 32rpx;
 }

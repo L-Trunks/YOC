@@ -226,6 +226,9 @@
     font-weight: 500
 }
 
+.txt_regular {
+    font-weight: 400
+}
 /* 字体颜色 */
 
 .txt_222 {

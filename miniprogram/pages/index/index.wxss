@@ -67,7 +67,7 @@
     color: #fff;
     font-weight: 800;
     background: #6fb5f3;
-    padding: 6rpx 50rpx;
+    padding: 10rpx 80rpx;
     border-radius: 30rpx;
     margin-top: 40rpx;
     box-shadow: 1rpx 10rpx 21rpx 4rpx rgba(0, 0, 0, 0.07);

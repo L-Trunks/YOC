@@ -1,5 +1,52 @@
 <view class="pd_container">
-	
+	<map
+	 id="map"
+	 class="map"
+	 subkey="{{key}}"
+	 longitude="{{poi.longitude}}"
+	 latitude="{{poi.latitude}}"
+	 scale="14"
+	 include-points="{{markers}}"
+	 markers="{{markers}}"
+	 polyline="{{polyLine}}"
+	 bindmarkertap="onClickMarker"
+	 layer-style='1'
+	/>
+	<view class="pd_main" hover-class="none" hover-stop-propagation="false">
+		<block wx:for="{{planItems}}" wx:key="index">
+			<view class="pd_item" hover-class="none" hover-stop-propagation="false">
+				<view class="pd_item_up txt_18 main_txt txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
+					<image
+					 class=""
+					 src="../../../images/plan/go_06@3x.png"
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
+					{{item.distance}}km
+				</view>
+				<view catchtap="goLocation" data-index='{{index}}' class="pd_item_down txt_333 txt_30 txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
+					<image
+					 class="pd_item_down_icon"
+					 src="../../../images/plan/scenery_icon_03@3x.png"
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
+					<image
+					 class="pd_item_down_img"
+					 src="{{item.img}}"
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
+					{{item.name||''}}
+				</view>
+			</view>
+		</block>
+	</view>
 </view>
-
 

@@ -52,7 +52,9 @@ Page({
     isEdit: false,
     travelPlan: [],
     sceneryList: [],
-    hotelList: []
+    hotelList: [],
+    isPlan: false,
+    datumScenery: {},//基准景点,用于系统推荐周围最近的景点
   },
   onLoad: function (options) {
     // this.setLocation()
@@ -102,16 +104,81 @@ Page({
       })
     }
   },
-  //点击左边按钮
-  onClickLeftBtn: function (e) {
-    let id = e.currentTarget.dataset.id
-    let idMap = {
-      '0': true,
-      '1': false,
-    }
+  //点击形成方案
+  onClickPlan: function (e) {
     let _this = this
     _this.setData({
-      isShow: idMap[id]
+      isPlan: !_this.data.isPlan
+    })
+    if (_this.data.isPlan) {
+      _this.useSystemTravel()
+
+    }
+
+  },
+  //系统制定行程计划
+  systemPlan(day, scenery, number, type) {
+    console.log(day, scenery, number, type)
+    let _this = this
+    wx.showLoading()
+    Array.from(day, (i, j) => {
+      if (j !== day.length - 1) {
+        let points = []
+        Array.from(scenery.slice(j * number, (j+1)*number), (i, j) => {
+
+          points.push({
+            latitude: i.location && i.location.lat && i.location.lat || i.latitude || '',
+            longitude: i.location && i.location.lon && i.location.lon || i.longitude || '',
+          })
+        })
+        console.log(`第${i}天点列表`, points)
+        _this.setData({
+          [`showPolyLine[${+i - 1}]`]: {
+            points: points,
+            color: _this.data.lineColorMap[+i - 1],
+            width: 8
+          },
+          [`polyline[${+i - 1}]`]: {
+            points: points,
+            color: _this.data.lineColorMap[+i - 1],
+            width: 8
+          },
+          [`travelPlan[${+i - 1}].sceneryInfo`]: scenery.slice(j * number, (j+1)*number) || [],
+        })
+      } else {
+        let points = []
+        Array.from(scenery.slice(j * number), (i, j) => {
+          points.push({
+            latitude: i.location && i.location.lat && i.location.lat || i.latitude || '',
+            longitude: i.location && i.location.lon && i.location.lon || i.longitude || '',
+          })
+        })
+        console.log(`第${i}天点列表`, points)
+        _this.setData({
+          [`showPolyLine[${+i - 1}]`]: {
+            points: points,
+            color: _this.data.lineColorMap[+i - 1],
+            width: 8
+          },
+          [`polyline[${+i - 1}]`]: {
+            points: points,
+            color: _this.data.lineColorMap[+i - 1],
+            width: 8
+          },
+          [`travelPlan[${+i - 1}].sceneryInfo`]: scenery.slice(j * number) || [],
+        })
+      }
+    })
+    wx.hideLoading()
+    if (type === 'submit') {
+      _this.saveTravel()
+    }
+  },
+  //点击隐藏线路
+  onClickHidden() {
+    let _this = this
+    _this.setData({
+      isShow: !_this.data.isShow
     })
     if (!_this.data.isShow) {
       _this.setData({
@@ -122,7 +189,7 @@ Page({
           [`imageItems[${j}].isCheck`]: false
         })
       })
-    } else if (_this.data.isTravel) {
+    } else {
       let [...temp] = _this.data.polyline
       _this.setData({
         showPolyLine: temp.slice(0, 1),
@@ -230,7 +297,8 @@ Page({
       longitude: _this.data.markers[id].longitude,
     }
     _this.setData({
-      isEdit: true
+      isEdit: true,
+      datumScenery: _this.data.markers[id]
     })
     if (!_this.data.isShow || !_this.data.isTravel) {
       if (!_this.data.isTravel) {
@@ -362,7 +430,9 @@ Page({
           let markers = []
           markers = res.data.map((i, j) => {
             return {
+              ...i,
               id: j,
+              sceneryId: i._id,
               latitude: i.location.lat,
               longitude: i.location.lon,
               iconPath: i.picList[0] && i.picList[0].picUrl || '../../images/scenery/noImage.jpg',
@@ -397,7 +467,8 @@ Page({
             circles: circles,
             sceneryList: res.data || []
           })
-          console.log('marker', _this.data.markers)
+          _this.data.datumScenery = _this.data.markers[0],
+            console.log('marker', _this.data.markers)
 
           wx.hideLoading()
           _this.initTravelPlan()
@@ -454,16 +525,8 @@ Page({
       }
     })
     _this.data.allowNext = allowNext
-    // if (!allowNext) {
-    //   wx.showToast({
-    //     title: "还有景点未选择哦",
-    //     icon: 'none'
-    //   })
-    //   return
-    // }
     let [...travelPlan] = _this.data.travelPlan
     let [...imageItems] = _this.data.imageItems
-
     console.log(travelPlan)
     let noTravelArr = []
     // let noHotelArr = []
@@ -504,7 +567,7 @@ Page({
               success: (result) => {
                 if (result.confirm) {
                   console.log('使用系统推荐行程')
-                  _this.useSystemTravel()
+                  _this.useSystemTravel('submit')
                 } else {
                   console.log('不使用系统推荐行程')
                   _this.saveTravel()
@@ -523,7 +586,7 @@ Page({
               success: (result) => {
                 if (result.confirm) {
                   console.log('使用系统推荐行程')
-                  _this.useSystemTravel()
+                  _this.useSystemTravel('submit')
                 } else {
                   console.log('不使用系统推荐行程')
                   _this.saveTravel()
@@ -541,9 +604,123 @@ Page({
     });
   },
   //使用系统推荐行程
-  useSystemTravel: function () {
+  useSystemTravel: function (type) {
+    wx.showLoading()
+    let _this = this
+    let allSceneryIsSelect = true //所有景点是否已选择
+    let unSelectScenery = [] //未选择景点列表
+    let suggestNumber = 3 //建议每天游玩景点数
+    let noTravelDays = 0 //未制定行程的天数
+    let totalNumber = 0 //未规划的景点数
+    let systemScenery = [] //未规划的景点列表
+    let systemSuggestNumber = 0 //需要系统推荐的景点数
+    let [...tempMarkers] = _this.data.markers
+    Array.from(tempMarkers, i => {
+      if (!i.isCheck) {
+        allSceneryIsSelect = false
+        unSelectScenery.push(i)
+      }
+    })
+    _this.data.allSceneryIsSelect = allSceneryIsSelect
+    let [...travelPlan] = _this.data.travelPlan
+    let [...imageItems] = _this.data.imageItems
+    console.log(travelPlan)
+    let noTravelArr = []
+    Array.from(imageItems, (i, j) => {
+      if (!travelPlan[j] || !travelPlan[j].sceneryInfo || travelPlan[j].sceneryInfo.length <= 0) {
+        noTravelArr.push(j + 1)
+      }
+    })
+    totalNumber = noTravelArr.length * suggestNumber
+    systemSuggestNumber = totalNumber - unSelectScenery.length
+    console.log(totalNumber, noTravelArr, systemSuggestNumber, unSelectScenery)
+    wx.hideLoading()
+    if (systemSuggestNumber > 0) {
+      wx.showLoading()
+      db.collection('scenery').where({
+        _id: _.nin([..._this.data.travelInfo.selectArr])
+      }).get().then(res => {
+        // res.data 包含该记录的数据
+        console.log('景点列表信息', res.data, _this.data.datumScenery)
+        if (res.data && res.data.length > 0) {
+          if (res.data[0]) {
+            Array.from(res.data, (i, j) => {
+              i.distance = distance(_this.data.datumScenery.latitude, _this.data.datumScenery.longitude, i.location.lat, i.location.lon)
+            })
+            res.data.sort((i, j) => {
+              return i.distance - j.distance
+            })
+            console.log(res.data)
+            systemScenery = res.data.slice(0, systemSuggestNumber)
+            let [...selectArr] = _this.data.travelInfo.selectArr
+            systemScenery.map((i,j)=>{
+              selectArr.push(i._id)
+            })
+            _this.data.travelInfo.selectArr = selectArr
+            //设置markers
+            let markers = []
 
-    this.saveTravel()
+            markers = systemScenery.map((i, j) => {
+              return {
+                id: j,
+                sceneryId: i._id,
+                latitude: i.location.lat,
+                longitude: i.location.lon,
+                iconPath: i.picList[0] && i.picList[0].picUrl || '../../images/scenery/noImage.jpg',
+                width: 48,
+                height: 48,
+                callout: {
+                  content: i.name || '',
+                  borderRadius: 0,
+                  color: "#ffffff",
+                  borderWidth: 0,
+                  bgColor: '#e4bb3d',
+                  display: "ALWAYS",
+                  textAlign: 'center',
+                  anchorX: 12,
+                  padding: 5
+                }
+              }
+            })
+            let circles = []
+            circles = systemScenery.map((i, j) => {
+              return {
+                latitude: i.location.lat,
+                longitude: i.location.lon,
+                color: '#6fb5f3',
+                fillColor: '#ffffff',
+                radius: 1,
+                strokeWidth: 1,
+              }
+            })
+            let [...sceneryList] = _this.data.sceneryList
+            markers = [..._this.data.markers, ...markers]
+            circles = [..._this.data.circles, ...circles]
+            sceneryList = [..._this.data.sceneryList, ...systemScenery]
+            _this.setData({
+              markers,
+              circles,
+              sceneryList
+            })
+            Array.from(unSelectScenery, (i, j) => {
+              i.distance = distance(_this.data.datumScenery.latitude, _this.data.datumScenery.longitude, i.latitude, i.longitude)
+            })
+
+            systemScenery = [...systemScenery, ...unSelectScenery]
+            console.log('未制定行程的景点', systemScenery)
+            wx.hideLoading()
+            //根据天数制定行程
+            _this.systemPlan(noTravelArr, systemScenery, suggestNumber, type)
+          }
+          wx.hideLoading();
+        }
+      })
+    } else {
+      systemScenery = [...systemScenery, ...unSelectScenery]
+      //根据天数制定行程
+      _this.systemPlan(noTravelArr, systemScenery, suggestNumber, type)
+    }
+
   },
   //保存用户行程
   saveTravel: function () {

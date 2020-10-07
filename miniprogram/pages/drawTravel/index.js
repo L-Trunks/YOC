@@ -124,7 +124,7 @@ Page({
     Array.from(day, (i, j) => {
       if (j !== day.length - 1) {
         let points = []
-        Array.from(scenery.slice(j * number, (j+1)*number), (i, j) => {
+        Array.from(scenery.slice(j * number, (j + 1) * number), (i, j) => {
 
           points.push({
             latitude: i.location && i.location.lat && i.location.lat || i.latitude || '',
@@ -143,7 +143,7 @@ Page({
             color: _this.data.lineColorMap[+i - 1],
             width: 8
           },
-          [`travelPlan[${+i - 1}].sceneryInfo`]: scenery.slice(j * number, (j+1)*number) || [],
+          [`travelPlan[${+i - 1}].sceneryInfo`]: scenery.slice(j * number, (j + 1) * number) || [],
         })
       } else {
         let points = []
@@ -168,6 +168,13 @@ Page({
           [`travelPlan[${+i - 1}].sceneryInfo`]: scenery.slice(j * number) || [],
         })
       }
+    })
+    let [...tempMarkers] = _this.data.markers
+    Array.from(tempMarkers, i => {
+      i.isCheck = true
+    })
+    _this.setData({
+      markers:tempMarkers
     })
     wx.hideLoading()
     if (type === 'submit') {
@@ -653,16 +660,18 @@ Page({
             console.log(res.data)
             systemScenery = res.data.slice(0, systemSuggestNumber)
             let [...selectArr] = _this.data.travelInfo.selectArr
-            systemScenery.map((i,j)=>{
+            systemScenery.map((i, j) => {
               selectArr.push(i._id)
             })
             _this.data.travelInfo.selectArr = selectArr
+            console.log('选择景点id列表', _this.data.travelInfo.selectArr)
+            wx.setStorageSync('selectArr', JSON.stringify(selectArr))
             //设置markers
             let markers = []
 
             markers = systemScenery.map((i, j) => {
               return {
-                id: j,
+                id: j + _this.data.markers.length,
                 sceneryId: i._id,
                 latitude: i.location.lat,
                 longitude: i.location.lon,
@@ -693,15 +702,12 @@ Page({
                 strokeWidth: 1,
               }
             })
-            let [...sceneryList] = _this.data.sceneryList
-            markers = [..._this.data.markers, ...markers]
-            circles = [..._this.data.circles, ...circles]
-            sceneryList = [..._this.data.sceneryList, ...systemScenery]
             _this.setData({
-              markers,
-              circles,
-              sceneryList
+              markers: [..._this.data.markers, ...markers],
+              circles: [..._this.data.circles, ...circles],
+              sceneryList: [..._this.data.sceneryList, ...systemScenery]
             })
+            console.log(_this.data.markers, _this.data.circles, _this.data.sceneryList)
             Array.from(unSelectScenery, (i, j) => {
               i.distance = distance(_this.data.datumScenery.latitude, _this.data.datumScenery.longitude, i.latitude, i.longitude)
             })
@@ -725,10 +731,12 @@ Page({
   //保存用户行程
   saveTravel: function () {
     let _this = this
+    console.log('用户行程信息', _this.data.travelPlan)
     db.collection('user').where({ _openid: app.globalData.openid }).update({
       data: {
         tPUpdateTime: dateTimeStamp(new Date()) || '',
-        travelPlan: _this.data.travelPlan
+        travelPlan: _this.data.travelPlan,
+        travelInfo: _this.data.travelInfo
       }
     }).then(res => {
       console.log('更新用户旅行计划返回值:', res)

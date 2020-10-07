@@ -5,13 +5,10 @@ const _ = db.command
 
 Page({
   data: {
-    duration: 2500,//滑动动画时长
-    easingFunction: 'easeInOutCubic',//滑动动画方式
+    duration: 1500,//滑动动画时长
+    // easingFunction: 'easeInOutCubic',//滑动动画方式
     current: 0,
     imageItems: [
-      {
-        url: '../../images/first/index_1.jpg',
-      },
       {
         url: '../../images/first/index_2.jpg',
       },

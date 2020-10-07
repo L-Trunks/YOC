@@ -20,7 +20,7 @@
   }
 
   .tabbar-item-icon image {
-    width: 60rpx;
+    width: 50rpx;
     height: 50rpx;
   }
   

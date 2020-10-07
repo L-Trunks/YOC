@@ -40,6 +40,9 @@ Page({
             scope: 'scope.userLocation',
             success() {
               _this.getLocation()
+            },
+            fail(){
+              _this.getPlan()
             }
           })
         }

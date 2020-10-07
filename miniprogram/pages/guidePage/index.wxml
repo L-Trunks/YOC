@@ -1,0 +1,25 @@
+<view class="gd_container">
+	<swiper
+	 duration="{{duration}}"
+	 easing-function="{{easingFunction}}"
+	 bindchange="onImgChange"
+	 class="gd_swiper"
+	 current="{{current}}"
+	>
+		<block wx:for="{{imageItems}}" wx:key='index'>
+			<swiper-item>
+				<image
+				 bindtap="onClickImg"
+				 data-index="{{index}}"
+				 class=""
+				 src="{{item.url}}"
+				 mode="aspectFit|aspectFill|widthFix"
+				 lazy-load="false"
+				 binderror=""
+				 bindload=""
+				/>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>
+

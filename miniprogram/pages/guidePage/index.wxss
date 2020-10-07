@@ -1,0 +1,20 @@
+@import '../../style/base.wxss';
+
+.gd_container{
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.gd_swiper{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.gd_swiper image{
+  width: 100% !important;
+  height: 100% !important;
+}

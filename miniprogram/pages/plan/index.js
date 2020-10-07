@@ -51,6 +51,12 @@ Page({
         _this.formatItem()
         wx.hideLoading();
 
+      }else{
+        wx.showToast({
+          title:"未查询到您的记录哦，快去制定行程计划吧~",
+          icon:'none'
+        })
+        wx.hideLoading();
       }
     })
   },

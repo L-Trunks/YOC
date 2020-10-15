@@ -38,7 +38,7 @@
 				<block wx:for="{{sceneryList}}" wx:key="index">
 					<view data-id="{{item._id}}" bindtap="goDetail" class="cs_item flex a_start column txt_medium txt_333 txt_26" hover-class="none"
 						hover-stop-propagation="false">
-						<image class="" src="{{item.picList[0].picUrl||'../../../images/scenery/noImage.jpg'}}"
+						<image class="" src="{{item.imageUrl||'../../../images/scenery/noImage.jpg'}}"
 							mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="">
 						</image>
 						<view class="cs_item_txt" hover-class="none" hover-stop-propagation="false">

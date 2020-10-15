@@ -442,9 +442,9 @@ Page({
               sceneryId: i._id,
               latitude: i.location.lat,
               longitude: i.location.lon,
-              iconPath: i.picList[0] && i.picList[0].picUrl || '../../images/scenery/noImage.jpg',
-              width: 48,
-              height: 48,
+              iconPath: i.imageUrl && i.imageUrl || '../../images/scenery/noImage.jpg',
+              width: 34.6,
+              height: 38.6,
               callout: {
                 content: i.name || '',
                 borderRadius: 0,

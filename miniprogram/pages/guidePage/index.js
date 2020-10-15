@@ -22,8 +22,8 @@ Page({
   },
 
   onLoad: function () {
-    let count = wx.getStorageSync('enterCount') && +wx.getStorageSync('enterCount') || 0
-    wx.setStorageSync('enterCount', count + 1)
+    let count = wx.getStorageSync('count') && +wx.getStorageSync('count') || 0
+    wx.setStorageSync('count', count + 1)
     if (count > 0) {
       wx.switchTab({
         url: '../index/index'

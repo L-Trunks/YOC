@@ -1,3 +1,4 @@
+@import '../../style/base.wxss';
 .main {
     text-align: center;
     margin-bottom: 150rpx;
@@ -65,7 +66,7 @@
 
 .start_btn {
     color: #fff;
-    font-weight: 800;
+    font-weight: bold;
     background: #6fb5f3;
     padding: 10rpx 80rpx;
     border-radius: 30rpx;

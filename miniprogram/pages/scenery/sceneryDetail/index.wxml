@@ -21,7 +21,7 @@
 				<view style='font-size:48rpx'>
 					{{sceneryInfo.name || ''}}
 				</view>
-				<view bindtap="goLocation" class='flex j_end' style='font-size:20rpx;font-weight:500;color:#000'>
+				<view catchtap="goLocation" class='flex j_end' style='font-size:20rpx;font-weight:500;color:#000'>
 					<image src="../../../images/scenery/daohang_03.png" style='width:84rpx;height:78rpx;' />
 					<view style="white-space: nowrap;">
 						转到导航

@@ -49,7 +49,7 @@
 				 data-id='{{item._id}}'
 				 mode='scaleToFill'
 				 class="s_item_left"
-				 src="{{item.picList[0].picUrl || '../../images/scenery/noImage.jpg'}}"
+				 src="{{item.imageUrl && item.imageUrl || '../../images/scenery/noImage.jpg'}}"
 				/>
 				<view
 				 bindtap="goDetail"

@@ -36,6 +36,12 @@ Page({
       })
     }
   },
+  //添加景点
+  addScenery:function(){
+    wx.navigateBack({
+      delta: 0,
+    })
+  },
   //计算天数
   calDays: function () {
     let travelInfo = JSON.parse(wx.getStorageSync('travelInfo'))

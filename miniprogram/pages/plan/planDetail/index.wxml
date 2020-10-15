@@ -26,7 +26,7 @@
 					/>
 					{{item.distance}}km
 				</view>
-				<view catchtap="goLocation" data-index='{{index}}' class="pd_item_down txt_333 txt_30 txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
+				<view catchtap="goSceneryDetail" data-id='{{item._id}}' class="pd_item_down txt_333 txt_30 txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
 					<image
 					 class="pd_item_down_icon"
 					 src="../../../images/plan/scenery_icon_03@3x.png"

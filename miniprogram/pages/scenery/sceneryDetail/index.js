@@ -104,7 +104,7 @@ Page({
     let _this = this
     qqmapsdk.geocoder({
       //获取表单传入地址
-      address: _this.data.sceneryInfo.address, //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+      address: _this.data.sceneryInfo.address ||'西安市区', //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
       success: function (res) {//成功后的回调
         console.log(res);
         let result = res.result;
@@ -148,7 +148,7 @@ Page({
       let tempInfo = _this.data.sceneryInfo
       let tempList = _this.data.listItem
       tempList[0].label = tempInfo.opentime || '暂无'
-      tempList[1].label = tempInfo.opentime || '暂无'
+      tempList[1].label = tempInfo.recommendtime || '暂无'
       tempList[2].label = tempInfo.coupon || '暂无'
       tempList[3].label = tempInfo.address || '暂无'
       _this.setData({

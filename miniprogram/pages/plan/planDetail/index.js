@@ -69,10 +69,12 @@ Page({
       }
     })
   },
-  //打开微信内置地图
-  goLocation(e) {
-    let index = e.currentTarget.dataset.index
-    let scenery = this.data.planItems[index]
+  //点击地图中图片
+  onClickMarker(e) {
+    console.log(e)
+    let id = e.markerId
+    let scenery = this.data.markers[id]
+    console.log(scenery)
     wx.openLocation({
       latitude: +scenery.location.lat, // 纬度，范围为-90~90，负数表示南纬
       longitude: +scenery.location.lon, // 经度，范围为-180~180，负数表示西经
@@ -118,7 +120,8 @@ Page({
     }]
     Array.from(tempPlan.sceneryInfo, (i, j) => {
       markers[j] = {
-        id: i._id,
+        ...i,
+        id: j,
         latitude: i.location.lat,
         longitude: i.location.lon,
         iconPath: i.picList[0] && i.picList[0].picUrl || '../../../images/scenery/noImage.jpg',
@@ -145,6 +148,7 @@ Page({
       markers: markers,
       polyLine: polyLine
     })
+    console.log(markers)
     _this.formatPlanData()
   },
   //格式化行程计划
@@ -172,12 +176,11 @@ Page({
       planItems: planItems
     })
   },
-  //点击地图中图片
-  onClickMarker(e) {
-    console.log(e)
-    let id = e.markerId
+  
+  goSceneryDetail(e) {
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `../../scenery/sceneryDetail/index?sceneryId=${id}`,
+      url: `../../scenery/sceneryDetail/index?sceneryId=${id}`
     })
   }
 })

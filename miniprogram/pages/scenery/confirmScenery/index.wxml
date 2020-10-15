@@ -20,9 +20,9 @@
 			<view class="" hover-class="none" hover-stop-propagation="false">
 				已选景点数量：{{sceneryList.length}}个
 			</view>
-			<view class="" hover-class="none" hover-stop-propagation="false">
+		<!--<view class="" hover-class="none" hover-stop-propagation="false">
 				推荐游玩时间：{{adviseHours||'0'}}小时
-			</view>
+			</view>-->	
 			<view class="" hover-class="none" hover-stop-propagation="false">
 				已选游玩时间：{{hours}}小时×{{days||'1'}}天
 			</view>

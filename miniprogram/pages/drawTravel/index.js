@@ -443,8 +443,8 @@ Page({
               latitude: i.location.lat,
               longitude: i.location.lon,
               iconPath: i.imageUrl && i.imageUrl || '../../images/scenery/noImage.jpg',
-              width: 34.6,
-              height: 38.6,
+              width: 48.4,
+              height: 55.4,
               callout: {
                 content: i.name || '',
                 borderRadius: 0,

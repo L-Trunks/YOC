@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/travel/index",
     "pages/guidePage/index",
     "pages/index/index",
     "pages/scenery/index",

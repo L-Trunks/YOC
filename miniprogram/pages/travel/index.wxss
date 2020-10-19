@@ -1,0 +1,19 @@
+@import '../../style/base.wxss';
+
+/* .web_code{
+    width: 500rpx;
+    height: 500rpx;
+} */
+
+.t_container{
+    padding: 106rpx 66rpx;
+
+}
+
+.t_left{
+    position: fixed;
+    top: 265rpx;
+    left: 0;
+    bottom: 0;
+    width: 120rpx;
+}

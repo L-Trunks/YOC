@@ -1,0 +1,23 @@
+<view class="t_container" hover-class="none" hover-stop-propagation="false">
+	<view class="txt_333 txt_48 txt_bold flex j_end" hover-class="none" hover-stop-propagation="false">
+		选择周边游行程
+	</view>
+	<view class="flex j_start a_start t_main" hover-class="none" hover-stop-propagation="false">
+		<view class="t_left">
+			<view class="txt_18 txt_fff txt_bold t_select" hover-class="none" hover-stop-propagation="false">
+				选择套餐
+			</view>
+			<block wx:for="{{travelItems}}" wx:key="index">
+				<view class="" hover-class="none" hover-stop-propagation="false">
+					{{item.name}}
+				</view>
+			</block>
+		</view>
+		<view class="t_right" hover-class="none" hover-stop-propagation="false">
+
+		</view>
+	</view>
+</view>
+
+<!-- <web-view class="web_code" src="https://mp.weixin.qq.com/s/Qt0DV4jZuLOVKu7scQe8YQ" bindmessage=""></web-view> -->
+

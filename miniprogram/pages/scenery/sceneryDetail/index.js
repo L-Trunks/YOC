@@ -104,7 +104,7 @@ Page({
     let _this = this
     qqmapsdk.geocoder({
       //获取表单传入地址
-      address: _this.data.sceneryInfo.address ||'西安市区', //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+      address: _this.data.sceneryInfo.address || '西安市区', //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
       success: function (res) {//成功后的回调
         console.log(res);
         let result = res.result;
@@ -140,11 +140,16 @@ Page({
       _this.setData({
         sceneryInfo: res.data && res.data[0] || {}
       })
-      if (_this.data.sceneryInfo.picList && _this.data.sceneryInfo.picList.length === 0) {
-        _this.setData({
-          sceneryInfo: { ..._this.data.sceneryInfo, picList: [{ picUrl: '../../../images/scenery/noImage.jpg' }] }
-        })
-      }
+      _this.setData({
+        sceneryInfo: {
+          ..._this.data.sceneryInfo, picList: [
+            { picUrl: _this.data.sceneryInfo.imgUrl1 && _this.data.sceneryInfo.imgUrl1 || '../../../images/scenery/noImage.jpg' },
+            { picUrl: _this.data.sceneryInfo.imgUrl2 && _this.data.sceneryInfo.imgUrl2 || '../../../images/scenery/noImage.jpg' },
+            { picUrl: _this.data.sceneryInfo.imgUrl3 && _this.data.sceneryInfo.imgUrl3 || '../../../images/scenery/noImage.jpg' },
+            { picUrl: _this.data.sceneryInfo.imgUrl4 && _this.data.sceneryInfo.imgUrl4 || '../../../images/scenery/noImage.jpg' },
+          ]
+        }
+      })
       let tempInfo = _this.data.sceneryInfo
       let tempList = _this.data.listItem
       tempList[0].label = tempInfo.opentime || '暂无'

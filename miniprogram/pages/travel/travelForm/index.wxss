@@ -1,0 +1,63 @@
+@import '../../../style/base.wxss';
+.tf_container>image:first-child {
+    width: 750rpx;
+    height: 551rpx;
+}
+
+.tf_cell {
+    padding: 0 111rpx;
+    margin-top: 30rpx;
+}
+
+.tf_cell:first-child {
+    margin-top: 0;
+}
+
+.tf_cell>view {
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #ccc;
+}
+
+.td_point {
+    width: 12rpx;
+    height: 12rpx;
+    border-radius: 50%;
+    background: #6fb5f4;
+    margin: 0 10rpx 0 17rpx;
+}
+
+.tf_check {
+    padding: 20rpx 111rpx 20rpx 0;
+}
+
+.tf_check>image {
+    width: 22rpx;
+    height: 22rpx;
+    margin-left: 12rpx;
+}
+
+.btn_view {
+    position: relative;
+    margin: 20rpx 130rpx 0 130rpx;
+    border-radius: 30rpx;
+    padding: 15rpx 0;
+    background: #6fb5f4;
+}
+
+.sub_btn {
+    position: absolute;
+    background: transparent;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.tf_bg {
+    padding: 50rpx;
+}
+
+.tf_bg>image {
+    width: 290rpx;
+    height: 292rpx;
+}

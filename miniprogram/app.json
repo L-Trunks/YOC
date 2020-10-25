@@ -8,7 +8,9 @@
     "pages/drawTravel/index",
     "pages/drawTravel/hotelList/index",
     "pages/scenery/sceneryDetail/index",
-    "pages/plan/planDetail/index"
+    "pages/plan/planDetail/index",
+    "pages/travel/travelForm/index",
+    "pages/travel/travelCode/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

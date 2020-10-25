@@ -1,19 +1,141 @@
 @import '../../style/base.wxss';
 
-/* .web_code{
-    width: 500rpx;
-    height: 500rpx;
-} */
 
-.t_container{
-    padding: 106rpx 66rpx;
-
+.t_container {
+    padding: 146rpx 86rpx;
+    position: relative;
 }
 
-.t_left{
+.t_logo {
+    width: 139rpx;
+    height: 44rpx;
+    position: absolute;
+    top: 46rpx;
+    left: 70rpx;
+}
+
+.t_left {
+    flex-basis: 130rpx;
+    background: #d4e9fc;
+}
+
+.t_select {
+    background: #6fb5f4;
+    white-space: nowrap;
+}
+
+.t_item_height {
+    padding: 20rpx;
+}
+
+.t_right {
+    flex: 1;
+    padding: 56rpx 70rpx 56rpx 48rpx;
+}
+
+.t_item_active {
+    background: #fff;
+    color: #6fb5f4;
+}
+
+.plan_active {
+    border: solid 6rpx #6fb5f4;
+}
+
+.plan_no_active {
+    border: solid 6rpx #fff;
+}
+
+.t_right_item {
+    margin-top: 45rpx;
+}
+
+.t_right_item:first-child {
+    margin-top: 0;
+}
+
+.t_right_item>view:first-child {
+    position: relative;
+    margin-bottom: 16rpx;
+    width: 501rpx;
+    height: 206rpx;
+}
+
+.t_right_item>view:last-child {
+    margin-top: 16rpx;
+}
+
+.t_right_item_bottom>view:last-child image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 5rpx;
+}
+
+.t_right_item>view:first-child>image:first-child {
+    width: 501rpx;
+    height: 206rpx;
+}
+
+.t_right_item>view:first-child>image:last-child {
+    position: absolute;
+    bottom: 0rpx;
+    right: 0;
+    width: 73rpx;
+    height: 102rpx;
+}
+
+.black_view {
+    background: rgba(0, 0, 0, 0.2);
     position: fixed;
-    top: 265rpx;
-    left: 0;
+    top: 0;
+    right: 0;
     bottom: 0;
-    width: 120rpx;
+    left: 0;
 }
+
+.t_dialog {
+    z-index: 99;
+    position: relative;
+}
+.t_main_view{
+    position: fixed;
+    top: 134rpx;
+}
+.t_dialog_main {
+    background: #fff;
+    width: 610rpx;
+    height: 674rpx;
+    position: relative;
+    top: 134rpx;
+    left: 70rpx;
+    border-radius: 25rpx;
+}
+
+.t_dialog_img {
+    width: 470rpx;
+}
+
+.t_eye {
+    width: 102rpx;
+    height: 102rpx;
+    position: absolute;
+    top: -44rpx;
+    left: 58rpx;
+    z-index: 999;
+}
+
+.t_close {
+    width: 38rpx;
+    height: 38rpx;
+    right: 25rpx;
+    top: 20rpx;
+    position: absolute;
+}
+.t_scroll{
+    width: 470rpx;
+    height: 574rpx;
+    position: relative;
+    left: 70rpx;
+    top: 70rpx;
+}
+

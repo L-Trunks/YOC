@@ -1,0 +1,50 @@
+<view class="tf_container">
+	<image src="" />
+	<form catchsubmit="formSubmit" catchreset="formReset">
+		<view class="tf_cell ">
+			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
+				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
+				<input class="tf_input" name="name" placeholder="姓    名" />
+			</view>
+		</view>
+		<view class="tf_cell ">
+			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
+				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
+				<input class="tf_input" name="phone" placeholder="联系电话" />
+			</view>
+		</view>
+		<view class="tf_cell ">
+			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
+				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
+				<input class="tf_input" name="hotelAddress" placeholder="酒店地址" />
+			</view>
+		</view>
+		<view class="tf_check txt_20 main_txt flex j_end">
+			是否为学生票
+			<image
+			 catchtap="changeStatus"
+			 class=""
+			 src="{{isCheck?'../../../images/first/tf_checked@3x.png':'../../../images/first/tf_unchecked@3x.png'}}"
+			 mode="aspectFit|aspectFill|widthFix"
+			 lazy-load="false"
+			 binderror=""
+			 bindload=""
+			/>
+		</view>
+		<view class="btn_view txt_26 txt_fff flex j_center">
+			立即提交
+			<button class="sub_btn" formType="submit" />
+		</view>
+	</form>
+	<view class="tf_bg flex j_center" hover-class="none" hover-stop-propagation="false">
+		<image
+		 class=""
+		 src="../../../images/first/tf_bg@3x.png"
+		 mode="aspectFit|aspectFill|widthFix"
+		 lazy-load="false"
+		 binderror=""
+		 bindload=""
+		/>
+	</view>
+</view>
+

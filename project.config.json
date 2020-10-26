@@ -62,6 +62,13 @@
           "id": -1,
           "name": "pages/drawTravel/index",
           "pathName": "pages/drawTravel/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/travel/index",
+          "pathName": "pages/travel/index",
           "scene": null
         }
       ]

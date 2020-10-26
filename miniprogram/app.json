@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/travel/index",
     "pages/guidePage/index",
     "pages/index/index",
+    "pages/travel/index",
     "pages/scenery/index",
     "pages/plan/index",
     "pages/drawTravel/index",

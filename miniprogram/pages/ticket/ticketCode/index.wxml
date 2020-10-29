@@ -1,0 +1,2 @@
+<web-view class="web_code" src="{{url}}" bindmessage=""></web-view>
+

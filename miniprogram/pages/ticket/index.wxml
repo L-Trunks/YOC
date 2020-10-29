@@ -1,0 +1,190 @@
+<view class="t_container" hover-class="none" hover-stop-propagation="false">
+	<image
+	 class="t_logo"
+	 src="../../images/first/logo@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+	<view class="main_hot_banner">
+		<swiper
+		 class="hot_swiper_banner"
+		 bindchange="hotSwiperChange"
+		 current="{{hotBannerIndex}}"
+		 autoplay="{{autoPlay}}"
+		 circular="true"
+		>
+			<block wx:for="{{hotBannerList}}" wx:key="index">
+				<swiper-item class="hot_swiper_banner_item left_banner">
+					<image
+					 data-index="{{index}}"
+					 class="main_hot_image"
+					 src="{{item.url}}"
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+	<view class="main_txt txt_30 txt_bold flex j_center" hover-class="none" hover-stop-propagation="false">
+		选择您的票务
+	</view>
+	<view class="t_tips txt_16 txt_333 flex j_end">
+		真正的自由行 真正的优惠
+	</view>
+
+</view>
+<view class="flex j_start a_start t_main" hover-class="none" hover-stop-propagation="false">
+	<view class="t_left">
+		<block wx:for="{{ticketItems}}" wx:key="index">
+			<view
+			 catchtap="onTicketchange"
+			 data-index="{{index}}"
+			 class="txt_20 txt_fff t_item_height {{ticketIndex===index?'t_item_active':''}}"
+			 hover-class="none"
+			 hover-stop-propagation="false"
+			>
+				{{item.name}}
+			</view>
+		</block>
+		<view class="txt_20 txt_666 t_item_height" hover-class="none" hover-stop-propagation="false">
+			更多票务信息将逐步向您提供
+		</view>
+	</view>
+	<view class="t_right" hover-class="none" hover-stop-propagation="false">
+		<view class="t_main_dd txt_24 txt_bold txt_333">单独玩</view>
+		<block wx:for="{{nowList}}" wx:key='index'>
+			<view wx:if="{{item.type==0}}">
+				<view
+				 catchtap="onPlanchange"
+				 data-index="{{index}}"
+				 class="t_right_item {{selectIndex===index?'plan_active':'plan_no_active'}} flex j_start"
+				 hover-class="none"
+				 hover-stop-propagation="false"
+				>
+					<image
+					 class=""
+					 src="{{item.ticketImg||'../../images/scenery/noImage.jpg'}}"
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
+					<view class="flex column j_start a_start">
+						<view class="txt_24 txt_bold txt_333">
+							{{item.name}}
+						</view>
+						<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
+							<text class="">{{item.info}}</text>
+							<image
+							 class=""
+							 src="../../images/first/travel_enter@3x.png"
+							 mode="aspectFit|aspectFill|widthFix"
+							 lazy-load="false"
+							 binderror=""
+							 bindload=""
+							/>
+						</view>
+						<view class=" plan_btn txt_20 txt_medium txt_fff {{selectIndex===index?'plan_btn_active':'plan_btn_no_active'}}">
+							确认
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+		<view class="t_main_dd txt_24 txt_bold txt_333">套票玩</view>
+		<block wx:for="{{nowList}}" wx:key='index'>
+			<view wx:if="{{item.type==1}}">
+				<view
+				 catchtap="onPlanchange"
+				 data-index="{{index}}"
+				 class="t_right_item {{selectIndex===index?'plan_active':'plan_no_active'}} flex j_start"
+				 hover-class="none"
+				 hover-stop-propagation="false"
+				>
+					<image
+					 class=""
+					 src="{{item.ticketImg||'../../images/scenery/noImage.jpg'}}"
+					 mode="aspectFit|aspectFill|widthFix"
+					 lazy-load="false"
+					 binderror=""
+					 bindload=""
+					/>
+					<view class="flex column j_start a_start">
+						<view class="txt_24 txt_bold txt_333">
+							{{item.name}}
+						</view>
+						<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
+							<text class="">{{item.info}}</text>
+							<image
+							 class=""
+							 src="../../images/first/travel_enter@3x.png"
+							 mode="aspectFit|aspectFill|widthFix"
+							 lazy-load="false"
+							 binderror=""
+							 bindload=""
+							/>
+						</view>
+						<view class=" plan_btn txt_20 txt_medium txt_fff {{selectIndex===index?'plan_btn_active':'plan_btn_no_active'}}">
+							确认
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+		<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff">
+			下一步
+		</view>
+
+	</view>
+</view>
+
+<view
+ wx:if="{{isShow}}"
+ class="t_dialog"
+ hover-class="none"
+ hover-stop-propagation="false"
+>
+	<view class="black_view" catchtap="hideDetail" />
+	<view class="t_main_view" hover-class="none" hover-stop-propagation="false">
+		<view class="t_dialog_main" hover-class="none" hover-stop-propagation="false">
+			<image
+			 class="t_eye"
+			 src="../../images/first/eye_icon@3x.png"
+			 mode="aspectFit|aspectFill|widthFix"
+			 lazy-load="false"
+			 binderror=""
+			 bindload=""
+			/>
+			<image
+			 class="t_close"
+			 src="../../images/first/t_close@3x.png"
+			 mode="aspectFit|aspectFill|widthFix"
+			 lazy-load="false"
+			 binderror=""
+			 catchtap="hideDetail"
+			 bindload=""
+			/>
+			<scroll-view class="t_scroll" scroll-y="true">
+				<image
+				 class="t_dialog_img"
+				 src="{{isShow?showImage:''}}"
+				 mode="widthFix"
+				 lazy-load="false"
+				 binderror=""
+				 bindload=""
+				/>
+				<view class="txt_333 txt_24 flex j_center no_ticket" wx:if="{{!nowList[selectIndex].detailImg}}">
+					暂无行程简介~
+				</view>
+			</scroll-view>
+
+		</view>
+	</view>
+
+</view>
+

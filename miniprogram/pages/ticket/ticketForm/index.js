@@ -29,7 +29,7 @@ Page({
         data = {
             ...data,
             isStudent: this.data.isCheck ? '是' : '否',
-            type: 1
+            type: 2
         }
         db.collection('hz_user')
             .add({
@@ -46,7 +46,7 @@ Page({
                     });
                     setTimeout(() => {
                         wx.navigateTo({
-                            url: `../travelCode/index?id=${_this.data.id}`
+                            url: `../ticketCode/index?id=${_this.data.id}`
                         })
                     }, 1000)
                 }

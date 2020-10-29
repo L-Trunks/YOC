@@ -36,7 +36,7 @@
   },
   "appid": "wxcc70b16488aed11a",
   "projectname": "yoc",
-  "libVersion": "2.13.0",
+  "libVersion": "2.13.2",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

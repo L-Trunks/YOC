@@ -35,8 +35,6 @@
 	<view class="t_right" hover-class="none" hover-stop-propagation="false">
 		<block wx:for="{{nowList}}" wx:key='index'>
 			<view
-			 bindtap="goDetail"
-			 data-id="{{item._id}}"
 			 class="t_right_item"
 			 hover-class="none"
 			 hover-stop-propagation="false"
@@ -92,6 +90,9 @@
 				</view>
 			</view>
 		</block>
+		<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff">
+			下一步
+		</view>
 	</view>
 </view>
 

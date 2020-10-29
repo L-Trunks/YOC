@@ -3,52 +3,79 @@ const app = getApp()
 const db = wx.cloud.database()
 Page({
     data: {
-        travelItems: [],
+        ticketItems: [],
         nowList: [],
         nowId: '',
-        travelIndex: 0,
-        selectIndex: 0
+        ticketIndex: 0,
+        selectIndex: 0,
+        autoPlay: true,
+        hotBannerIndex: 0,
+        hotBannerList: [],
     },
 
     onLoad: function() {
-        this.getTravelInfo()
+        this.getBannerList()
+        this.getTicketInfo()
     },
     onShow: function() {
 
     },
-    getTravelInfo() {
+    hotSwiperChange: function(e) {
+        this.setData({
+            hotBannerIndex: e.detail.current
+        })
+    },
+    getBannerList() {
+        let _this = this
+        wx.showLoading({
+            title: '加载中'
+        })
+        db.collection('ticket_img').where({ type: 1 }).get().then(res => {
+            // res.data 包含该记录的数据
+            console.log('banner列表', res.data)
+            if (res.data && res.data.length) {
+                _this.setData({
+                    hotBannerList: res.data || [],
+
+                })
+
+            }
+            wx.hideLoading();
+        })
+    },
+    getTicketInfo() {
         wx.showLoading({
             title: '加载中'
         });
         let _this = this
             //获取周边游列表
-        db.collection('hz_travel').where({}).get().then(res => {
+        db.collection('hz_ticket').where({}).get().then(res => {
             // res.data 包含该记录的数据
-            console.log('周边游列表', res.data)
+            console.log('票务类型列表', res.data)
             if (res.data && res.data.length) {
                 if (res.data[0]) {
                     _this.setData({
-                        travelItems: res.data || [],
+                        ticketItems: res.data || [],
                         nowId: res.data && res.data[0] && res.data[0]._id && res.data[0]._id || ''
                     })
                 }
                 wx.hideLoading();
-                _this.getTravelList()
+                _this.getTicketList()
             } else {
                 wx.showToast({
-                    title: "暂无周边游计划推荐，请稍候再来~",
+                    title: "暂无票务计划推荐，请稍候再来~",
                     icon: 'none'
                 })
                 wx.hideLoading();
             }
         })
     },
-    getTravelList() {
+    getTicketList() {
         wx.showLoading({
             title: '加载中'
         })
         let _this = this
-        db.collection('hz_travel_detail').where({ travelId: _this.data.nowId }).orderBy('position', 'asc').get().then(result => {
+        db.collection('hz_ticket_detail').where({ ticketId: _this.data.nowId }).orderBy('position', 'asc').get().then(result => {
             console.log('套餐列表', result.data)
             if (result.data) {
                 _this.setData({
@@ -58,13 +85,13 @@ Page({
             wx.hideLoading()
         })
     },
-    onTravelchange(e) {
+    onTicketchange(e) {
         let index = e.currentTarget.dataset.index
         this.setData({
-            travelIndex: index,
-            nowId: this.data.travelItems[index]._id
+            ticketIndex: index,
+            nowId: this.data.ticketItems[index]._id
         })
-        this.getTravelList()
+        this.getTicketList()
     },
     onPlanchange(e) {
         let index = e.currentTarget.dataset.index
@@ -87,7 +114,7 @@ Page({
     goDetail() {
         let id = this.data.nowList[this.data.selectIndex]._id
         wx.navigateTo({
-            url: `./travelForm/index?id=${id}`,
+            url: `./ticketForm/index?id=${id}`,
         })
     }
 })

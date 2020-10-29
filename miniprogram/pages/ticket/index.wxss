@@ -1,6 +1,6 @@
 @import '../../style/base.wxss';
 .t_container {
-    padding: 146rpx 86rpx;
+    padding: 20rpx 0;
     position: relative;
 }
 
@@ -12,9 +12,37 @@
     left: 70rpx;
 }
 
+.hot_swiper_banner {
+    width: 100%;
+    height: 175rpx;
+}
+
+.hot_swiper_banner_item,
+.main_hot_image {
+    width: 682rpx !important;
+    height: 175rpx !important;
+    border-radius: 10rpx;
+}
+
+.main_hot_banner {
+    background: #fff;
+    padding-top: 40rpx;
+    margin: 80rpx 0rpx 20rpx 0;
+}
+
+.left_banner {
+    margin-left: 38rpx !important;
+}
+
+.t_tips {
+    padding-right: 87rpx;
+    font-size: 14rpx;
+}
+
 .t_left {
     flex-basis: 130rpx;
     background: #d4e9fc;
+    padding: 50rpx 0 150rpx 0;
 }
 
 .t_select {
@@ -28,7 +56,8 @@
 
 .t_right {
     flex: 1;
-    padding: 56rpx 70rpx 56rpx 48rpx;
+    padding: 0rpx 70rpx 56rpx 48rpx;
+    position: relative;
 }
 
 .t_item_active {
@@ -37,49 +66,85 @@
 }
 
 .plan_active {
-    border: solid 6rpx #6fb5f4;
+    box-shadow: 6rpx 10rpx 26rpx 1rpx rgba(111, 181, 244, 0.5);
 }
 
 .plan_no_active {
-    border: solid 6rpx #fff;
+    box-shadow: 6rpx 10rpx 26rpx 1rpx rgba(179, 179, 179, 0.3);
 }
 
 .t_right_item {
     margin-top: 45rpx;
+    border-radius: 15rpx;
+}
+
+.t_right_item>image {
+    width: 190rpx;
+    height: 200rpx;
+    border-radius: 15px 0 0 15px;
 }
 
 .t_right_item:first-child {
     margin-top: 0;
 }
 
-.t_right_item>view:first-child {
-    position: relative;
-    margin-bottom: 16rpx;
-    width: 501rpx;
-    height: 206rpx;
+.t_right_item>view {
+    height: 160rpx;
+    padding: 20rpx;
+    padding-right: 32rpx;
+    flex: 1;
 }
 
-.t_right_item>view:last-child {
-    margin-top: 16rpx;
+.t_right_item:last-child {
+    margin-bottom: 40rpx;
 }
 
-.t_right_item_bottom>view:last-child image {
+.t_right_item_bottom {
+    margin: 20rpx 0;
+}
+
+.t_right_item_bottom>image {
     width: 24rpx;
     height: 24rpx;
     margin-left: 5rpx;
 }
 
-.t_right_item>view:first-child>image:first-child {
-    width: 501rpx;
-    height: 206rpx;
+.t_right_item_bottom>text {
+    width: 180rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.t_right_item>view:first-child>image:last-child {
+.plan_btn {
+    background: #70b8f7;
+    padding: 6rpx 30rpx;
+    border-radius: 30rpx;
+    align-self: flex-end;
+}
+
+.plan_btn_active {
+    opacity: 1;
+}
+
+.plan_btn_no_active {
+    opacity: 0.5;
+}
+
+.t_main_dd {
+    position: relative;
+    left: 24rpx;
+    margin-bottom: 24rpx;
+}
+
+.t_main_dd::before {
+    content: '';
     position: absolute;
-    bottom: 0rpx;
-    right: 0;
-    width: 73rpx;
-    height: 102rpx;
+    top: 0;
+    bottom: 0;
+    left: -20rpx;
+    width: 8rpx;
+    background: #6fb5f4;
 }
 
 .next_btn {

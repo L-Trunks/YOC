@@ -1,5 +1,5 @@
 <view class="tf_container">
-	<image src="" />
+	<image src="../../../images/first/form_top@3x.png" mode="aspectFit|aspectFill|widthFix" />
 	<form catchsubmit="formSubmit" catchreset="formReset">
 		<view class="tf_cell ">
 			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">

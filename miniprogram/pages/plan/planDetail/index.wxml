@@ -37,7 +37,7 @@
 					/>
 					<image
 					 class="pd_item_down_img"
-					 src="{{item.img}}"
+					 src="{{item.imageUrl && item.imageUrl || '../../../images/scenery/noImage.jpg'}}"
 					 mode="aspectFit|aspectFill|widthFix"
 					 lazy-load="false"
 					 binderror=""

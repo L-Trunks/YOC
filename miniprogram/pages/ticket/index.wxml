@@ -30,7 +30,7 @@
 			</block>
 		</swiper>
 	</view>
-	<view class="main_txt txt_30 txt_bold flex j_center" hover-class="none" hover-stop-propagation="false">
+	<view class="main_txt txt_6 txt_bold flex j_center" hover-class="none" hover-stop-propagation="false">
 		选择您的票务
 	</view>
 	<view class="t_tips txt_16 txt_333 flex j_end">
@@ -44,14 +44,14 @@
 			<view
 			 catchtap="onTicketchange"
 			 data-index="{{index}}"
-			 class="txt_20 txt_fff t_item_height {{ticketIndex===index?'t_item_active':''}}"
+			 class="txt_20 txt_333 t_item_height {{ticketIndex===index?'t_item_active':''}}"
 			 hover-class="none"
 			 hover-stop-propagation="false"
 			>
 				{{item.name}}
 			</view>
 		</block>
-		<view class="txt_20 txt_666 t_item_height" hover-class="none" hover-stop-propagation="false">
+		<view class="txt_16 txt_666 t_item_height" hover-class="none" hover-stop-propagation="false">
 			更多票务信息将逐步向您提供
 		</view>
 	</view>
@@ -136,9 +136,13 @@
 				</view>
 			</view>
 		</block>
-		<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff">
+		<view class="flex j_center">
+			<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff">
 			下一步
 		</view>
+		</view>
+		  
+		
 
 	</view>
 </view>

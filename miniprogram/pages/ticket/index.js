@@ -18,7 +18,13 @@ Page({
         this.getTicketInfo()
     },
     onShow: function() {
-
+        let value = wx.getLaunchOptionsSync()
+        console.log(value)
+        if (value.scene && value.scene !== 1082) {
+            wx.switchTab({
+                url: '../index/index'
+            })
+        }
     },
     hotSwiperChange: function(e) {
         this.setData({

@@ -1,4 +1,8 @@
 @import '../../style/base.wxss';
+page {
+    padding-top: 160rpx;
+}
+
 .t_container {
     padding: 20rpx 0;
     position: relative;
@@ -14,19 +18,19 @@
 
 .hot_swiper_banner {
     width: 100%;
-    height: 175rpx;
+    height: 120rpx;
 }
 
 .hot_swiper_banner_item,
 .main_hot_image {
     width: 682rpx !important;
-    height: 175rpx !important;
+    height: 120rpx !important;
     border-radius: 10rpx;
 }
 
 .main_hot_banner {
     background: #fff;
-    padding-top: 40rpx;
+    padding-top: 20rpx;
     margin: 80rpx 0rpx 20rpx 0;
 }
 
@@ -42,7 +46,7 @@
 .t_left {
     flex-basis: 130rpx;
     background: #d4e9fc;
-    padding: 50rpx 0 150rpx 0;
+    padding: 50rpx 0 200rpx 0;
 }
 
 .t_select {
@@ -151,8 +155,8 @@
     background: #6fb5f4;
     padding: 14rpx 170rpx;
     margin-top: 100rpx;
-    position: absolute;
-    right: 70rpx;
+    /* position: absolute;
+    right: 70rpx; */
     border-radius: 30rpx;
     box-shadow: 6rpx 10rpx 26rpx 1rpx rgba(179, 179, 179, 0.3);
 }
@@ -179,7 +183,7 @@
 .t_dialog_main {
     background: #fff;
     width: 610rpx;
-    height: 674rpx;
+    height: 804rpx;
     position: relative;
     top: 134rpx;
     left: 70rpx;
@@ -209,7 +213,7 @@
 
 .t_scroll {
     width: 470rpx;
-    height: 574rpx;
+    height: 684rpx;
     position: relative;
     left: 70rpx;
     top: 70rpx;

@@ -1,9 +1,9 @@
 {
     "pages": [
         "pages/guidePage/index",
+        "pages/index/index",
         "pages/ticket/index",
         "pages/travel/index",
-        "pages/index/index",
         "pages/scenery/index",
         "pages/plan/index",
         "pages/drawTravel/index",

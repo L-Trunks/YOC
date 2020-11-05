@@ -1,7 +1,7 @@
 @import '../../../style/base.wxss';
 .tf_container>image:first-child {
     width: 750rpx;
-    height: 551rpx;
+    height: 521rpx;
 }
 
 .tf_cell {

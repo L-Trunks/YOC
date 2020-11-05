@@ -14,16 +14,16 @@
 		<view class="form_item" hover-class="none" hover-stop-propagation="false">
 			<image class="form_img" src="../../images/first/arrive.png" />
 			到达地点:
-			<picker bindchange="bindCityChange" value="{{cityIndex}}" range="{{cityArray}}">
+			<picker bindchange="bindCityChange" style="width: 50%;text-align: left;" value="{{cityIndex}}" range="{{cityArray}}">
 				<view class="picker">
 					{{cityArray[cityIndex]}}
 				</view>
 			</picker>
 		</view>
-		<view class="form_item" hover-class="none" hover-stop-propagation="false">
+		<view class="form_item"  hover-class="none" hover-stop-propagation="false">
 			<image class="form_img" src="../../images/first/plane.png" />
 			交通工具:
-			<picker bindchange="bindTransportChange" value="{{transIndex}}" range="{{transArray}}">
+			<picker bindchange="bindTransportChange" style="width: 50%;text-align: left;" value="{{transIndex}}" range="{{transArray}}">
 				<view class="picker">
 					{{transArray[transIndex]}}
 				</view>

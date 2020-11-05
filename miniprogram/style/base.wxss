@@ -135,11 +135,13 @@
     -webkit-flex-direction: column;
 }
 
+
 /* 按钮背景色 */
 
 .btn_bg {
     background: #f04f48;
 }
+
 
 /* 主题色 */
 
@@ -150,6 +152,7 @@
 .main_txt {
     color: #6fb5f3;
 }
+
 
 /* 红色按钮 */
 
@@ -166,7 +169,16 @@
     font-size: 36rpx;
 }
 
+
 /* 文本大小 */
+
+.txt_44 {
+    font-size: 44rpx;
+}
+
+.txt_40 {
+    font-size: 40rpx;
+}
 
 .txt_36 {
     font-size: 36rpx;
@@ -216,6 +228,11 @@
     font-size: 18rpx;
 }
 
+.txt_16 {
+    font-size: 16rpx;
+}
+
+
 /* 字重 */
 
 .txt_bold {
@@ -229,6 +246,8 @@
 .txt_regular {
     font-weight: 400
 }
+
+
 /* 字体颜色 */
 
 .txt_222 {
@@ -267,6 +286,7 @@
     color: #cccccc
 }
 
+
 /* 行内块元素 */
 
 .inline_block {
@@ -276,6 +296,7 @@
 .inline {
     display: inline
 }
+
 
 /* 已加载全部数据 */
 

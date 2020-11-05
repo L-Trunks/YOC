@@ -1,3 +1,12 @@
+<image
+ class="travel_bg"
+ src="../../images/first/travel_bg@3x.png"
+ mode="aspectFit|aspectFill|widthFix"
+ lazy-load="false"
+ binderror=""
+ bindload=""
+/>
+
 <view class="t_container" hover-class="none" hover-stop-propagation="false">
 	<image
 	 class="t_logo"
@@ -7,9 +16,6 @@
 	 binderror=""
 	 bindload=""
 	/>
-	<view class="txt_333 txt_48 txt_bold flex j_end" hover-class="none" hover-stop-propagation="false">
-		选择周边游行程
-	</view>
 
 </view>
 <view class="flex j_start a_start t_main" hover-class="none" hover-stop-propagation="false">
@@ -28,17 +34,16 @@
 				{{item.name}}
 			</view>
 		</block>
-		<view class="txt_20 txt_666 t_item_height" hover-class="none" hover-stop-propagation="false">
+		<view class="txt_16 txt_666 t_item_height" hover-class="none" hover-stop-propagation="false">
 			更多周边游行程将逐步向您提供
 		</view>
 	</view>
 	<view class="t_right" hover-class="none" hover-stop-propagation="false">
+		<view class="main_txt txt_44 txt_bold flex j_center" hover-class="none" hover-stop-propagation="false">
+			选择周边游行程
+		</view>
 		<block wx:for="{{nowList}}" wx:key='index'>
-			<view
-			 class="t_right_item"
-			 hover-class="none"
-			 hover-stop-propagation="false"
-			>
+			<view class="t_right_item" hover-class="none" hover-stop-propagation="false">
 				<view
 				 class="{{selectIndex===index?'plan_active':'plan_no_active'}}"
 				 catchtap="onPlanchange"
@@ -90,9 +95,12 @@
 				</view>
 			</view>
 		</block>
-		<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff">
-			下一步
+		<view class="flex j_center">
+			<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff flex j_center">
+				下一步
+			</view>
 		</view>
+
 	</view>
 </view>
 
@@ -140,5 +148,4 @@
 	</view>
 
 </view>
-
 

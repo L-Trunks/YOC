@@ -1,7 +1,21 @@
 @import '../../style/base.wxss';
+page {
+    padding-top: 160rpx;
+}
+
+.travel_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 370rpx;
+    width: 750rpx;
+}
+
 .t_container {
-    padding: 146rpx 86rpx;
+    padding-top: 160rpx;
     position: relative;
+    z-index: 1;
 }
 
 .t_logo {
@@ -12,6 +26,10 @@
     left: 70rpx;
 }
 
+.t_main {
+    position: relative;
+}
+
 .t_left {
     flex-basis: 130rpx;
     background: #d4e9fc;
@@ -20,6 +38,7 @@
 .t_select {
     background: #6fb5f4;
     white-space: nowrap;
+    margin-bottom: 100rpx;
 }
 
 .t_item_height {
@@ -28,7 +47,7 @@
 
 .t_right {
     flex: 1;
-    padding: 56rpx 70rpx 56rpx 48rpx;
+    padding: 0rpx 70rpx 56rpx 48rpx;
 }
 
 .t_item_active {
@@ -86,8 +105,8 @@
     background: #6fb5f4;
     padding: 14rpx 170rpx;
     margin-top: 100rpx;
-    position: absolute;
-    right: 70rpx;
+    /* position: absolute;
+    right: 70rpx; */
     border-radius: 30rpx;
     box-shadow: 6rpx 10rpx 26rpx 1rpx rgba(179, 179, 179, 0.3);
 }
@@ -114,7 +133,7 @@
 .t_dialog_main {
     background: #fff;
     width: 610rpx;
-    height: 674rpx;
+    height: 804rpx;
     position: relative;
     top: 134rpx;
     left: 70rpx;
@@ -144,7 +163,7 @@
 
 .t_scroll {
     width: 470rpx;
-    height: 574rpx;
+    height: 684rpx;
     position: relative;
     left: 70rpx;
     top: 70rpx;

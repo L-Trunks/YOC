@@ -1,6 +1,7 @@
 //index.js
 const app = getApp()
 const db = wx.cloud.database()
+import { formatDateTime, dateTimeStamp } from '../../../util/util'
 Page({
     data: {
         isCheck: false,
@@ -11,15 +12,28 @@ Page({
         this.setData({
             id: option.id && option.id || ''
         })
+        let now = new Date()
+        let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
+        this.setData({
+            nowDate: formatDateTime(now, 'yy-mm-dd'),
+            goDate: '选择时间',
+            endDate: formatDateTime(end, 'yy-mm-dd'),
+        })
     },
     onShow: function() {
 
+    },
+    //时间选择改变事件
+    bindGoDateChange: function(e) {
+        this.setData({
+            goDate: e.detail.value
+        })
     },
     formSubmit(e) {
         console.log(e)
         let _this = this
         let data = e.detail.value || {}
-        if (!data.name || !data.phone || !data.hotelAddress) {
+        if (!data.name || !data.phone || !data.hotelAddress || _this.data.goDate === '选择时间' || !_this.data.goDate) {
             wx.showToast({
                 title: '请将信息填写完整',
                 icon: 'none'

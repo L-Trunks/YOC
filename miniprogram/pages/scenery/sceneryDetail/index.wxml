@@ -1,7 +1,7 @@
 <view>
 	<view class='info_box'>
 		<view>
-			<swiper style='height:364rpx'>
+			<swiper indicator-dots="true" style='height:364rpx'>
 				<block wx:for="{{sceneryInfo.picList}}" wx:key="index">
 					<swiper-item>
 						<image

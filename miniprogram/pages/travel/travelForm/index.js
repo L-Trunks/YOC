@@ -28,6 +28,7 @@ Page({
     },
     //时间选择改变事件
     bindGoDateChange: function(e) {
+        console.log(e.detail.value)
         this.setData({
             goDate: e.detail.value
         })

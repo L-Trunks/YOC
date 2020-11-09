@@ -33,6 +33,7 @@ page {
 .t_left {
     flex-basis: 130rpx;
     background: #d4e9fc;
+    padding-bottom: 600rpx;
 }
 
 .t_select {
@@ -133,7 +134,7 @@ page {
 .t_dialog_main {
     background: #fff;
     width: 610rpx;
-    height: 804rpx;
+    height: 1004rpx;
     position: relative;
     top: 134rpx;
     left: 70rpx;
@@ -163,7 +164,7 @@ page {
 
 .t_scroll {
     width: 470rpx;
-    height: 684rpx;
+    height: 884rpx;
     position: relative;
     left: 70rpx;
     top: 70rpx;

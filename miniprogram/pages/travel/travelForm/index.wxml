@@ -10,7 +10,7 @@
 		<view class="tf_cell ">
 			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
 				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
-				<input class="tf_input" placeholder-class="txt_666" name="number" maxlength="11" placeholder="联系电话" />
+				<input class="tf_input" placeholder-class="txt_666" name="phone" type="number" maxlength="11" placeholder="联系电话" />
 			</view>
 		</view>
 		<view class="tf_cell ">

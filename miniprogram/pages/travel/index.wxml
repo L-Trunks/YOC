@@ -8,14 +8,6 @@
 />
 
 <view class="t_container" hover-class="none" hover-stop-propagation="false">
-	<image
-	 class="t_logo"
-	 src="../../images/first/logo@3x.png"
-	 mode="aspectFit|aspectFill|widthFix"
-	 lazy-load="false"
-	 binderror=""
-	 bindload=""
-	/>
 
 </view>
 <view class="flex j_start a_start t_main" hover-class="none" hover-stop-propagation="false">

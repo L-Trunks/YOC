@@ -41,12 +41,6 @@
     "simulatorPluginLibVersion": {},
     "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
     "condition": {
-        "search": {
-            "list": []
-        },
-        "conversation": {
-            "list": []
-        },
         "plugin": {
             "list": []
         },
@@ -69,6 +63,18 @@
                     "id": -1,
                     "name": "pages/travel/index",
                     "pathName": "pages/travel/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/ticket/index",
+                    "pathName": "pages/ticket/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/plan/planDetail/index",
+                    "pathName": "pages/plan/planDetail/index",
                     "scene": null
                 }
             ]

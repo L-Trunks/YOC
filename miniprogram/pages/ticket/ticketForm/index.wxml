@@ -36,16 +36,15 @@
 				 style="color:#666"
 				 bindchange="bindGoDateChange"
 				>
-					<view class="picker">
+					<view style="width: 400rpx;" class="picker">
 						{{goDate}}
 					</view>
 				</picker>
 			</view>
 		</view>
-		<view class="tf_check txt_20 main_txt flex j_end">
+		<view catchtap="changeStatus" class="tf_check txt_20 main_txt flex j_end">
 			是否为学生票
 			<image
-			 catchtap="changeStatus"
 			 class=""
 			 src="{{isCheck?'../../../images/first/tf_checked@3x.png':'../../../images/first/tf_unchecked@3x.png'}}"
 			 mode="aspectFit|aspectFill|widthFix"

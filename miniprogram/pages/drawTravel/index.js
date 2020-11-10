@@ -57,34 +57,40 @@ Page({
     },
     onLoad: function(options) {
         // this.setLocation()
-        wx.cloud.callFunction({
-            name: 'getSceneryLocation',
-            data: {},
-            success: res => {
-                console.log('获取景点列表', res)
-                res.result.data.map(i => {
-                    console.log(i.address, i._id)
-                    qqmapsdk.geocoder({
-                        address: i.address || '',
-                        complete: res => {
-                            db.collection('scenery').where({ _id: i._id }).update({
-                                data: {
-                                    location: {
-                                        ...res.result.location,
-                                        lon: res.result.location.lon
-                                    },
-                                }
-                            }).then(res => {
-                                // console.log(res)
-                            })
-                        }
-                    });
-                })
-            },
-            fail: err => {
-                console.error('[云函数] [getScenery] 调用失败', err)
-            }
-        })
+        // wx.cloud.callFunction({
+        //     name: 'getSceneryLocation',
+        //     data: {},
+        //     success: res => {
+        //         console.log('获取景点列表', res)
+        //         let count = 0
+        //         let inter = setInterval(() => {
+        //             let i = res.result.data[count]
+        //             qqmapsdk.geocoder({
+        //                 address: i.address || '',
+        //                 complete: res => {
+        //                     console.log(res)
+        //                     db.collection('scenery').where({ _id: i._id }).update({
+        //                         data: {
+        //                             location: {
+        //                                 ...res.result.location,
+        //                                 lon: res.result.location.lng
+        //                             },
+        //                         }
+        //                     }).then(res => {
+        //                         // console.log(res)
+        //                     })
+        //                 }
+        //             });
+        //             if (count === res.result.data.length - 1) {
+        //                 clearInterval(inter)
+        //             }
+        //             count++
+        //         }, 1000)
+        //     },
+        //     fail: err => {
+        //         console.error('[云函数] [getScenery] 调用失败', err)
+        //     }
+        // })
         this.onGetUserInfo()
     },
     onShow() {

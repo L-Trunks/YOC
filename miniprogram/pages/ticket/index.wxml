@@ -74,24 +74,32 @@
 					 binderror=""
 					 bindload=""
 					/>
-					<view class="flex column j_start a_start">
+					<view class="flex column a_start">
 						<view class="txt_24 txt_bold txt_333">
 							{{item.name}}
 						</view>
-						<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
-							<text class="">{{item.info}}</text>
+						<view class='flex'>
+							<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
+								<text class="">{{item.info}}</text>
+								<image
+								 class=""
+								 src="../../images/first/travel_enter@3x.png"
+								 mode="aspectFit|aspectFill|widthFix"
+								 lazy-load="false"
+								 binderror=""
+								 bindload=""
+								/>
+							</view>
 							<image
-							 class=""
-							 src="../../images/first/travel_enter@3x.png"
+							 class="ticket_select_img"
 							 mode="aspectFit|aspectFill|widthFix"
 							 lazy-load="false"
+							 src="{{selectIndex===index?'../../images/scenery/heart.png':'../../images/scenery/heart_uncheck.png'}}"
 							 binderror=""
 							 bindload=""
 							/>
 						</view>
-						<view class=" plan_btn txt_20 txt_medium txt_fff {{selectIndex===index?'plan_btn_active':'plan_btn_no_active'}}">
-							确认
-						</view>
+
 					</view>
 				</view>
 			</view>
@@ -114,23 +122,30 @@
 					 binderror=""
 					 bindload=""
 					/>
-					<view class="flex column j_start a_start">
+					<view class="flex column a_start">
 						<view class="txt_24 txt_bold txt_333">
 							{{item.name}}
 						</view>
-						<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
-							<text class="">{{item.info}}</text>
+						<view class='flex'>
+							<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
+								<text class="">{{item.info}}</text>
+								<image
+								 class=""
+								 src="../../images/first/travel_enter@3x.png"
+								 mode="aspectFit|aspectFill|widthFix"
+								 lazy-load="false"
+								 binderror=""
+								 bindload=""
+								/>
+							</view>
 							<image
-							 class=""
-							 src="../../images/first/travel_enter@3x.png"
+							 class="ticket_select_img"
 							 mode="aspectFit|aspectFill|widthFix"
 							 lazy-load="false"
+							 src="{{selectIndex===index?'../../images/scenery/heart.png':'../../images/scenery/heart_uncheck.png'}}"
 							 binderror=""
 							 bindload=""
 							/>
-						</view>
-						<view class=" plan_btn txt_20 txt_medium txt_fff {{selectIndex===index?'plan_btn_active':'plan_btn_no_active'}}">
-							确认
 						</view>
 					</view>
 				</view>
@@ -138,11 +153,9 @@
 		</block>
 		<view class="flex j_center">
 			<view catchtap="goDetail" class="next_btn txt_bold txt_22 txt_fff">
-			下一步
+				下一步
+			</view>
 		</view>
-		</view>
-		  
-		
 
 	</view>
 </view>

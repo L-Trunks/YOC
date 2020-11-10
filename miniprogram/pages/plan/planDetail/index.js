@@ -123,29 +123,29 @@ Page({
         }]
         Array.from(tempPlan.sceneryInfo, (i, j) => {
             markers[j] = {
-                    ...i,
-                    id: j,
-                    latitude: i.location.lat,
-                    longitude: i.location.lon,
-                    iconPath: i.picList[0] && i.picList[0].picUrl || '../../../images/scenery/noImage.jpg',
-                    width: 24,
-                    height: 24,
-                    callout: {
-                        content: i.name || '',
-                        borderRadius: 0,
-                        color: "#ffffff",
-                        borderWidth: 0,
-                        bgColor: '#e4bb3d',
-                        display: "ALWAYS",
-                        textAlign: 'center',
-                        anchorX: 12,
-                        padding: 5
-                    }
-                },
-                polyLine[0].points[j] = {
-                    latitude: i.location.lat,
-                    longitude: i.location.lon,
+                ...i,
+                id: j,
+                latitude: i.location.lat,
+                longitude: i.location.lon,
+                iconPath: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
+                width: 24,
+                height: 24,
+                callout: {
+                    content: i.name || '',
+                    borderRadius: 0,
+                    color: "#ffffff",
+                    borderWidth: 0,
+                    bgColor: '#e4bb3d',
+                    display: "ALWAYS",
+                    textAlign: 'center',
+                    anchorX: 12,
+                    padding: 5
                 }
+            }
+            polyLine[0].points[j] = {
+                latitude: i.location.lat,
+                longitude: i.location.lon,
+            }
         })
         _this.setData({
             markers: markers,
@@ -164,13 +164,13 @@ Page({
             if (j === 0) {
                 planItems[j] = {
                     ...i,
-                    img: i.picList[0] && i.picList[0].picUrl || '../../../images/scenery/noImage.jpg',
+                    img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
                     distance: distance(_this.data.userLocation.latitude, _this.data.userLocation.longitude, i.location.lat, i.location.lon)
                 }
             } else {
                 planItems[j] = {
                     ...i,
-                    img: i.picList[0] && i.picList[0].picUrl || '../../../images/scenery/noImage.jpg',
+                    img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
                     distance: distance(tempPlan.sceneryInfo[j - 1].location.lat, tempPlan.sceneryInfo[j - 1].location.lon, i.location.lat, i.location.lon)
                 }
             }

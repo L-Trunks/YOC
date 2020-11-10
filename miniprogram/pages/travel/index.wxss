@@ -33,7 +33,12 @@ page {
 .t_left {
     flex-basis: 130rpx;
     background: #d4e9fc;
-    padding-bottom: 600rpx;
+    position: fixed;
+    width: 130rpx;
+    bottom: 0;
+    top: 320rpx;
+    left: 0;
+    z-index: 9;
 }
 
 .t_select {
@@ -48,7 +53,7 @@ page {
 
 .t_right {
     flex: 1;
-    padding: 0rpx 70rpx 56rpx 48rpx;
+    padding: 0rpx 70rpx 56rpx 178rpx;
 }
 
 .t_item_active {
@@ -105,7 +110,7 @@ page {
 .next_btn {
     background: #6fb5f4;
     padding: 14rpx 170rpx;
-    margin-top: 100rpx;
+    margin-top: 140rpx;
     /* position: absolute;
     right: 70rpx; */
     border-radius: 30rpx;

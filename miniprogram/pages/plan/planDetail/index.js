@@ -18,7 +18,8 @@ Page({
         travelInfo: {},
         circles: [],
         markers: [],
-        userLocation: {}
+        userLocation: {},
+        hour: 0
     },
 
     onLoad: function(option) {
@@ -34,7 +35,12 @@ Page({
     },
     onShow() {
         let _this = this
-            // 获取用户位置信息
+        if (wx.getStorageSync('travelHour')) {
+            this.setData({
+                hour: wx.getStorageSync('travelHour')
+            })
+        }
+        // 获取用户位置信息
         wx.getSetting({
             success: res => {
                 if (res.authSetting['scope.userLocation']) {

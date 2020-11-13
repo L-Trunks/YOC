@@ -247,6 +247,10 @@
     font-weight: 400
 }
 
+.txt_light {
+    font-weight: 300;
+}
+
 
 /* 字体颜色 */
 

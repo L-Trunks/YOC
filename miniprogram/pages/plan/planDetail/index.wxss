@@ -1,7 +1,8 @@
 @import '../../../style/base.wxss';
-page{
-    background: #C6F2C9;
+page {
+    background: #ddedfc;
 }
+
 .pd_container {
     position: relative;
     width: 100%;
@@ -13,36 +14,47 @@ page{
     height: 500rpx;
 }
 
-.pd_main{
-    margin-top: 80rpx;
+.pd_main {
+    margin-top: 40rpx;
     padding: 0 70rpx;
 }
-.pd_item{
+
+.pd_item {
     margin-top: 40rpx;
 }
-.pd_item_up{
-    padding: 8rpx 0;
-}
-.pd_item_up>image{
-    width:36rpx;
-    height: 26rpx;
-    margin-right: 18rpx;
-}
-.pd_item_down{
-    position: relative;
-    background: #fff;
-    padding: 25rpx 40rpx;
+
+.pd_item_img {
+    width: 173rpx;
+    height: 193rpx;
 }
 
-.pd_item_down_img{
-    width: 64rpx;
-    height: 72rpx;
-    margin-right: 70rpx;
+.pd_item_article {
+    padding: 25rpx 26rpx 18rpx 22rpx;
+    flex: 1;
+    height: 150rpx;
+    background: #fff;
 }
-.pd_item_down_icon{
-    position: absolute;
-    width: 44rpx;
-    height: 44rpx;
-    top: 38rpx;
-    left: -22rpx;
+
+.pd_item_article>view {
+    width: 100%;
+}
+
+.pd_item_article image {
+    width: 40rpx;
+    height: 24rpx;
+}
+
+.pd_txt image {
+    width: 18rpx;
+    height: 18rpx;
+}
+
+.pd_txt view {
+    width: 30%;
+}
+
+.pd_bg {
+    width: 750rpx;
+    height: 400rpx;
+    margin-top: 60rpx;
 }

@@ -1,7 +1,12 @@
 <view>
 	<view class='info_box'>
 		<view>
-			<swiper indicator-dots="true" style='height:364rpx'>
+			<swiper
+			 autoplay="true"
+			 circular="true"
+			 indicator-dots="true"
+			 style='height:364rpx'
+			>
 				<block wx:for="{{sceneryInfo.picList}}" wx:key="index">
 					<swiper-item>
 						<image

@@ -13,40 +13,74 @@
 	 layer-style='1'
 	/>
 	<view class="pd_main" hover-class="none" hover-stop-propagation="false">
+		<view class="txt_18 txt_bold txt_333 pd_txt  flex column a_end">
+			<view class='flex  '>
+				已选景点数量: {{planItems.length||0}}
+				<image
+				 class=""
+				 src="../../../images/plan/yellow_icon@3x.png"
+				 mode="aspectFit|aspectFill|widthFix"
+				 lazy-load="false"
+				 binderror=""
+				 bindload=""
+				/>
+			</view>
+			<view class='flex '>
+				已选游玩时间: {{hour||0}}
+				<image
+				 class=""
+				 src="../../../images/plan/red_icon@3x.png"
+				 mode="aspectFit|aspectFill|widthFix"
+				 lazy-load="false"
+				 binderror=""
+				 bindload=""
+				/>
+			</view>
+		</view>
+
 		<block wx:for="{{planItems}}" wx:key="index">
-			<view class="pd_item" hover-class="none" hover-stop-propagation="false">
-				<view class="pd_item_up txt_18 main_txt txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
+			<!--<view class="pd_item_up txt_18 main_txt txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
 					<image
 					 class=""
 					 src="../../../images/plan/go_06@3x.png"
 					 mode="aspectFit|aspectFill|widthFix"
 					 lazy-load="false"
-					 binderror=""
-					 bindload=""
 					/>
 					{{item.distance}}km
-				</view>
-				<view catchtap="goSceneryDetail" data-id='{{item._id}}' class="pd_item_down txt_333 txt_30 txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
-					<image
+				</view> -->
+			<view class="pd_item txt_333 txt_30 txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
+				<!--<image
 					 class="pd_item_down_icon"
 					 src="../../../images/plan/scenery_icon_03@3x.png"
 					 mode="aspectFit|aspectFill|widthFix"
 					 lazy-load="false"
-					 binderror=""
-					 bindload=""
-					/>
-					<image
-					 class="pd_item_down_img"
-					 src="{{item.imageUrl && item.imageUrl || '../../../images/scenery/noImage.jpg'}}"
-					 mode="aspectFit|aspectFill|widthFix"
-					 lazy-load="false"
-					 binderror=""
-					 bindload=""
-					/>
+					/> -->
+				<image
+				 class="pd_item_img"
+				 src="{{item.imageUrl && item.imageUrl || '../../../images/scenery/noImage.jpg'}}"
+				 mode="aspectFit|aspectFill|widthFix"
+				 lazy-load="false"
+				/>
+				<view class="pd_item_article flex a_start column txt_333 txt_24 txt_bold">
 					{{item.name||''}}
+					<view class="flex txt_20 txt_light">
+						{{index===0?'距离当前位置':'距离'+planItems[index-1].name}}{{item.distance}}km
+						<image
+						 class=""
+						 src="../../../images/plan/eyes@3x.png"
+						 mode="aspectFit|aspectFill|widthFix"
+						 lazy-load="false"
+						 binderror=""
+						 bindload=""
+						 catchtap="goSceneryDetail"
+						 data-id='{{item._id}}'
+						/>
+					</view>
 				</view>
 			</view>
 		</block>
 	</view>
+	<image class="pd_bg" src="../../../images/plan/plan_bg@3x.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+	  
 </view>
 

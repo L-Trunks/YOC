@@ -32,7 +32,8 @@
         "userConfirmedUseCompilerModuleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": true
+        "minifyWXSS": true,
+        "skeletonGenerateFilesWithoutConfirm": true
     },
     "appid": "wxcc70b16488aed11a",
     "projectname": "yoc",

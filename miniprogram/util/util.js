@@ -1,5 +1,5 @@
 //时间戳转时间类型
-export const formatDateTime = function (inputTime, type) {
+export const formatDateTime = function(inputTime, type) {
     var date = new Date(inputTime);
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
@@ -20,13 +20,13 @@ export const formatDateTime = function (inputTime, type) {
     }
     return resultMap[type];
 };
-export const randomsort = function (a, b) {
+export const randomsort = function(a, b) {
     return Math.random() > .5 ? -1 : 1;
     //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
 }
 
 //日期转时间戳
-export const dateTimeStamp = function (data) {
+export const dateTimeStamp = function(data) {
     let date = new Date(data);
     let timestamp = date.getTime()
     return timestamp
@@ -36,7 +36,7 @@ export const dateTimeStamp = function (data) {
 //第一张图片src
 export const getFirstPic = (str) => {
     let data = ''
-    str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/, function (match, capture) {
+    str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/, function(match, capture) {
         data = capture
     })
     return data
@@ -97,13 +97,13 @@ export const getNextMonthDay = (date, monthNum) => {
 }
 
 //计算天数差
-export const dateDiff = (sDate1, sDate2) => {    //sDate1和sDate2是2002-12-18格式 
+export const dateDiff = (sDate1, sDate2) => { //sDate1和sDate2是2002-12-18格式 
     let aDate, oDate1, oDate2, iDays
     aDate = sDate1.split("-")
-    oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])    //转换为12-18-2002格式 
+    oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]) //转换为12-18-2002格式 
     aDate = sDate2.split("-")
     oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0])
-    iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24)    //把相差的毫秒数转换为天数 
+    iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24) //把相差的毫秒数转换为天数 
     return iDays
 }
 
@@ -126,4 +126,19 @@ export const weekDay = (date) => {
     let weekArray = ["日", "一", "二", "三", "四", "五", "六"];
     let week = weekArray[new Date(date).getDay()];
     return `周${week}`
+}
+
+//生成十六进制颜色值
+
+export const getColor = () => {
+    //定义数组，值为1—f
+    let num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+    //颜色的值为16进制并且开头为#，
+    let str = "#";
+    //我们需要的是一个6位的十六进制所以循环6次
+    for (var i = 0; i < 6; i++) {
+        //随机产生的数做数组的索引，索引值只能为整数所以需要转换为整型通过索引获得数组的值,
+        str += num[parseInt(Math.random() * 16)];
+    }
+    return str;
 }

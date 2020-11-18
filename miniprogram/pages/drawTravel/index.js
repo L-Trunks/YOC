@@ -6,7 +6,7 @@ let qqmapsdk = new QQMapWX({
 });
 const db = wx.cloud.database({})
 const _ = db.command
-import { dateDiff, distance, dateTimeStamp } from '../../util/util'
+import { dateDiff, distance, dateTimeStamp, getColor } from '../../util/util'
 Page({
     data: {
         key: '375BZ-RAXWU-NJOVW-BX74F-W4HHK-LXBC7',
@@ -445,13 +445,27 @@ Page({
     //计算天数
     calDays: function(travelInfo) {
         let days = dateDiff(travelInfo.goDate, travelInfo.arriveDate) + 1
-        let [...imageItems] = this.data.allImageItems
-        let [...lineItems] = this.data.allLineColorMap
+        let colorArr = []
+        for (let i = 0; i < days; i++) {
+            colorArr.push(getColor())
+        }
+        let imageItems = []
+        Array.from(colorArr, (i, j) => {
+            imageItems.push({
+                url: '../../images/scenery/btn1_03.png',
+                isCheck: false,
+                color: i,
+                index: `第${j+1}天`
+            })
+        })
+        let [...lineItems] = colorArr
 
         this.setData({
             days: days,
-            lineColorMap: lineItems.slice(0, days),
-            imageItems: imageItems.slice(0, days)
+            allLineColorMap: colorArr,
+            allImageItems: imageItems,
+            lineColorMap: lineItems,
+            imageItems: imageItems
         })
     },
     //获取已选择景点详情并初始化

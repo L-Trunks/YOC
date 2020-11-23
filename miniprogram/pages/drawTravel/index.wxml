@@ -50,14 +50,14 @@
 			</cover-view>
 		</block>
 	</cover-view> -->
-	<cover-view class="" scroll-top="0">
+	<cover-view class="dayTips" scroll-top="0">
 		<cover-view class="" scroll-top="0">
 			已选游玩时间：
 		</cover-view>
 	</cover-view>
-	<cover-view class="" scroll-top="0">
+	<cover-view class="dayItems" scroll-top="0">
 		<block wx:for="{{days}}">
-			<cover-view class="" scroll-top="0">
+			<cover-view class="dayItem" scroll-top="0">
 				第{{index+1}}天
 			</cover-view>
 		</block>

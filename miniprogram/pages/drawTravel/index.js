@@ -54,6 +54,8 @@ Page({
         hotelList: [],
         isPlan: false,
         datumScenery: {}, //基准景点,用于系统推荐周围最近的景点
+        showTips:false,
+        showDay:false
     },
     onLoad: function(options) {
         // this.setLocation()
@@ -105,6 +107,16 @@ Page({
         //   console.log('行程计划', this.data.travelPlan)
         // }
 
+    },
+    changeTipsStatus(){
+        this.setData({
+            showTips:!this.data.showTips
+        })
+    },
+    onClickShowDay(){
+        this.setData({
+            showDay:!this.data.showDay
+        })
     },
     //点击顶部按钮
     onClickTopBtn: function(e) {
@@ -413,7 +425,7 @@ Page({
     onClickImageItem: function(e) {
         let index = e.currentTarget.dataset.index
         this.setData({
-            [`imageItems[${index}].isCheck`]: !this.data.imageItems[index].isCheck
+            [`imageItems[${index}].isCheck`]: true
         })
         if (this.data.imageItems[index].isCheck) {
             this.setData({
@@ -439,6 +451,9 @@ Page({
                     [`showPolyLine[${index}]`]: {}
                 })
             }
+        })
+        this.setData({
+            showDay:false
         })
         console.log(this.data.showPolyLine, tempPolyLine, this.data.polyline)
     },
@@ -482,6 +497,7 @@ Page({
                 success: (res) => {
                     console.log('景点数据', res.data)
                     let markers = []
+                    
                     markers = res.data.map((i, j) => {
                         return {
                             ...i,

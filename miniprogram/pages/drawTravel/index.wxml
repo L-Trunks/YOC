@@ -50,15 +50,61 @@
 			</cover-view>
 		</block>
 	</cover-view> -->
-	<cover-view class="dayTips" scroll-top="0">
+	<cover-image
+	 class="tipsBtn"
+	 src="{{showTips?'../../images/scenery/heart_uncheck.png':'../../images/scenery/add_blue@3x.png'}}"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 catchtap="changeTipsStatus"
+	 binderror=""
+	 bindload=""
+	/>
+	<cover-view wx:if="{{showTips}}" class="dayTips txt_22" scroll-top="0">
+		<cover-view class="tips_top" scroll-top="0" />
+
 		<cover-view class="" scroll-top="0">
-			已选游玩时间：
+			信息总览
+			<cover-view class="txt_20" scroll-top="0">
+				1.景点数量：{{travelPlan[nowIndex].sceneryInfo.length ||0}}
+			</cover-view>
+			<cover-view class="txt_20" scroll-top="0">
+				2.游玩时间：{{travelInfo.hours}}h
+			</cover-view>
+		</cover-view>
+		<cover-view class="" style="margin-top:30rpx" scroll-top="0">
+			当前线路
+			<cover-view
+			 wx:for="{{travelPlan[nowIndex].sceneryInfo}}"
+			 wx:key="index"
+			 class="txt_20"
+			 scroll-top="0"
+			>
+				{{index+1}}.{{item.name}}
+			</cover-view>
 		</cover-view>
 	</cover-view>
-	<cover-view class="dayItems" scroll-top="0">
-		<block wx:for="{{days}}">
-			<cover-view class="dayItem" scroll-top="0">
-				第{{index+1}}天
+	<cover-view class="dayItems flex column txt_24" scroll-top="0">
+		<cover-view
+		 class="dayItem flex j_start"
+		 bindtap='onClickShowDay'
+		 data-index="{{index}}"
+		 scroll-top="0"
+		>
+			第{{nowIndex+1}}天
+			<cover-image class="" src="../../images/scenery/down_icon@3x.png" bindload="" binderror="">
+				
+			</cover-image>
+			  
+		</cover-view>
+		<block wx:for="{{imageItems}}" wx:if="{{showDay}}" wx:key="index">
+			<cover-view
+			 class="dayItem"
+			 bindtap='onClickImageItem'
+			 data-index="{{index}}"
+			 scroll-top="0"
+			 wx:if="{{index!==nowIndex}}"
+			>
+				{{item.index}}
 			</cover-view>
 		</block>
 	</cover-view>

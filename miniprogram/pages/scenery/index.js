@@ -1,6 +1,7 @@
 //index.js
 const app = getApp()
 const db = wx.cloud.database()
+import { getSingleArr } from '../../util/util'
 Page({
   data: {
     statusBarHeight: 20,
@@ -30,10 +31,14 @@ Page({
 
   onLoad: function () {
     wx.hideTabBar()
+    
+
     this.getCategory()
   },
   onShow: function () {
     if (wx.getStorageSync('selectArr')) {
+      //已选择景点数组去重
+      wx.setStorageSync('selectArr', JSON.stringify(getSingleArr(JSON.parse(wx.getStorageSync('selectArr')))))
       this.setData({
         selectArr: JSON.parse(wx.getStorageSync('selectArr'))
       })
@@ -55,7 +60,7 @@ Page({
     const val = e.detail.value
     this.setData({
       travelHour: this.data.hours[val[0]],
-      hoursIndex:val
+      hoursIndex: val
     })
     console.log(val, this.data.travelHour)
   },
@@ -93,7 +98,7 @@ Page({
   showHours() {
     this.setData({
       hasHour: false,
-      hoursIndex:[this.data.travelHour-1]
+      hoursIndex: [this.data.travelHour - 1]
     })
   },
   //选择景点事件
@@ -281,6 +286,7 @@ Page({
   },
   //点击确认
   confirmScenery: function () {
+
     wx.navigateTo({
       url: './confirmScenery/index'
     })

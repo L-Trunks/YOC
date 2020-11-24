@@ -142,3 +142,19 @@ export const getColor = () => {
     }
     return str;
 }
+
+//数组去重
+export const getSingleArr = (arr)=>{
+    let tempObj = {}
+    let result = []
+
+    arr.map(i => {
+        if (!tempObj[i]) {
+            tempObj[i] = i
+            result.push(i)
+        }
+    })
+
+    console.log(result)
+    return result
+}

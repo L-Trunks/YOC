@@ -20,25 +20,25 @@ Page({
         showPolyLine: [],
         polyline: [],
         allImageItems: [{
-                url: '../../images/scenery/btn1_03.png',
-                isCheck: true
-            },
-            {
-                url: '../../images/scenery/btn2_03.png',
-                isCheck: false
-            },
-            {
-                url: '../../images/scenery/btn3_03.png',
-                isCheck: false
-            },
-            {
-                url: '../../images/scenery/btn4_03.png',
-                isCheck: false
-            },
-            {
-                url: '../../images/scenery/btn5_03.png',
-                isCheck: false
-            }
+            url: '../../images/scenery/btn1_03.png',
+            isCheck: true
+        },
+        {
+            url: '../../images/scenery/btn2_03.png',
+            isCheck: false
+        },
+        {
+            url: '../../images/scenery/btn3_03.png',
+            isCheck: false
+        },
+        {
+            url: '../../images/scenery/btn4_03.png',
+            isCheck: false
+        },
+        {
+            url: '../../images/scenery/btn5_03.png',
+            isCheck: false
+        }
         ],
         imageItems: [],
         nowHotel: [],
@@ -54,10 +54,30 @@ Page({
         hotelList: [],
         isPlan: false,
         datumScenery: {}, //基准景点,用于系统推荐周围最近的景点
-        showTips:false,
-        showDay:false
+        showTips: false,
+        showDay: false,
+        guidePage1: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/dravel_page1@3x.png',
+        guidePage2: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/dravel_page2@3x.png',
+        guidePage3: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/dravel_page3@3x.png',
+        showPage1: false,
+        showPage2: false,
+        showPage3: false,
     },
-    onLoad: function(options) {
+    onLoad: function (options) {
+        console.log(wx.getStorageSync('dravelPage'))
+        if (wx.getStorageSync('dravelPage') && wx.getStorageSync('dravelPage')) {
+            this.setData({
+              showPage1: false,
+              showPage2: false,
+              showPage3: false,
+            })
+          }else{
+            this.setData({
+                showPage1: true,
+                showPage2: false,
+                showPage3: false,
+              })
+          }
         // this.setLocation()
         // wx.cloud.callFunction({
         //     name: 'getSceneryLocation',
@@ -108,18 +128,49 @@ Page({
         // }
 
     },
-    changeTipsStatus(){
+    //引导页
+    onClickPage1() {
         this.setData({
-            showTips:!this.data.showTips
+            showPage1: false,
+            showPage2: true,
+            showPage3: false,
         })
     },
-    onClickShowDay(){
+    onClickPage2() {
         this.setData({
-            showDay:!this.data.showDay
+            showPage1: false,
+            showPage2: false,
+            showPage3: true,
+        })
+    },
+    onClickPage3() {
+        wx.setStorageSync('dravelPage', 1)
+        this.setData({
+            showPage1: false,
+            showPage2: false,
+            showPage3: false,
+        })
+    },
+    //查看引导
+    showGuidePageShow(){
+        this.setData({
+            showPage1:true
+        })
+    },
+    //改变提示状态
+    changeTipsStatus() {
+        this.setData({
+            showTips: !this.data.showTips
+        })
+    },
+    
+    onClickShowDay() {
+        this.setData({
+            showDay: !this.data.showDay
         })
     },
     //点击顶部按钮
-    onClickTopBtn: function(e) {
+    onClickTopBtn: function (e) {
         let id = e.currentTarget.dataset.id
         let idMap = {
             '0': true,
@@ -150,7 +201,7 @@ Page({
         }
     },
     //点击形成方案
-    onClickPlan: function(e) {
+    onClickPlan: function (e) {
         let _this = this
         _this.setData({
             isPlan: !_this.data.isPlan
@@ -253,13 +304,13 @@ Page({
         }
     },
     //设置中间坐标
-    setLocation: function(address) {
+    setLocation: function (address) {
         let _this = this
-            //调用地址解析接口
+        //调用地址解析接口
         qqmapsdk.geocoder({
             //获取表单传入地址
             address: address || '西安市', //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
-            success: function(res) { //成功后的回调
+            success: function (res) { //成功后的回调
                 console.log(res);
                 let result = res.result;
                 let latitude = result.location.lat;
@@ -271,16 +322,16 @@ Page({
                     }
                 })
             },
-            fail: function(error) {
+            fail: function (error) {
                 console.error(error);
             },
-            complete: function(res) {
+            complete: function (res) {
                 console.log(res);
             }
         })
     },
     //初始化用户信息
-    initUserData: function() {
+    initUserData: function () {
         let _this = this
         db.collection('user').where({ _openid: app.globalData.openid }).get().then(res => {
             // res.data 包含该记录的数据
@@ -337,7 +388,7 @@ Page({
     //   });
     // },
     //点击景点
-    onClickMarker: function(e) {
+    onClickMarker: function (e) {
         console.log(e)
         let id = e.markerId
         let _this = this
@@ -422,7 +473,7 @@ Page({
         })
     },
     //点击旁边图片items
-    onClickImageItem: function(e) {
+    onClickImageItem: function (e) {
         let index = e.currentTarget.dataset.index
         this.setData({
             [`imageItems[${index}].isCheck`]: true
@@ -453,12 +504,12 @@ Page({
             }
         })
         this.setData({
-            showDay:false
+            showDay: false
         })
         console.log(this.data.showPolyLine, tempPolyLine, this.data.polyline)
     },
     //计算天数
-    calDays: function(travelInfo) {
+    calDays: function (travelInfo) {
         let days = dateDiff(travelInfo.goDate, travelInfo.arriveDate) + 1
         let colorArr = []
         for (let i = 0; i < days; i++) {
@@ -470,7 +521,7 @@ Page({
                 url: '../../images/scenery/btn1_03.png',
                 isCheck: false,
                 color: i,
-                index: `第${j+1}天`
+                index: `第${j + 1}天`
             })
         })
         let [...lineItems] = colorArr
@@ -484,20 +535,20 @@ Page({
         })
     },
     //获取已选择景点详情并初始化
-    initSceneryList: function() {
+    initSceneryList: function () {
         let idArr = this.data.travelInfo.selectArr
         let _this = this
         wx.showLoading({
             title: '加载中'
         })
         db.collection('scenery').where({
-                _id: _.in(idArr)
-            })
+            _id: _.in(idArr)
+        })
             .get({
                 success: (res) => {
                     console.log('景点数据', res.data)
                     let markers = []
-                    
+
                     markers = res.data.map((i, j) => {
                         return {
                             ...i,
@@ -551,7 +602,7 @@ Page({
             })
     },
     //删除路线
-    removeTravelInfo: function() {
+    removeTravelInfo: function () {
         let _this = this
         if (!_this.data.travelPlan[_this.data.nowIndex] || _this.data.travelPlan[_this.data.nowIndex].length === 0) {
             wx.showToast({
@@ -585,7 +636,7 @@ Page({
         });
     },
     //点击下一步
-    enterTravelPlan: function() {
+    enterTravelPlan: function () {
         let _this = this
         let allowNext = true //所有景点是否已选择
         let [...tempMarkers] = _this.data.markers
@@ -599,22 +650,22 @@ Page({
         let [...imageItems] = _this.data.imageItems
         console.log(travelPlan)
         let noTravelArr = []
-            // let noHotelArr = []
+        // let noHotelArr = []
         Array.from(imageItems, (i, j) => {
-                if (!travelPlan[j] || !travelPlan[j].sceneryInfo || travelPlan[j].sceneryInfo.length <= 0) {
-                    noTravelArr.push(j + 1)
-                }
-                // if (travelPlan[j] && travelPlan[j].sceneryInfo && travelPlan[j].sceneryInfo.length > 0 && JSON.stringify(travelPlan[j].hotelInfo) === '{}') {
-                //   noHotelArr.push(j + 1)
-                // }
-            })
-            // if (noHotelArr.length > 0) {
-            //   wx.showToast({
-            //     title: `第${noHotelArr.join(',')}天酒店未选择`,
-            //     icon: 'none'
-            //   })
-            //   return
+            if (!travelPlan[j] || !travelPlan[j].sceneryInfo || travelPlan[j].sceneryInfo.length <= 0) {
+                noTravelArr.push(j + 1)
+            }
+            // if (travelPlan[j] && travelPlan[j].sceneryInfo && travelPlan[j].sceneryInfo.length > 0 && JSON.stringify(travelPlan[j].hotelInfo) === '{}') {
+            //   noHotelArr.push(j + 1)
             // }
+        })
+        // if (noHotelArr.length > 0) {
+        //   wx.showToast({
+        //     title: `第${noHotelArr.join(',')}天酒店未选择`,
+        //     icon: 'none'
+        //   })
+        //   return
+        // }
         wx.showModal({
             title: '提示',
             content: '确定使用该行程计划吗？',
@@ -674,7 +725,7 @@ Page({
         });
     },
     //使用系统推荐行程
-    useSystemTravel: function(type) {
+    useSystemTravel: function (type) {
         wx.showLoading()
         let _this = this
         let allSceneryIsSelect = true //所有景点是否已选择
@@ -729,7 +780,7 @@ Page({
                         _this.data.travelInfo.selectArr = selectArr
                         console.log('选择景点id列表', _this.data.travelInfo.selectArr)
                         wx.setStorageSync('selectArr', JSON.stringify(selectArr))
-                            //设置markers
+                        //设置markers
                         let markers = []
 
                         markers = systemScenery.map((i, j) => {
@@ -778,7 +829,7 @@ Page({
                         systemScenery = [...systemScenery, ...unSelectScenery]
                         console.log('未制定行程的景点', systemScenery)
                         wx.hideLoading()
-                            //根据天数制定行程
+                        //根据天数制定行程
                         _this.systemPlan(noTravelArr, systemScenery, suggestNumber, type)
                     }
                     wx.hideLoading();
@@ -786,13 +837,13 @@ Page({
             })
         } else {
             systemScenery = [...systemScenery, ...unSelectScenery]
-                //根据天数制定行程
+            //根据天数制定行程
             _this.systemPlan(noTravelArr, systemScenery, suggestNumber, type)
         }
 
     },
     //保存用户行程
-    saveTravel: function() {
+    saveTravel: function () {
         let _this = this
         console.log('用户行程信息', _this.data.travelPlan)
         db.collection('user').where({ _openid: app.globalData.openid }).update({
@@ -831,23 +882,23 @@ Page({
         let tempMarkers = []
 
         Array.from(tempPlan, (i, j) => {
-                i && i.sceneryInfo && i.sceneryInfo.length > 0 ? Array.from(i.sceneryInfo, k => {
-                    let points = polyLine[j] && polyLine[j].points && polyLine[j].points || []
-                    points.push({
-                        latitude: k.location.lat || '',
-                        longitude: k.location.lon || '',
-                    })
-                    polyLine[j] = {
-                        points: points,
-                        color: _this.data.lineColorMap[j],
-                        width: 8,
-                    }
-                    tempMarkers.push(k)
-                }) : polyLine[j] = {
-                    points: [],
+            i && i.sceneryInfo && i.sceneryInfo.length > 0 ? Array.from(i.sceneryInfo, k => {
+                let points = polyLine[j] && polyLine[j].points && polyLine[j].points || []
+                points.push({
+                    latitude: k.location.lat || '',
+                    longitude: k.location.lon || '',
+                })
+                polyLine[j] = {
+                    points: points,
+                    color: _this.data.lineColorMap[j],
+                    width: 8,
                 }
-            })
-            //初始化
+                tempMarkers.push(k)
+            }) : polyLine[j] = {
+                points: [],
+            }
+        })
+        //初始化
         _this.setData({
             nowDay: 1,
             nowIndex: 0,
@@ -884,7 +935,7 @@ Page({
         wx.hideLoading()
     },
     //获取openid
-    onGetUserInfo: function() {
+    onGetUserInfo: function () {
         let _this = this
         if (app.globalData.openid) {
             _this.initUserData()

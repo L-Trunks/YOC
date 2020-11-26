@@ -1,4 +1,5 @@
 {
   "usingComponents": {
+    "guidePage": "../../../components/guidePage/index"
   }
 }

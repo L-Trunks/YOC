@@ -57,20 +57,23 @@ Component({
         return
       } else if (this.data.activeIdx === 0) {
         if (idx === 1) {
-          wx.showModal({
-            title: '提示',
-            content: '确定使用该行程吗？',
-            success(res) {
-              if (res.confirm) {
-                _this.updateUserTravelInfo(JSON.parse(wx.getStorageSync('travelInfo')))
-                wx.switchTab({
-                  url: `/${path}`,
-                })
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-            }
+          wx.switchTab({
+            url: `/${path}`,
           })
+          // wx.showModal({
+          //   title: '提示',
+          //   content: '确定使用该行程吗？',
+          //   success(res) {
+          //     if (res.confirm) {
+          //       _this.updateUserTravelInfo(JSON.parse(wx.getStorageSync('travelInfo')))
+          //       wx.switchTab({
+          //         url: `/${path}`,
+          //       })
+          //     } else if (res.cancel) {
+          //       console.log('用户点击取消')
+          //     }
+          //   }
+          // })
         } else if (idx === 2) {
           wx.switchTab({
             url: `/${path}`,
@@ -78,19 +81,22 @@ Component({
         }
       } else if (this.data.activeIdx === 1) {
         if (idx === 0) {
-          wx.showModal({
-            title: '提示',
-            content: '确定重新选择行程吗？',
-            success(res) {
-              if (res.confirm) {
-                wx.switchTab({
-                  url: `/${path}`,
-                })
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-            }
+          wx.switchTab({
+            url: `/${path}`,
           })
+          // wx.showModal({
+          //   title: '提示',
+          //   content: '确定重新选择行程吗？',
+          //   success(res) {
+          //     if (res.confirm) {
+          //       wx.switchTab({
+          //         url: `/${path}`,
+          //       })
+          //     } else if (res.cancel) {
+          //       console.log('用户点击取消')
+          //     }
+          //   }
+          // })
         } else if (idx === 2) {
           wx.switchTab({
             url: `/${path}`,
@@ -98,19 +104,22 @@ Component({
         }
       } else if (this.data.activeIdx === 2) {
         if (idx === 0) {
-          wx.showModal({
-            title: '提示',
-            content: '确定重新选择行程吗？',
-            success(res) {
-              if (res.confirm) {
-                wx.switchTab({
-                  url: `/${path}`,
-                })
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-            }
+          wx.switchTab({
+            url: `/${path}`,
           })
+          // wx.showModal({
+          //   title: '提示',
+          //   content: '确定重新选择行程吗？',
+          //   success(res) {
+          //     if (res.confirm) {
+          //       wx.switchTab({
+          //         url: `/${path}`,
+          //       })
+          //     } else if (res.cancel) {
+          //       console.log('用户点击取消')
+          //     }
+          //   }
+          // })
         } else if (idx === 1) {
           wx.switchTab({
             url: `/${path}`,

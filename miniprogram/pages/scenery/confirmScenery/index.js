@@ -11,10 +11,21 @@ Page({
     hours: 0,
     scrollDir: true,
     adviseHours: 0,
-    days: 0
+    days: 0,
+    guidePage: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/scenery_page2@3x.png',
+    showPage: false,
   },
 
   onLoad: function () {
+    if (wx.getStorageSync('csPage') && wx.getStorageSync('csPage')) {
+      this.setData({
+        showPage: false
+      })
+    }else{
+      this.setData({
+        showPage: true
+      })
+    }
     console.log('全局', app.globalData)
     console.log('本地缓存中的游玩时间', wx.getStorageSync('travelHour'))
     console.log('本地缓存中的已选景点', wx.getStorageSync('selectArr'))
@@ -143,5 +154,12 @@ Page({
       });
       return
     }
-  }
+  },
+    //引导页
+    onClickPage() {
+      wx.setStorageSync('csPage', 1)
+      this.setData({
+        showPage: false
+      })
+    },
 })

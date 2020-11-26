@@ -20,13 +20,19 @@ Page({
     goDate: '',//开始时间
     endDate: '',//选择器截止时间
     arriveDate: '',//结束时间
+    guidePage1: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/index_page1@3x.png',
+    guidePage2: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/index_page2@3x.png',
+    showPage1: false,
+    showPage2: false
   },
 
   onLoad: function () {
+
     wx.hideTabBar()
     let _this = this.data
     let now = new Date()
     let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
+    
     this.setData({
       nowDate: formatDateTime(now, 'yy-mm-dd'),
       goDate: formatDateTime(now, 'yy-mm-dd'),
@@ -44,6 +50,17 @@ Page({
     }
     app.globalData.travelInfo = travelInfo
     wx.setStorageSync('travelInfo', JSON.stringify(travelInfo))
+    if (wx.getStorageSync('indexPage') && wx.getStorageSync('indexPage')) {
+      this.setData({
+        showPage1: false,
+        showPage2: false
+      })
+    }else{
+      this.setData({
+        showPage1: true,
+        showPage2: false
+      })
+    }
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -232,6 +249,7 @@ Page({
   //获取openid
   onGetOpenid: function () {
     // 调用云函数
+    let _this = this
     wx.cloud.callFunction({
       name: 'login',
       data: {},
@@ -242,6 +260,11 @@ Page({
           // res.data 包含该记录的数据
           console.log(res.data)
           if (res.data && res.data.length > 0) {
+            wx.setStorageSync('indexPage', 1)
+            _this.setData({
+              showPage1: false,
+              showPage2: false
+            })
             console.log('用户已存在，不再存入数据库')
             if (res.data[0].travelInfo) {
               if (res.data[0].travelInfo.selectArr && res.data[0].travelInfo.selectArr.length > 0) {
@@ -277,6 +300,10 @@ Page({
               }
             }
           } else {
+            _this.setData({
+              showPage1: true,
+              showPage2: false
+            })
             this.createUser()
           }
         })
@@ -286,6 +313,18 @@ Page({
       }
     })
   },
-
-
+  //引导页
+  onClickPage1() {
+    this.setData({
+      showPage1: false,
+      showPage2: true
+    })
+  },
+  onClickPage2() {
+    wx.setStorageSync('indexPage', 1)
+    this.setData({
+      showPage1: false,
+      showPage2: false
+    })
+  }
 })

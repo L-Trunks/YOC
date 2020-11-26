@@ -122,4 +122,6 @@
 </view>
 </view>
 <tabbar activeIdx="{{activeIdx}}" />
-
+<guidePage url="{{guidePage}}" wx:if="{{showPage}}">
+	<cover-view class="guidebtn" catchtap="onClickPage" scroll-top="0" />
+</guidePage>

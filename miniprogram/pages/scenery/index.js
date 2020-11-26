@@ -26,13 +26,19 @@ Page({
     travelHour: 0,
     hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     hasHour: false,
-    selectArr: []
+    selectArr: [],
+    guidePage: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/scenery_page1@3x.png',
+    showPage: false,
+
   },
 
   onLoad: function () {
     wx.hideTabBar()
-    
-
+    if (wx.getStorageSync('sceneryPage') && wx.getStorageSync('sceneryPage')) {
+      this.setData({
+        showPage: false
+      })
+    }
     this.getCategory()
   },
   onShow: function () {
@@ -77,6 +83,15 @@ Page({
       this.setData({
         hasHour: true
       })
+      if (wx.getStorageSync('sceneryPage') && wx.getStorageSync('sceneryPage')) {
+        this.setData({
+          showPage: false
+        })
+      }else{
+        this.setData({
+          showPage: true
+        })
+      }
     }
   },
   //选择时间下一步事件
@@ -92,6 +107,15 @@ Page({
       this.setData({
         hasHour: true
       })
+      if (wx.getStorageSync('sceneryPage') && wx.getStorageSync('sceneryPage')) {
+        this.setData({
+          showPage: false
+        })
+      }else{
+        this.setData({
+          showPage: true
+        })
+      }
     }
   },
   //打开时间选择
@@ -312,5 +336,11 @@ Page({
       }
     }).exec()
   },
-
+  //引导页
+  onClickPage() {
+    wx.setStorageSync('sceneryPage', 1)
+    this.setData({
+      showPage: false
+    })
+  },
 })

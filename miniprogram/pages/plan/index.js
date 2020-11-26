@@ -14,9 +14,20 @@ Page({
     days: 0,
     leftBgColor: ['#A9EDEE', '#F6EAAE'],
     rightBgColor: ['#EEC0AB', '#BBF5CF'],
+    guidePage: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/plan_page1@3x.png',
+    showPage: false,
   },
 
   onLoad: function () {
+    if (wx.getStorageSync('planPage') && wx.getStorageSync('planPage')) {
+      this.setData({
+        showPage: false
+      })
+    } else {
+      this.setData({
+        showPage: true
+      })
+    }
     wx.hideTabBar()
     //计算总天数
     this.calDays()
@@ -32,6 +43,13 @@ Page({
   },
   onShow() {
     this.onGetUserInfo()
+  },
+  //引导页
+  onClickPage() {
+    wx.setStorageSync('planPage', 1)
+    this.setData({
+      showPage: false,
+    })
   },
   initUserData() {
     let _this = this
@@ -51,10 +69,10 @@ Page({
         _this.formatItem()
         wx.hideLoading();
 
-      }else{
+      } else {
         wx.showToast({
-          title:"未查询到您的记录哦，快去制定行程计划吧~",
-          icon:'none'
+          title: "未查询到您的记录哦，快去制定行程计划吧~",
+          icon: 'none'
         })
         wx.hideLoading();
       }
@@ -99,11 +117,11 @@ Page({
     });
   },
   //保存行程
-  saveTravel(){
+  saveTravel() {
 
   },
   //进入计划详情
-  goPlanDetail(e){
+  goPlanDetail(e) {
     console.log(e)
     let index = e.currentTarget.dataset.index
     wx.navigateTo({

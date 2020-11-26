@@ -318,3 +318,11 @@
     margin: 0 20rpx;
     background: #f5f5f5;
 }
+
+.guidebtn{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 800rpx;
+}

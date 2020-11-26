@@ -86,19 +86,24 @@
     color: #fff;
 }
 
-.btn_remove {
+.btn_remove,.btn_show {
     position: fixed;
     z-index: 1;
     right: 44rpx;
     bottom: 88rpx;
 }
-
-.btn_remove_view {
+.btn_show{
+    left: 44rpx;
+    right: auto;
+}
+.btn_remove_view,.btn_show_view {
     padding: 10rpx 20rpx;
     border-radius: 10rpx;
     background: #f04f48;
 }
-
+.btn_show_view{
+    background: #6fb5f3;
+}
 .tipsBtn{
     position: fixed;
     top: 40rpx;

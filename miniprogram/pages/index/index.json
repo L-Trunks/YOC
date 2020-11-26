@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "tabbar": "../../components/navbar/index"
+    "tabbar": "../../components/navbar/index",
+    "guidePage": "../../components/guidePage/index"
   }
 }

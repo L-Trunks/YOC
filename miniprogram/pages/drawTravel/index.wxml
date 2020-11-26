@@ -167,5 +167,29 @@
 			删除路线
 		</cover-view>
 	</cover-view>
+		<cover-view
+	 catchtap=""
+	 class="flex j_center txt_24 txt_fff btn_show"
+	 hover-class="none"
+	 hover-stop-propagation="false"
+	>
+		<cover-view
+		 catchtap="showGuidePageShow"
+		 class="btn_show_view"
+		 hover-class="none"
+		 hover-stop-propagation="false"
+		>
+			查看引导
+		</cover-view>
+	</cover-view>
 </view>
 
+<guidePage url="{{guidePage1}}" wx:if="{{showPage1}}">
+	<cover-view class="guidebtn" catchtap="onClickPage1" scroll-top="0" />
+</guidePage>
+<guidePage url="{{guidePage2}}" wx:if="{{showPage2}}">
+	<cover-view class="guidebtn" catchtap="onClickPage2" scroll-top="0" />
+</guidePage>
+<guidePage url="{{guidePage3}}" wx:if="{{showPage3}}">
+	<cover-view class="guidebtn" catchtap="onClickPage3" scroll-top="0" />
+</guidePage>

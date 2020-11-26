@@ -142,8 +142,8 @@
 	</view>
 	<image catchtap="showHours" class="show_lock" src="../../images/scenery/lock_07.png" />
 </view>
-<guidePage url="{{guidePage}}" wx:if="{{showPage}}">
-	<cover-view class="guidebtn" catchtap="onClickPage" scroll-top="0" />
+<guidePage url="{{guidePage}}" catchtap="onClickPage" wx:if="{{showPage}}">
+	<cover-view class="guidebtn" scroll-top="0" />
 </guidePage>
 <tabbar activeIdx="{{activeIdx}}" />
 

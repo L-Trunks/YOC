@@ -325,4 +325,5 @@
     right: 0;
     bottom: 0;
     top: 800rpx;
+    z-index: 4;
 }

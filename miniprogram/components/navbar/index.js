@@ -57,6 +57,7 @@ Component({
         return
       } else if (this.data.activeIdx === 0) {
         if (idx === 1) {
+          _this.updateUserTravelInfo(JSON.parse(wx.getStorageSync('travelInfo')))
           wx.switchTab({
             url: `/${path}`,
           })

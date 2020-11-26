@@ -22,11 +22,6 @@ Page({
   },
 
   onLoad: function () {
-    let isClear = wx.getStorageSync('isClear') && +wx.getStorageSync('isClear') || 0
-    if(!isClear){
-      wx.clearStorageSync()
-      wx.setStorageSync('isClear', 1)
-    }
     let count = wx.getStorageSync('count') && +wx.getStorageSync('count') || 0
     wx.setStorageSync('count', count + 1)
     if (count > 0) {

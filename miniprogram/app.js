@@ -15,8 +15,17 @@ App({
       })
     }
 
+
     // this.globalData = {}
 
+  }, onShow() {
+    let isClear = wx.getStorageSync('isClear') && +wx.getStorageSync('isClear') || 0
+    console.log('缓存状态',isClear)
+    if (!isClear) {
+      wx.clearStorageSync()
+      console.log('缓存清除')
+      wx.setStorageSync('isClear', 1)
+    }
   },
   globalData: {
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],

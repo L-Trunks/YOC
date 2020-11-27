@@ -62,22 +62,25 @@ Page({
         showPage1: false,
         showPage2: false,
         showPage3: false,
+        isShowBtn: true
     },
     onLoad: function (options) {
         console.log(wx.getStorageSync('dravelPage'))
         if (wx.getStorageSync('dravelPage') && wx.getStorageSync('dravelPage')) {
             this.setData({
-              showPage1: false,
-              showPage2: false,
-              showPage3: false,
+                showPage1: false,
+                showPage2: false,
+                showPage3: false,
+                isShowBtn: true
             })
-          }else{
+        } else {
             this.setData({
                 showPage1: true,
                 showPage2: false,
                 showPage3: false,
-              })
-          }
+                isShowBtn: false
+            })
+        }
         // this.setLocation()
         // wx.cloud.callFunction({
         //     name: 'getSceneryLocation',
@@ -149,12 +152,14 @@ Page({
             showPage1: false,
             showPage2: false,
             showPage3: false,
+            isShowBtn: true
         })
     },
     //查看引导
-    showGuidePageShow(){
+    showGuidePageShow() {
         this.setData({
-            showPage1:true
+            showPage1: true,
+            isShowBtn: false
         })
     },
     //改变提示状态
@@ -163,7 +168,7 @@ Page({
             showTips: !this.data.showTips
         })
     },
-    
+
     onClickShowDay() {
         this.setData({
             showDay: !this.data.showDay

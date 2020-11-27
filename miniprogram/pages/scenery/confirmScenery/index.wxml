@@ -73,5 +73,5 @@
 
 </view>
 <guidePage url="{{guidePage}}" catchtap="onClickPage" wx:if="{{showPage}}">
-	<cover-view class="guidebtn" scroll-top="0" />
+	
 </guidePage>

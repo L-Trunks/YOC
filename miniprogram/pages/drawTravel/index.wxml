@@ -51,6 +51,7 @@
 		</block>
 	</cover-view> -->
 	<cover-image
+	wx:if="{{isShowBtn}}"
 	 class="tipsBtn"
 	 src="{{showTips?'../../images/scenery/heart_uncheck.png':'../../images/scenery/add_blue@3x.png'}}"
 	 mode="aspectFit|aspectFill|widthFix"
@@ -83,7 +84,7 @@
 			</cover-view>
 		</cover-view>
 	</cover-view>
-	<cover-view class="dayItems flex column txt_24" scroll-top="0">
+	<cover-view wx:if="{{isShowBtn}}" class="dayItems flex column txt_24" scroll-top="0">
 		<cover-view
 		 class="dayItem flex j_start"
 		 bindtap='onClickShowDay'
@@ -123,7 +124,7 @@
 	 circles="{{circles}}"
 	 layer-style='1'
 	/>
-	<cover-view class="dt_left_btn flex column txt_28 txt_medium" scroll-top="0">
+	<cover-view wx:if="{{isShowBtn}}" class="dt_left_btn flex column txt_28 txt_medium" scroll-top="0">
 		<cover-view
 		 bindtap='onClickPlan'
 		 data-id="0"
@@ -141,7 +142,7 @@
 			隐藏线路
 		</cover-view>
 	</cover-view>
-	<cover-view class="btn_next_view flex j_center" hover-class="none" hover-stop-propagation="false">
+	<cover-view wx:if="{{isShowBtn}}" class="btn_next_view flex j_center" hover-class="none" hover-stop-propagation="false">
 		<cover-view
 		 catchtap="enterTravelPlan"
 		 class="main_bg btn_next"
@@ -154,6 +155,7 @@
 	</cover-view>
 	<cover-view
 	 catchtap=""
+	 wx:if="{{isShowBtn}}"
 	 class="flex j_center txt_24 txt_fff btn_remove"
 	 hover-class="none"
 	 hover-stop-propagation="false"
@@ -169,6 +171,7 @@
 	</cover-view>
 		<cover-view
 	 catchtap=""
+	 wx:if="{{isShowBtn}}"
 	 class="flex j_center txt_24 txt_fff btn_show"
 	 hover-class="none"
 	 hover-stop-propagation="false"
@@ -185,11 +188,11 @@
 </view>
 
 <guidePage url="{{guidePage1}}" catchtap="onClickPage1" wx:if="{{showPage1}}">
-	<cover-view class="guidebtn" scroll-top="0" />
+	
 </guidePage>
 <guidePage url="{{guidePage2}}" catchtap="onClickPage2" wx:if="{{showPage2}}">
-	<cover-view class="guidebtn" scroll-top="0" />
+	
 </guidePage>
 <guidePage url="{{guidePage3}}" catchtap="onClickPage3" wx:if="{{showPage3}}">
-	<cover-view class="guidebtn" scroll-top="0" />
+	
 </guidePage>

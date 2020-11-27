@@ -300,10 +300,10 @@ Page({
               }
             }
           } else {
-            _this.setData({
-              showPage1: true,
-              showPage2: false
-            })
+            // _this.setData({
+            //   showPage1: true,
+            //   showPage2: false
+            // })
             this.createUser()
           }
         })

@@ -15,4 +15,5 @@
     right: 0;
     bottom: 0;
     width: 750rpx;
+    height: auto;
 }

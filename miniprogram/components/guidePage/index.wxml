@@ -1,6 +1,6 @@
-<cover-view class="guide_page" wx:if="{{show}}" scroll-top="0">
-    <cover-image class="image" src="{{url}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+<view class="guide_page" wx:if="{{show}}" scroll-top="0">
+    <image class="image" src="{{url}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
     <slot />
       
-</cover-view>
+</view>
   

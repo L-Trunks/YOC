@@ -154,7 +154,7 @@ Page({
       }
     }
 
-    Array.from(userData.travelPlan, (i, j) => {
+    Array.from(userData.travelPlan ||[], (i, j) => {
       if (j % 2 === 0) {
         left.push({
           ...i,

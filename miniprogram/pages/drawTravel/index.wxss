@@ -139,7 +139,7 @@
 .dayItems{
     position: fixed;
     top: 40rpx;
-    right: 170rpx;
+    right: 70rpx;
     z-index: 1;
     background: rgba(0, 0, 0, .3);
     border-radius: 10rpx;

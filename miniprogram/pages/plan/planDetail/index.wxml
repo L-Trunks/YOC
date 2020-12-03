@@ -48,7 +48,13 @@
 					/>
 					{{item.distance}}km
 				</view> -->
-			<view class="pd_item txt_333 txt_30 txt_bold flex j_start" hover-class="none" hover-stop-propagation="false">
+			<view
+			 catchtap="goSceneryDetail"
+			 data-id='{{item._id}}'
+			 class="pd_item txt_333 txt_30 txt_bold flex j_start"
+			 hover-class="none"
+			 hover-stop-propagation="false"
+			>
 				<!--<image
 					 class="pd_item_down_icon"
 					 src="../../../images/plan/scenery_icon_03@3x.png"
@@ -72,21 +78,23 @@
 						 lazy-load="false"
 						 binderror=""
 						 bindload=""
-						 catchtap="goSceneryDetail"
-						 data-id='{{item._id}}'
 						/>
 					</view>
 				</view>
 			</view>
 		</block>
 	</view>
-	<image class="pd_bg" src="../../../images/plan/plan_bg@3x.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
-	  
+	<image
+	 class="pd_bg"
+	 src="../../../images/plan/plan_bg@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+
 </view>
 
-<guidePage url="{{guidePage1}}" catchtap="onClickPage1" wx:if="{{showPage1}}">
-	
-</guidePage>
-<guidePage url="{{guidePage2}}" catchtap="onClickPage2" wx:if="{{showPage2}}">
-	
-</guidePage>
+<guidePage url="{{guidePage1}}" catchtap="onClickPage1" wx:if="{{showPage1}}" />
+<guidePage url="{{guidePage2}}" catchtap="onClickPage2" wx:if="{{showPage2}}" />
+

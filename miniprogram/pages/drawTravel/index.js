@@ -54,7 +54,7 @@ Page({
         hotelList: [],
         isPlan: false,
         datumScenery: {}, //基准景点,用于系统推荐周围最近的景点
-        showTips: false,
+        showTips: true,
         showDay: false,
         guidePage1: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/dravel_page1@3x.png',
         guidePage2: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/dravel_page2@3x.png',
@@ -71,10 +71,12 @@ Page({
                 showPage1: false,
                 showPage2: false,
                 showPage3: false,
-                isShowBtn: true
+                isShowBtn: true,
+                showTips: true,
             })
         } else {
             this.setData({
+                showTips: false,
                 showPage1: true,
                 showPage2: false,
                 showPage3: false,
@@ -152,14 +154,16 @@ Page({
             showPage1: false,
             showPage2: false,
             showPage3: false,
-            isShowBtn: true
+            isShowBtn: true,
+            showTips: true,
         })
     },
     //查看引导
     showGuidePageShow() {
         this.setData({
             showPage1: true,
-            isShowBtn: false
+            isShowBtn: false,
+            showTips: false,
         })
     },
     //改变提示状态
@@ -299,12 +303,20 @@ Page({
             })
         } else {
             let [...temp] = _this.data.polyline
+            _this.data.imageItems.map((i, j) => {
+                _this.setData({
+                    [`imageItems[${j}].isCheck`]: true
+                })
+            })
             _this.setData({
-                showPolyLine: temp.slice(0, 1),
+                showPolyLine: temp,
                 nowIndex: 0,
                 nowDay: 1,
                 nowLine: temp[0] && temp[0].points && temp[0].points || [],
-                [`imageItems[0].isCheck`]: true
+            })
+            wx.showToast({
+                title: '当前编辑天数为第一天',
+                icon: 'none'
             })
         }
     },
@@ -481,14 +493,11 @@ Page({
     onClickImageItem: function (e) {
         let index = e.currentTarget.dataset.index
         this.setData({
-            [`imageItems[${index}].isCheck`]: true
+            [`imageItems[${index}].isCheck`]: true,
+            nowIndex: index,
+            nowDay: index + 1,
+            isShow: false
         })
-        if (this.data.imageItems[index].isCheck) {
-            this.setData({
-                nowIndex: index,
-                nowDay: index + 1
-            })
-        }
         let _this = this
         wx.showToast({
             title: `当前第${_this.data.nowDay}天`,
@@ -496,15 +505,20 @@ Page({
         })
         let [...tempArr] = _this.data.imageItems
         let [...tempPolyLine] = _this.data.polyline
-        Array.from(tempArr, (i, index) => {
-            if (i.isCheck) {
+        for (let i = 0; i < _this.data.days; i++) {
+            _this.setData({
+                [`showPolyLine[${i}]`]: null
+            })
+        }
+        Array.from(tempArr, (i, j) => {
+            if (j === index) {
                 _this.setData({
-                    [`showPolyLine[${index}]`]: tempPolyLine[index] || {},
-                    nowLine: tempPolyLine[index] && tempPolyLine[index].points || []
+                    [`showPolyLine[${j}]`]: tempPolyLine[j] || {},
+                    nowLine: tempPolyLine[j] && tempPolyLine[j].points || []
                 })
             } else {
                 _this.setData({
-                    [`showPolyLine[${index}]`]: {}
+                    [`imageItems[${j}].isCheck`]: false,
                 })
             }
         })
@@ -562,8 +576,8 @@ Page({
                             latitude: i.location.lat,
                             longitude: i.location.lon,
                             iconPath: i.imageUrl && i.imageUrl || '../../images/scenery/noImage.jpg',
-                            width: 48.4,
-                            height: 55.4,
+                            width: 43.6,
+                            height: 50,
                             callout: {
                                 content: i.name || '',
                                 borderRadius: 0,

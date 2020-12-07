@@ -1,3 +1,5 @@
+<import src="../../templates/main.wxml" />
+<template is="goMain" wx:if="{{isFirst}}" />
 <image
  class="travel_bg"
  src="../../images/first/travel_bg@3x.png"
@@ -7,9 +9,7 @@
  bindload=""
 />
 
-<view class="t_container" hover-class="none" hover-stop-propagation="false">
-
-</view>
+<view class="t_container" hover-class="none" hover-stop-propagation="false" />
 <view class="flex j_start a_start t_main" hover-class="none" hover-stop-propagation="false">
 	<view class="t_left">
 		<view class="txt_22 txt_fff txt_bold t_item_height t_select flex j_center" hover-class="none" hover-stop-propagation="false">
@@ -63,17 +63,11 @@
 				<view class="txt_24 txt_bold txt_333">
 					{{item.name}}
 				</view>
-				<view class="t_right_item_bottom flex txt_22 txt_333">
+				<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
 					<view class="">
 						{{item.info}}
 					</view>
-					<view
-					 catchtap='showDetail'
-					 data-index="{{index}}"
-					 class="flex j_end txt_999"
-					 hover-class="none"
-					 hover-stop-propagation="false"
-					>
+					<view class="flex j_end txt_999" hover-class="none" hover-stop-propagation="false">
 						行程简介
 						<image
 						 class=""
@@ -129,6 +123,7 @@
 				 mode="widthFix"
 				 lazy-load="false"
 				 binderror=""
+				 catchtap="showImage"
 				 bindload=""
 				/>
 				<view class="txt_333 txt_24 flex j_center no_travel" wx:if="{{!nowList[selectIndex].detailImg}}">

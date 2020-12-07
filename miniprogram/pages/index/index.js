@@ -12,7 +12,7 @@ Page({
     requestResult: '',
     activeIdx: 0,
     isLogin: false,
-    cityArray: ['西安', '杭州'],
+    cityArray: ['西安'],
     transArray: ['飞机', '火车', '自驾', '客车', '步行', '其他'],
     cityIndex: 0,
     transIndex: 0,

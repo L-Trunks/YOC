@@ -1,7 +1,7 @@
 @import '../../style/base.wxss';
-page {
+/* page {
     padding-top: 160rpx;
-}
+} */
 
 .travel_bg {
     position: absolute;
@@ -28,6 +28,7 @@ page {
 
 .t_main {
     position: relative;
+    top: 160rpx;
 }
 
 .t_left {
@@ -147,7 +148,7 @@ page {
 }
 
 .t_dialog_img {
-    width: 470rpx;
+    width: 610rpx;
 }
 
 .t_eye {
@@ -168,9 +169,8 @@ page {
 }
 
 .t_scroll {
-    width: 470rpx;
+    width: 610rpx;
     height: 884rpx;
     position: relative;
-    left: 70rpx;
     top: 70rpx;
 }

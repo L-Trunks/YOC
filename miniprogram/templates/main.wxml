@@ -6,3 +6,11 @@
 	</view>
 </template>
 
+<template name="goMain">
+	<view class='go_main txt_22 txt_fff flex j_center'>
+
+		点此回到小程序首页
+
+	</view>
+</template>
+

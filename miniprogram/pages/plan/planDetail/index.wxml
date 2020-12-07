@@ -70,7 +70,7 @@
 				<view class="pd_item_article flex a_start column txt_333 txt_24 txt_bold">
 					{{item.name||''}}
 					<view class="flex txt_20 txt_light">
-						{{index===0?'距离当前位置':'距离'+planItems[index-1].name}}{{item.distance}}km
+						{{item.distance && item.distance!=='NaN'?'距离当前位置'+item.distance+'km':'请您打开导航后重新进入本页获取位置信息'}}
 						<image
 						 class=""
 						 src="../../../images/plan/eyes@3x.png"
@@ -85,7 +85,7 @@
 		</block>
 	</view>
 	<image
-	 class="pd_bg"
+	 class="pd_bg {{planItems&&planItems.length&&planItems.length===1?'pd_fix_bg':''}}"
 	 src="../../../images/plan/plan_bg@3x.png"
 	 mode="aspectFit|aspectFill|widthFix"
 	 lazy-load="false"

@@ -26,27 +26,25 @@ Page({
         showPage2: false
     },
 
-    onLoad: function(option) {
+    onLoad: function (option) {
         let _this = this
         if (option && option.index >= 0) {
             this.setData({
                 index: option.index,
                 day: option.index + 1
             })
-
         }
         if (wx.getStorageSync('pdPage') && wx.getStorageSync('pdPage')) {
             this.setData({
-              showPage1: false,
-              showPage2: false
+                showPage1: false,
+                showPage2: false
             })
-          }else{
+        } else {
             this.setData({
-              showPage1: true,
-              showPage2: false
+                showPage1: true,
+                showPage2: false
             })
-          }
-
+        }
     },
     onShow() {
         let _this = this
@@ -67,27 +65,66 @@ Page({
                             _this.getLocation()
                         },
                         fail() {
+                            _this.getUserLocation()
                             _this.getPlan()
-                        }
+                        },
                     })
                 }
             }
         })
     },
-      //引导页
-  onClickPage1() {
-    this.setData({
-      showPage1: false,
-      showPage2: true
-    })
-  },
-  onClickPage2() {
-    wx.setStorageSync('pdPage', 1)
-    this.setData({
-      showPage1: false,
-      showPage2: false
-    })
-  },
+    getUserLocation() {
+        let _this = this
+        wx.showModal({
+            title: '授权',
+            content: '需要使用获取您的当前位置，以便更好地为您服务，请在打开的设置中开启位置权限',
+            showCancel: true,
+            cancelText: '取消',
+            cancelColor: '#000000',
+            confirmText: '确定',
+            confirmColor: '#3CC51F',
+            success: (result) => {
+                if (result.confirm) {
+                    wx.openSetting({
+                        success(res) {
+                            console.log(res.authSetting)
+                            if (res.authSetting['scope.userLocation']) {
+                                _this.getLocation()
+                            } else {
+                                wx.authorize({
+                                    scope: 'scope.userLocation',
+                                    success() {
+                                        _this.getLocation()
+                                    },
+                                    fail() {
+                                        _this.getPlan()
+                                    },
+                                })
+                            }
+                        }
+                    })
+                }
+            },
+            fail: () => { },
+            complete: () => { }
+        });
+
+
+    },
+    //引导页
+    onClickPage1() {
+        this.setData({
+            showPage1: false,
+            showPage2: true
+        })
+    },
+    onClickPage2() {
+        wx.setStorageSync('pdPage', 1)
+        this.setData({
+            showPage1: false,
+            showPage2: false
+        })
+    },
     //获取定位
     getLocation() {
         let _this = this
@@ -103,6 +140,9 @@ Page({
                         accuracy: res.accuracy
                     }
                 })
+                
+            },
+            complete(){
                 _this.getPlan()
             }
         })
@@ -149,7 +189,7 @@ Page({
     //设置地图marker和polyline
     setMap() {
         let _this = this
-        let {...tempPlan } = _this.data.planData
+        let { ...tempPlan } = _this.data.planData
         let markers = []
         let polyLine = [{
             points: [],
@@ -193,23 +233,29 @@ Page({
     formatPlanData() {
         let _this = this
         let planItems = []
-        let {...tempPlan } = _this.data.planData
-        console.log(_this.data.userLocation)
+        let { ...tempPlan } = _this.data.planData
+
         Array.from(tempPlan.sceneryInfo, (i, j) => {
-            if (j === 0) {
-                planItems[j] = {
-                    ...i,
-                    img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
-                    distance: distance(_this.data.userLocation.latitude, _this.data.userLocation.longitude, i.location.lat, i.location.lon)
-                }
-            } else {
-                planItems[j] = {
-                    ...i,
-                    img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
-                    distance: distance(tempPlan.sceneryInfo[j - 1].location.lat, tempPlan.sceneryInfo[j - 1].location.lon, i.location.lat, i.location.lon)
-                }
+            // if (j === 0) {
+            //     planItems[j] = {
+            //         ...i,
+            //         img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
+            //         distance: distance(_this.data.userLocation.latitude, _this.data.userLocation.longitude, i.location.lat, i.location.lon)
+            //     }
+            // } else {
+            //     planItems[j] = {
+            //         ...i,
+            //         img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
+            //         distance: distance(tempPlan.sceneryInfo[j - 1].location.lat, tempPlan.sceneryInfo[j - 1].location.lon, i.location.lat, i.location.lon)
+            //     }
+            // }
+            planItems[j] = {
+                ...i,
+                img: i.imageUrl && i.imageUrl || '../../../images/scenery/noImage.jpg',
+                distance: distance(_this.data.userLocation.latitude, _this.data.userLocation.longitude, i.location.lat, i.location.lon) || ''
             }
         })
+        console.log(_this.data.userLocation, planItems)
         _this.setData({
             planItems: planItems
         })

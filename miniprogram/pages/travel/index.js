@@ -7,22 +7,40 @@ Page({
         nowList: [],
         nowId: '',
         travelIndex: 0,
-        selectIndex: 0
+        selectIndex: 0,
+        isFirst:true
     },
 
-    onLoad: function() {
+    onLoad: function () {
+        
         this.getTravelInfo()
     },
-    onShow: function() {
+    onShow: function () {
+        let count = wx.getStorageSync('travelCount') && +wx.getStorageSync('travelCount') || 0
+        wx.setStorageSync('travelCount', count + 1)
+        if (count > 0) {
+            console.log('非首次进入周边游')
+        //   this.setData({
+        //       isFirst:false
+        //   })
+        }
         let value = wx.getLaunchOptionsSync()
         console.log(value)
+    },
+    showImage() {
+        let _this = this
+        wx.previewImage({
+            showmenu:true,
+            current: _this.data.showImage, // 当前显示图片的http链接
+            urls: [_this.data.showImage,] // 需要预览的图片http链接列表
+        })
     },
     getTravelInfo() {
         wx.showLoading({
             title: '加载中'
         });
         let _this = this
-            //获取周边游列表
+        //获取周边游列表
         db.collection('hz_travel').where({}).get().then(res => {
             // res.data 包含该记录的数据
             console.log('周边游列表', res.data)

@@ -47,7 +47,7 @@ Page({
         }
         db.collection('hz_user')
             .add({
-                data: {...data }
+                data: {...data, goDate: _this.data.goDate  }
             }).then(res => {
                 console.log(res)
                 if (res._id) {

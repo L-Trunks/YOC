@@ -1,4 +1,4 @@
-// zh_tcwq/pubcoms/navbar/navbar.js
+// components/navbar/index.js
 import tabbarList from "../../config/router.js"
 const app = getApp();
 Component({

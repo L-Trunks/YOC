@@ -1,3 +1,5 @@
+<import src="../../templates/main.wxml" />
+<template is="goMain" wx:if="{{isFirst}}" />
 <view class="t_container" hover-class="none" hover-stop-propagation="false">
 	<image
 	 class="t_logo"
@@ -78,6 +80,7 @@
 						<view class="txt_24 txt_bold txt_333">
 							{{item.name}}
 						</view>
+						<text class="txt_22 txt_bold txt_price">{{item.price&&item.price+'元'}}</text>
 						<view class='flex'>
 							<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
 								<text class="">{{item.info}}</text>
@@ -126,6 +129,7 @@
 						<view class="txt_24 txt_bold txt_333">
 							{{item.name}}
 						</view>
+						<text class="txt_22 txt_bold txt_price">{{item.price&&item.price+'元'}}</text>
 						<view class='flex'>
 							<view catchtap='showDetail' data-index="{{index}}" class="t_right_item_bottom flex txt_22 txt_333">
 								<text class="">{{item.info}}</text>
@@ -191,6 +195,7 @@
 				 class="t_dialog_img"
 				 src="{{isShow?showImage:''}}"
 				 mode="widthFix"
+				 catchtap="showImage"
 				 lazy-load="false"
 				 binderror=""
 				 bindload=""

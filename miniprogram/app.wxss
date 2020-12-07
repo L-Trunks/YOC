@@ -2,3 +2,23 @@ page{
     overflow-y: scroll;
     
 }
+.go_main{
+    background: #f04f48;
+    border-radius: 15rpx;
+    position: fixed;
+    top: 10rpx;
+    left: 10rpx;
+    padding: 10rpx;
+    z-index: 99;
+}
+
+.go_main::before{
+    content: '';
+    position: fixed;
+    border-top: solid 10rpx transparent;
+    border-left: solid 10rpx transparent;
+    border-right: solid 10rpx transparent;
+    border-bottom: solid 10rpx #f04f48;
+    top: -6rpx;
+    left: 40rpx;
+}

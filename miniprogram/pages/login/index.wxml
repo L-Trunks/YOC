@@ -1,0 +1,34 @@
+<view class="l_main" hover-class="none" hover-stop-propagation="false">
+	<image
+	 class="l_main_top"
+	 src="../../images/first/travel_bg@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+	<view class="flex column txt_666 txt_20 txt_medium user_login">
+		<image
+		 class="no_login"
+		 src="{{avatarUrl&&avatarUrl||'../../images/first/no_login.png'}}"
+		 mode="aspectFit|aspectFill|widthFix"
+		 lazy-load="false"
+		 binderror=""
+		 bindload=""
+		/>
+
+		<button class=" txt_30 txt_bold main_bg txt_fff" open-type="getUserInfo" bindgetuserinfo='onGetUserInfo'>授权登录</button>
+		Yoc需要获取您的登录信息,以便更好的为您提供服务
+	</view>
+
+	<image
+	 class="l_main_bottom"
+	 src="../../images/plan/plan_bg@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+
+</view>
+

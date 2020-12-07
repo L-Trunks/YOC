@@ -25,8 +25,8 @@ Page({
     let count = wx.getStorageSync('count') && +wx.getStorageSync('count') || 0
     wx.setStorageSync('count', count + 1)
     if (count > 0) {
-      wx.switchTab({
-        url: '../index/index'
+      wx.redirectTo({
+        url: '../login/index'
       })
     }
 
@@ -37,8 +37,8 @@ Page({
   onClickImg(e) {
     let index = e.currentTarget.dataset.index
     if (index >= this.data.imageItems.length - 1) {
-      wx.switchTab({
-        url: '../index/index'
+      wx.redirectTo({
+        url: '../login/index'
       })
     } else {
       this.setData({

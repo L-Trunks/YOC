@@ -58,3 +58,8 @@ page {
     height: 400rpx;
     margin-top: 60rpx;
 }
+
+.pd_fix_bg{
+    position: fixed;
+    bottom: 0;
+}

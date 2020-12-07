@@ -1,6 +1,5 @@
 @import '../../style/base.wxss';
 page {
-    padding-top: 160rpx;
 }
 
 .t_container {
@@ -50,7 +49,7 @@ page {
     position: fixed;
     width: 130rpx;
     bottom: 0;
-    top: 500rpx;
+    top: 340rpx;
     left: 0;
     z-index: 9;
 }
@@ -203,7 +202,7 @@ page {
 }
 
 .t_dialog_img {
-    width: 470rpx;
+    width: 610rpx;
 }
 
 .t_eye {
@@ -224,9 +223,12 @@ page {
 }
 
 .t_scroll {
-    width: 470rpx;
+    width: 610rpx;
     height: 884rpx;
     position: relative;
-    left: 70rpx;
     top: 70rpx;
+}
+
+.txt_price{
+    color: #f04f48;
 }

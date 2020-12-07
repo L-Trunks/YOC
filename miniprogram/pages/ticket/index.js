@@ -11,6 +11,7 @@ Page({
         autoPlay: true,
         hotBannerIndex: 0,
         hotBannerList: [],
+        isFirst:true
     },
 
     onLoad: function() {
@@ -18,12 +19,27 @@ Page({
         this.getTicketInfo()
     },
     onShow: function() {
+        let count = wx.getStorageSync('ticketCount') && +wx.getStorageSync('ticketCount') || 0
+        wx.setStorageSync('ticketCount', count + 1)
+        if (count > 0) {
+          this.setData({
+              isFirst:false
+          })
+        }
         let value = wx.getLaunchOptionsSync()
         console.log(value)
     },
     hotSwiperChange: function(e) {
         this.setData({
             hotBannerIndex: e.detail.current
+        })
+    },
+    showImage() {
+        let _this = this
+        wx.previewImage({
+            showmenu:true,
+            current: _this.data.showImage, // 当前显示图片的http链接
+            urls: [_this.data.showImage,] // 需要预览的图片http链接列表
         })
     },
     getBannerList() {

@@ -11,7 +11,8 @@ Page({
     takeSession: false,
     requestResult: '',
     isLogin: false,
-    avatarUrl:''
+    avatarUrl:'',
+    showImg:false,
   },
 
   onLoad: function () {
@@ -37,6 +38,11 @@ Page({
     })
   },
   onShow() {
+  },
+  showImg(){
+    this.setData({
+      showImg:true
+    })
   },
   //添加用户
   createUser: function () {

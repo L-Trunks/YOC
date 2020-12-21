@@ -1,26 +1,69 @@
-<view class="l_main" hover-class="none" hover-stop-propagation="false">
+<view class="l_main flex j_start column">
 	<image
-	 class="l_main_top"
-	 src="../../images/first/travel_bg@3x.png"
+	 class=""
+	 src="../../images/first/logo_kong@3x.png"
 	 mode="aspectFit|aspectFill|widthFix"
 	 lazy-load="false"
 	 binderror=""
 	 bindload=""
 	/>
-	<view class="flex column txt_666 txt_20 txt_medium user_login">
+	<image
+	 class=""
+	 src="../../images/first/logo_icon@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
+	<view class="l_main_btn txt_30 txt_fff main_bg" catchtap="onLogin">立即登录</view>
+	<image
+	 class=""
+	 src="../../images/first/logo_info@3x.png"
+	 mode="aspectFit|aspectFill|widthFix"
+	 lazy-load="false"
+	 binderror=""
+	 bindload=""
+	/>
 
-		<button class=" txt_30 txt_bold main_bg txt_fff" open-type="getUserInfo" bindgetuserinfo='onGetUserInfo'>授权登录</button>
-		Yoc需要获取您的登录信息,以便更好的为您提供服务
+</view>
+
+<view
+ class="l_dialog_main"
+ wx:if="{{isShow}}"
+ hover-class="none"
+ hover-stop-propagation="false"
+>
+
+	<view class="flex j_start column txt_666 txt_20 txt_medium user_login">
+		<image
+		 class=""
+		 src="../../images/first/dialog_img@3x.png"
+		 mode="aspectFit|aspectFill|widthFix"
+		 lazy-load="false"
+		 binderror=""
+		 bindload=""
+		/>
+		<image
+		 class=""
+		 src="../../images/first/close_icon@3x.png"
+		 mode="aspectFit|aspectFill|widthFix"
+		 lazy-load="false"
+		 binderror=""
+		 bindload=""
+		 catchtap='cancelLogin'
+		/>
+		<view class="flex  user_login_btn">
+			<button class="txt_24 txt_fff" style="width:auto;white-space:nowrap" catchtap='cancelLogin'>取消登录</button>
+			<button
+			 class="txt_24 main_bg txt_fff"
+			 style="width:auto;white-space:nowrap"
+			 open-type="getUserInfo"
+			 bindgetuserinfo='onGetUserInfo'
+			>授权登录
+			</button>
+		</view>
+
 	</view>
-
-	<image
-	 class="l_main_bottom"
-	 src="../../images/plan/plan_bg@3x.png"
-	 mode="aspectFit|aspectFill|widthFix"
-	 lazy-load="false"
-	 binderror=""
-	 bindload=""
-	/>
 
 </view>
 

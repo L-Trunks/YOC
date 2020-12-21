@@ -3,7 +3,7 @@
 <view class="t_container" hover-class="none" hover-stop-propagation="false">
 	<image
 	 class="t_logo"
-	 src="../../images/first/logo@3x.png"
+	 src="../../images/first/logo_left.png"
 	 mode="aspectFit|aspectFill|widthFix"
 	 lazy-load="false"
 	 binderror=""
@@ -190,6 +190,7 @@
 			 catchtap="hideDetail"
 			 bindload=""
 			/>
+			<view class="show_text txt_24 txt_333">点击图片查看大图</view>
 			<scroll-view class="t_scroll" scroll-y="true">
 				<image
 				 class="t_dialog_img"

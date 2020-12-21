@@ -1,34 +1,79 @@
 @import '../../style/base.wxss';
+.l_main>image:first-child {
+    width: 112rpx;
+    height: 167rpx;
+    margin-top: 81rpx;
+}
 
-.l_main_top,.l_main_bottom{
+.l_main>image:nth-child(2) {
+    width: 416rpx;
+    height: 422rpx;
+    margin-top: 151rpx;
+}
+
+.l_main_btn {
+    padding: 18rpx 82rpx;
+    margin-top: 185rpx;
+    border-radius: 50rpx;
+}
+
+.l_main>image:last-child {
+    width: 459rpx;
+    height: 62rpx;
+    margin-top: 107rpx;
+}
+
+.l_dialog_main {
     position: fixed;
-    left: 0;
-    right: 0;
     top: 0;
-    width: 750rpx;
-    height: 400rpx;
-}
-
-.l_main_bottom{
-    bottom: 0;
-    top: auto;
-}
-
-.user_login{
-    position: fixed;
-    top: 500rpx;
-    margin: 20rpx 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .4);
+    z-index: 9;
 }
 
-.user_login>button{
-    margin: 20rpx 0;
+.user_login {
+    position: fixed;
+    top: 340rpx;
+    left: 71rpx;
+    width: 608rpx;
+    height: 663rpx;
+    background: #fff;
+    border-radius: 15rpx;
+    z-index: 99;
 }
 
-.no_login{
-    width: 150rpx;
-    height: 150rpx;
-    margin: 20rpx 0;
-    border-radius: 50%;
+.user_login>image:first-child {
+    width: 293rpx;
+    height: 445rpx;
+    margin: 62rpx 157rpx 33rpx 158rpx;
+}
+
+.user_login>image:nth-child(2) {
+    width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    top: 40rpx;
+    right: 40rpx;
+}
+
+.user_login_btn {
+    padding: 0 85rpx;
+    margin-top: 30rpx;
+}
+
+.user_login_btn>button {
+    font-weight: 400;
+    border-radius: 30rpx !important;
+    padding: 10rpx 30rpx !important;
+    box-shadow: 0 15rpx 15rpx #a9cff1;
+    margin-left: 60rpx !important;
+}
+
+.user_login_btn>button:first-child {
+    background: #ccc;
+    box-shadow: 0 15rpx 15rpx #eee;
+    margin-right: 60rpx !important;
+    margin-left: 0rpx !important;
 }

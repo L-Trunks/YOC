@@ -8,10 +8,10 @@ page {
 }
 
 .t_logo {
-    width: 139rpx;
-    height: 44rpx;
+    width: 194rpx;
+    height: 51rpx;
     position: absolute;
-    top: 46rpx;
+    top: 30rpx;
     left: 70rpx;
 }
 
@@ -231,4 +231,10 @@ page {
 
 .txt_price{
     color: #f04f48;
+}
+
+.show_text{
+    text-align: center;
+    position: relative;
+    top: 60rpx;
 }

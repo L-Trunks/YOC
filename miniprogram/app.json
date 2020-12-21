@@ -1,6 +1,5 @@
 {
     "pages": [
-        "pages/guidePage/index",
         "pages/login/index",
         "pages/index/index",
         "pages/ticket/index",
@@ -20,7 +19,7 @@
         "backgroundColor": "#F6F6F6",
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#F6F6F6",
-        "navigationBarTitleText": "YOC自由行",
+        "navigationBarTitleText": "空白自由行",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
@@ -35,7 +34,7 @@
             },
             {
                 "pagePath": "pages/scenery/index",
-                "text": "喜欢的景点",
+                "text": "游玩的景点",
                 "iconPath": "images/first/xin1.png",
                 "selectedIconPath": "images/first/xin2.png"
             },

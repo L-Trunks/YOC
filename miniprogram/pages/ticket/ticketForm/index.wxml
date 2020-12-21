@@ -1,19 +1,25 @@
 <view class="tf_container">
-	<image src="../../../images/first/form_top@3x.png" mode="aspectFit|aspectFill|widthFix" />
+	<image src="https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/form_top@3x.png" mode="aspectFit|aspectFill|widthFix" />
 	<form catchsubmit="formSubmit" catchreset="formReset">
 		<view class="tf_cell ">
 			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
 				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
-				<input class="tf_input" name="name" placeholder-class="txt_666" placeholder="姓    名" />
+				<input
+				 class="tf_input"
+				 name="name"
+				 placeholder-class="txt_666"
+				 placeholder="姓    名"
+				/>
 			</view>
 		</view>
 		<view class="tf_cell ">
 			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
 				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
 				<input
-				placeholder-class="txt_666"
+				 placeholder-class="txt_666"
 				 class="tf_input"
-				 name="phone" type="number"
+				 name="phone"
+				 type="number"
 				 maxlength="11"
 				 placeholder="联系电话"
 				/>
@@ -22,7 +28,12 @@
 		<view class="tf_cell ">
 			<view class="flex j_start" hover-class="none" hover-stop-propagation="false">
 				<view class="td_point" hover-class="none" hover-stop-propagation="false" />
-				<input class="tf_input" placeholder-class="txt_666" name="hotelAddress"  placeholder="酒店地址" />
+				<input
+				 class="tf_input"
+				 placeholder-class="txt_666"
+				 name="hotelAddress"
+				 placeholder="酒店地址"
+				/>
 			</view>
 		</view>
 		<view class="tf_cell ">

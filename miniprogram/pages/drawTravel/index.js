@@ -413,8 +413,8 @@ Page({
         let isClick = false //是否点击过
         polyline = _this.data.polyline
         let poi = {
-            latitude: _this.data.markers[id].latitude,
-            longitude: _this.data.markers[id].longitude,
+            latitude: _this.data.markers[id] && _this.data.markers[id].latitude && _this.data.markers[id].latitude || '',
+            longitude: _this.data.markers[id] && _this.data.markers[id].longitude && _this.data.markers[id].longitude || '',
         }
         _this.setData({
             isEdit: true,

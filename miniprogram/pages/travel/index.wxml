@@ -2,7 +2,7 @@
 <template is="goMain" wx:if="{{isFirst}}" />
 <image
  class="travel_bg"
- src="../../images/first/travel_bg@3x.png"
+ src="https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/travel_bg@3x.png"
  mode="aspectFit|aspectFill|widthFix"
  lazy-load="false"
  binderror=""
@@ -116,6 +116,7 @@
 			 catchtap="hideDetail"
 			 bindload=""
 			/>
+			<view class="show_text txt_24 txt_333">点击图片查看大图</view>
 			<scroll-view class="t_scroll" scroll-y="true">
 				<image
 				 class="t_dialog_img"

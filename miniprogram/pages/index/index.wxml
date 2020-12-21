@@ -3,7 +3,7 @@
 		<view class="logo_box" hover-class="none" hover-stop-propagation="false">
 			<image
 			 class="logo"
-			 src="../../images/first/logo.png"
+			 src="../../images/first/logo_kong@3x.png"
 			 binderror=""
 			 bindload=""
 			/>

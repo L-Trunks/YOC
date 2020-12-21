@@ -13,6 +13,7 @@ Page({
     isLogin: false,
     avatarUrl:'',
     showImg:false,
+    isShow:false,
   },
 
   onLoad: function () {
@@ -39,9 +40,14 @@ Page({
   },
   onShow() {
   },
-  showImg(){
+  onLogin(){
     this.setData({
-      showImg:true
+      isShow:true
+    })
+  },
+  cancelLogin(){
+    this.setData({
+      isShow:false
     })
   },
   //添加用户

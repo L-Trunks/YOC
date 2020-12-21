@@ -20,9 +20,9 @@ Page({
         wx.setStorageSync('travelCount', count + 1)
         if (count > 0) {
             console.log('非首次进入周边游')
-        //   this.setData({
-        //       isFirst:false
-        //   })
+          this.setData({
+              isFirst:false
+          })
         }
         let value = wx.getLaunchOptionsSync()
         console.log(value)

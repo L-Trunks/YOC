@@ -93,9 +93,7 @@ Page({
     let _this = this
     let info = wx.getStorageSync('travelInfo')
     console.log(info)
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 7000)
+    
     if (info && JSON.parse(info).place) {
       let travelInfo = JSON.parse(wx.getStorageSync('travelInfo'))
       _this.setFormData(travelInfo)
@@ -110,6 +108,9 @@ Page({
         }
       })
     }
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 7000)
   },
   //设置表格数据
   setFormData: function (data) {
@@ -260,12 +261,14 @@ Page({
           // res.data 包含该记录的数据
           console.log(res.data)
           if (res.data && res.data.length > 0) {
+            
             wx.setStorageSync('indexPage', 1)
             _this.setData({
               showPage1: false,
               showPage2: false
             })
             console.log('用户已存在，不再存入数据库')
+            _this.formatData()
             if (res.data[0].travelInfo) {
               if (res.data[0].travelInfo.selectArr && res.data[0].travelInfo.selectArr.length > 0) {
                 wx.setStorageSync('selectArr', JSON.stringify(res.data[0].travelInfo.selectArr))

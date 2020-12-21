@@ -5,6 +5,7 @@
 }
 
 /* 请求用户数据按钮 */
+
 #btn_user {
     position: fixed;
     width: 100%;
@@ -19,24 +20,14 @@
 /* logo */
 
 .logo {
-    width: 40%;
-    height: 180rpx;
+    width: 112rpx;
+    height: 167rpx;
 }
 
 .logo_box {
     /* margin-top: 40rpx; */
-    padding: 40rpx;
+    padding: 100rpx;
     padding-bottom: 0;
-}
-
-.logo_box:after {
-    position: relative;
-    top: -45rpx;
-    /* left: 180rpx; */
-    font-weight: bold;
-    content: '自由行';
-    color: #6fb5f3;
-    font-size: 32rpx;
 }
 
 .form_box {
@@ -44,7 +35,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .form_item {
@@ -79,6 +69,6 @@
     margin-left: 28rpx;
 }
 
-.main_people{
+.main_people {
     width: 750rpx;
 }

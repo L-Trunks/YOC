@@ -174,3 +174,9 @@
     position: relative;
     top: 70rpx;
 }
+
+.show_text{
+    text-align: center;
+    position: relative;
+    top: 60rpx;
+}

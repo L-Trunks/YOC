@@ -32,6 +32,9 @@ Component({
   methods: {
     //更新用户行程
     updateUserTravelInfo: function (data) {
+      if (JSON.stringify(app.globalData.userInfo)=='{}') {
+        return
+      }
       wx.cloud.callFunction({
         name: 'updateUserTravel',
         data: { ...data },

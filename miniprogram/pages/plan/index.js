@@ -16,9 +16,13 @@ Page({
     rightBgColor: ['#EEC0AB', '#BBF5CF'],
     guidePage: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/plan_page1@3x.png',
     showPage: false,
+    userInfo:  {}
   },
 
   onLoad: function () {
+    this.setData({
+      userInfo:app.globalData.userInfo 
+    })
     if (wx.getStorageSync('planPage') && wx.getStorageSync('planPage')) {
       this.setData({
         showPage: false
@@ -43,6 +47,7 @@ Page({
   },
   onShow() {
     this.onGetUserInfo()
+    console.log(this.data.userInfo,app.globalData.userInfo)
   },
   //引导页
   onClickPage() {
@@ -74,6 +79,17 @@ Page({
           title: "未查询到您的记录哦，快去制定行程计划吧~",
           icon: 'none'
         })
+        // setTimeout(() => {
+        //   wx.redirectTo({
+        //     url: '../login/index',
+        //     success: (result) => {
+
+        //     },
+        //     fail: () => { },
+        //     complete: () => { }
+        //   });
+
+        // }, 500)
         wx.hideLoading();
       }
     })
@@ -112,9 +128,30 @@ Page({
   },
   //编辑行程
   editorTravel() {
+    if (JSON.stringify(app.globalData.userInfo) == '{}') {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../login/index'
+        });
+
+      }, 500)
+      return
+    }
     wx.navigateTo({
       url: '../drawTravel/index'
     });
+  },
+  goLogin() {
+    setTimeout(() => {
+      wx.navigateTo({
+        url: '../login/index'
+      });
+
+    }, 500)
   },
   //保存行程
   saveTravel() {
@@ -148,49 +185,53 @@ Page({
     let right = []
     let startDate = userData.travelInfo.goDate
     let oneDay = 1000 * 60 * 60 * 24
-    for (let i = 0; i < _this.data.days; i++) {
-      if (!userData.travelPlan[i]) {
-        userData.travelPlan[i] = {}
+    if (userData && userData.travelPlan && userData.travelPlan.length > 0) {
+      for (let i = 0; i < _this.data.days; i++) {
+        if (!userData.travelPlan[i]) {
+          userData.travelPlan[i] = {}
+        }
       }
+      Array.from(userData.travelPlan || [], (i, j) => {
+        if (j % 2 === 0) {
+          left.push({
+            ...i,
+            day: j + 1,
+            week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
+            date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd'),
+          })
+        } else if (j % 2 !== 0) {
+          right.push({
+            ...i,
+            day: j + 1,
+            week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
+            date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')
+          })
+        }
+      })
+      Array.from(left, (i, j) => {
+        if (j % 2 === 0) {
+          i.bgColor = _this.data.leftBgColor[0]
+        } else {
+          i.bgColor = _this.data.leftBgColor[1]
+        }
+      })
+      Array.from(right, (i, j) => {
+        if (j % 2 === 0) {
+          i.bgColor = _this.data.rightBgColor[0]
+        } else {
+          i.bgColor = _this.data.rightBgColor[1]
+        }
+      })
+      console.log('左边渲染列表', left)
+      console.log('右边渲染列表', right)
+      _this.setData({
+        leftItems: left,
+        rightItems: right
+      })
     }
 
-    Array.from(userData.travelPlan ||[], (i, j) => {
-      if (j % 2 === 0) {
-        left.push({
-          ...i,
-          day: j + 1,
-          week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
-          date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd'),
-        })
-      } else if (j % 2 !== 0) {
-        right.push({
-          ...i,
-          day: j + 1,
-          week: weekDay(formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')),
-          date: formatDateTime(dateTimeStamp(startDate) + j * oneDay, 'yy-mm-dd')
-        })
-      }
-    })
-    Array.from(left, (i, j) => {
-      if (j % 2 === 0) {
-        i.bgColor = _this.data.leftBgColor[0]
-      } else {
-        i.bgColor = _this.data.leftBgColor[1]
-      }
-    })
-    Array.from(right, (i, j) => {
-      if (j % 2 === 0) {
-        i.bgColor = _this.data.rightBgColor[0]
-      } else {
-        i.bgColor = _this.data.rightBgColor[1]
-      }
-    })
-    console.log('左边渲染列表', left)
-    console.log('右边渲染列表', right)
-    _this.setData({
-      leftItems: left,
-      rightItems: right
-    })
+
+
   },
   //获取openid
   onGetUserInfo: function () {

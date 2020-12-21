@@ -101,3 +101,8 @@
   width: 26rpx;
   height: 32rpx;
 }
+.p_login{
+  display: inline-block;
+  margin-left: 10rpx;
+  color: #6FB5F4;
+}

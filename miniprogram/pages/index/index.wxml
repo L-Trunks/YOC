@@ -81,12 +81,12 @@
 		 bindload=""
 		/>
 	</view>
-	<button
+	<!--<button
 	 wx:if="{{!isLogin}}"
 	 id="btn_user"
 	 open-type="getUserInfo"
 	 bindgetuserinfo='onGetUserInfo'
-	/>
+	/>-->
 	<tabbar activeIdx="{{activeIdx}}" />
 </view>
 <guidePage url="{{guidePage1}}" style="z-index:{{showPage1?999:-1}}" catchtap="onClickPage1" wx:if="{{showPage1}}">

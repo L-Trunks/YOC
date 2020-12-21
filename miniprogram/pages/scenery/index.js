@@ -87,7 +87,7 @@ Page({
         this.setData({
           showPage: false
         })
-      }else{
+      } else {
         this.setData({
           showPage: true
         })
@@ -111,7 +111,7 @@ Page({
         this.setData({
           showPage: false
         })
-      }else{
+      } else {
         this.setData({
           showPage: true
         })
@@ -310,7 +310,18 @@ Page({
   },
   //点击确认
   confirmScenery: function () {
-
+    if (JSON.stringify(app.globalData.userInfo) == '{}') {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../login/index'
+        });
+      }, 500)
+      return
+    }
     wx.navigateTo({
       url: './confirmScenery/index'
     })

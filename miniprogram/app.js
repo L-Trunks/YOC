@@ -31,6 +31,7 @@ App({
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     nowIndex: 0,
     nextIndex: 0,
-    selectArr: []
+    selectArr: [],
+    userInfo:{}
   }
 })

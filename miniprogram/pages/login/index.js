@@ -11,12 +11,15 @@ Page({
     takeSession: false,
     requestResult: '',
     isLogin: false,
-    avatarUrl:'',
-    showImg:false,
-    isShow:false,
+    avatarUrl: '',
+    showImg: false,
+    isShow: false,
   },
 
   onLoad: function () {
+
+  },
+  onShow() {
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -38,22 +41,25 @@ Page({
       }
     })
   },
-  onShow() {
-  },
-  onLogin(){
+  onLogin() {
     this.setData({
-      isShow:true
+      isShow: true
     })
   },
-  cancelLogin(){
+  goIndex() {
+    wx.switchTab({
+      url: '../index/index'
+    })
+  },
+  cancelLogin() {
     this.setData({
-      isShow:false
+      isShow: false
     })
   },
   //添加用户
   createUser: function () {
     wx.showLoading({
-      title:'加载中' ,
+      title: '加载中',
       mask: true
     });
     let user = app.globalData.userInfo
@@ -77,13 +83,13 @@ Page({
       wx.switchTab({
         url: '../index/index'
       })
-    }).catch(err=>{
+    }).catch(err => {
       wx.hideLoading()
       console.log(err)
       wx.showToast({
-        title:err
+        title: err
       })
-      
+
     })
   },
   //获取用户信息
@@ -109,10 +115,10 @@ Page({
       data: {},
       success: res => {
         wx.showLoading({
-          title:'加载中' ,
+          title: '加载中',
           mask: true
         });
-          
+
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         db.collection('user').where({ _openid: app.globalData.openid }).get().then(res => {

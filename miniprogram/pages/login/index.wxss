@@ -12,9 +12,11 @@
 }
 
 .l_main_btn {
-    padding: 18rpx 82rpx;
-    margin-top: 185rpx;
+    padding: 16rpx 61rpx;
     border-radius: 50rpx;
+    margin: 0 30rpx;
+    margin-top: 185rpx;
+    background: cornflowerblue;
 }
 
 .l_main>image:last-child {

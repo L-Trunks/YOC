@@ -116,12 +116,12 @@
 </block>
 </view>
 
-<view wx:if="{{!leftItems.length&&!rightItems.length}}" class="no_travel_plan txt_24 txt_999 txt_medium">
-	还未制定行程计划哦~
 </view>
+<view wx:if="{{!leftItems.length&&!rightItems.length}}" class="no_travel_plan txt_24 txt_999 txt_medium">
+	还未制定行程计划哦~<view class="p_login" catchtap="goLogin" wx:if="{{!userInfo.nickName}}">点我登录</view>
+	  
 </view>
 </view>
 <tabbar activeIdx="{{activeIdx}}" />
-<guidePage url="{{guidePage}}" catchtap="onClickPage" wx:if="{{showPage}}">
-	
-</guidePage>
+<guidePage url="{{guidePage}}" catchtap="onClickPage" wx:if="{{showPage}}" />
+

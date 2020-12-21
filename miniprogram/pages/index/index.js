@@ -32,7 +32,7 @@ Page({
     let _this = this.data
     let now = new Date()
     let end = +now + 1000 * 60 * 60 * 24 * 365 * 99
-    
+
     this.setData({
       nowDate: formatDateTime(now, 'yy-mm-dd'),
       goDate: formatDateTime(now, 'yy-mm-dd'),
@@ -55,7 +55,7 @@ Page({
         showPage1: false,
         showPage2: false
       })
-    }else{
+    } else {
       this.setData({
         showPage1: true,
         showPage2: false
@@ -93,7 +93,7 @@ Page({
     let _this = this
     let info = wx.getStorageSync('travelInfo')
     console.log(info)
-    
+
     if (info && JSON.parse(info).place) {
       let travelInfo = JSON.parse(wx.getStorageSync('travelInfo'))
       _this.setFormData(travelInfo)
@@ -177,6 +177,9 @@ Page({
     })
   },
   updateStorageTravelInfo: function () {
+    if (JSON.stringify(app.globalData.userInfo) == '{}') {
+      return
+    }
     try {
       let _this = this.data
       if (dateTimeStamp(_this.arriveDate) < dateTimeStamp(_this.goDate)) {
@@ -203,6 +206,19 @@ Page({
   },
   //gogogo
   start() {
+    if (JSON.stringify(app.globalData.userInfo) == '{}') {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../login/index'
+        });
+
+      }, 500)
+      return
+    }
     this.updateUserTravelInfo(JSON.parse(wx.getStorageSync('travelInfo')))
     // app.globalData.travelInfo = travelInfo
     wx.switchTab({
@@ -236,6 +252,9 @@ Page({
   },
   //更新用户行程
   updateUserTravelInfo: function (data) {
+    if (JSON.stringify(app.globalData.userInfo) == '{}') {
+      return
+    }
     wx.cloud.callFunction({
       name: 'updateUserTravel',
       data: { ...data },
@@ -261,7 +280,7 @@ Page({
           // res.data 包含该记录的数据
           console.log(res.data)
           if (res.data && res.data.length > 0) {
-            
+
             wx.setStorageSync('indexPage', 1)
             _this.setData({
               showPage1: false,

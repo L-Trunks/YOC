@@ -304,15 +304,15 @@ Page({
                       url: '../plan/index'
                     })
                   } else {
-                    wx.showToast({
-                      title: '还未制定行程计划哦',
-                      icon: 'none'
-                    })
-                    setTimeout(() => {
-                      wx.navigateTo({
-                        url: '../drawTravel/index'
-                      });
-                    }, 500)
+                    // wx.showToast({
+                    //   title: '还未制定行程计划哦',
+                    //   icon: 'none'
+                    // })
+                    // setTimeout(() => {
+                    //   wx.navigateTo({
+                    //     url: '../drawTravel/index'
+                    //   });
+                    // }, 500)
                   }
                 } else if (res.data[0].travelInfo) {
                   wx.switchTab({

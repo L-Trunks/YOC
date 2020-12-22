@@ -20,8 +20,8 @@
 }
 
 .l_main>image:last-child {
-    width: 459rpx;
-    height: 62rpx;
+    width: 559rpx;
+    height: 92rpx;
     margin-top: 107rpx;
 }
 

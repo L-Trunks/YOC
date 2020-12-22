@@ -10,7 +10,7 @@ module.exports = [
     {
         'index':2,
         "pagePath": "pages/scenery/index",
-        "text": "喜欢的景点",
+        "text": "游玩的景点",
         "iconPath": "/images/first/xin1.png",
         "selectedIconPath": "/images/first/xin2.png",
         'auth':0

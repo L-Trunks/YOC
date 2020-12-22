@@ -20,13 +20,13 @@
 /* logo */
 
 .logo {
-    width: 112rpx;
-    height: 167rpx;
+    width: 122rpx;
+    height: 177rpx;
 }
 
 .logo_box {
     /* margin-top: 40rpx; */
-    padding: 100rpx;
+    padding: 70rpx;
     padding-bottom: 0;
 }
 
@@ -70,5 +70,6 @@
 }
 
 .main_people {
-    width: 750rpx;
+    width: 650rpx;
+    height: 450rpx;
 }

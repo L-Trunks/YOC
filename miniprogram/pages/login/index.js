@@ -17,12 +17,14 @@ Page({
   },
 
   onLoad: function () {
-
+    
   },
   onShow() {
+    wx.showLoading()
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        wx.hideLoading()
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
@@ -38,6 +40,9 @@ Page({
             }
           })
         }
+      },
+      complete:()=>{
+        wx.hideLoading()
       }
     })
   },
@@ -143,15 +148,18 @@ Page({
                       url: '../plan/index'
                     })
                   } else {
-                    wx.showToast({
-                      title: '还未制定行程计划哦',
-                      icon: 'none'
+                    wx.switchTab({
+                      url: '../index/index'
                     })
-                    setTimeout(() => {
-                      wx.navigateTo({
-                        url: '../drawTravel/index'
-                      });
-                    }, 500)
+                    // wx.showToast({
+                    //   title: '还未制定行程计划哦',
+                    //   icon: 'none'
+                    // })
+                    // setTimeout(() => {
+                    //   wx.navigateTo({
+                    //     url: '../drawTravel/index'
+                    //   });
+                    // }, 500)
                   }
                 } else if (res.data[0].travelInfo) {
                   wx.switchTab({

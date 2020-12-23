@@ -89,9 +89,9 @@
 	/>-->
 	<tabbar activeIdx="{{activeIdx}}" />
 </view>
-<guidePage url="{{guidePage1}}" style="z-index:{{showPage1?999:-1}}" catchtap="onClickPage1" wx:if="{{showPage1}}">
+<!--<guidePage url="{{guidePage1}}" style="z-index:{{showPage1?999:-1}}" catchtap="onClickPage1" wx:if="{{showPage1}}">
 	<cover-view class="guidebtn"  scroll-top="0" />
-</guidePage>
+</guidePage> -->
 <guidePage url="{{guidePage2}}" style="z-index:{{showPage2?999:-1}}"  catchtap="onClickPage2" wx:if="{{showPage2}}">
 	
 </guidePage>

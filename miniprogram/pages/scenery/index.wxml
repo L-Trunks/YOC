@@ -20,6 +20,7 @@
 				 class="txt_24"
 				 value=""
 				 type="text"
+				 style='width: 80%;padding-left: 64rpx;position: relative;left: -64rpx;'
 				 placeholder="请输入景点名称"
 				 placeholder-style="color:#888"
 				 bindinput=""
@@ -142,8 +143,11 @@
 	</view>
 	<image catchtap="showHours" class="show_lock" src="../../images/scenery/lock_07.png" />
 </view>
-<guidePage url="{{guidePage}}" style="z-index:{{showPage?999:-1}}"  catchtap="onClickPage" wx:if="{{showPage}}">
-	
-</guidePage>
+<guidePage
+ url="{{guidePage}}"
+ style="z-index:{{showPage?999:-1}}"
+ catchtap="onClickPage"
+ wx:if="{{showPage}}"
+/>
 <tabbar activeIdx="{{activeIdx}}" />
 

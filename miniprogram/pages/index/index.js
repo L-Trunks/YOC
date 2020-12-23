@@ -20,9 +20,9 @@ Page({
     goDate: '',//开始时间
     endDate: '',//选择器截止时间
     arriveDate: '',//结束时间
-    guidePage1: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/index_page1@3x.png',
+    // guidePage1: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/index_page1@3x.png',
     guidePage2: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/index_page2@3x.png',
-    showPage1: false,
+    // showPage1: false,
     showPage2: false
   },
 
@@ -52,13 +52,13 @@ Page({
     wx.setStorageSync('travelInfo', JSON.stringify(travelInfo))
     if (wx.getStorageSync('indexPage') && wx.getStorageSync('indexPage')) {
       this.setData({
-        showPage1: false,
+        // showPage1: false,
         showPage2: false
       })
     } else {
       this.setData({
-        showPage1: true,
-        showPage2: false
+        // showPage1: true,
+        showPage2: true
       })
     }
     // 获取用户信息
@@ -336,16 +336,16 @@ Page({
     })
   },
   //引导页
-  onClickPage1() {
-    this.setData({
-      showPage1: false,
-      showPage2: true
-    })
-  },
+  // onClickPage1() {
+  //   this.setData({
+  //     showPage1: false,
+  //     showPage2: true
+  //   })
+  // },
   onClickPage2() {
     wx.setStorageSync('indexPage', 1)
     this.setData({
-      showPage1: false,
+      // showPage1: false,
       showPage2: false
     })
   }

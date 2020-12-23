@@ -336,7 +336,7 @@ Page({
     }
     query.select('#search').boundingClientRect((rect) => {
       let top = rect.top
-      if (top <= 5) {  //临界值，根据自己的需求来调整
+      if (top <= 1) {  //临界值，根据自己的需求来调整
         this.setData({
           isTop: true    //是否固定导航栏
         })

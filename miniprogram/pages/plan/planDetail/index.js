@@ -21,9 +21,9 @@ Page({
         userLocation: {},
         hour: 0,
         guidePage1: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/plandetail_page1@3x.png',
-        guidePage2: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/plandetail_page2@3x.png',
+        // guidePage2: 'https://yoc-test-fxk60-1302830806.tcloudbaseapp.com/travel/guidePage/plandetail_page2@3x.png',
         showPage1: false,
-        showPage2: false
+        // showPage2: false
     },
 
     onLoad: function (option) {
@@ -37,12 +37,12 @@ Page({
         if (wx.getStorageSync('pdPage') && wx.getStorageSync('pdPage')) {
             this.setData({
                 showPage1: false,
-                showPage2: false
+                // showPage2: false
             })
         } else {
             this.setData({
                 showPage1: true,
-                showPage2: false
+                // showPage2: false
             })
         }
     },
@@ -113,18 +113,19 @@ Page({
     },
     //引导页
     onClickPage1() {
-        this.setData({
-            showPage1: false,
-            showPage2: true
-        })
-    },
-    onClickPage2() {
         wx.setStorageSync('pdPage', 1)
         this.setData({
             showPage1: false,
-            showPage2: false
+            // showPage2: true
         })
     },
+    // onClickPage2() {
+    //     wx.setStorageSync('pdPage', 1)
+    //     this.setData({
+    //         showPage1: false,
+    //         showPage2: false
+    //     })
+    // },
     //获取定位
     getLocation() {
         let _this = this

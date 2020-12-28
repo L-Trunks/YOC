@@ -1,15 +1,15 @@
 //时间戳转时间类型
 export const formatDateTime = function(inputTime, type) {
-    var date = new Date(inputTime);
-    var y = date.getFullYear();
-    var m = date.getMonth() + 1;
+    let date = new Date(inputTime);
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
     m = m < 10 ? ('0' + m) : m;
-    var d = date.getDate();
+    let d = date.getDate();
     d = d < 10 ? ('0' + d) : d;
-    var h = date.getHours();
+    let h = date.getHours();
     h = h < 10 ? ('0' + h) : h;
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
     minute = minute < 10 ? ('0' + minute) : minute;
     second = second < 10 ? ('0' + second) : second;
     let resultMap = {
@@ -44,9 +44,9 @@ export const getFirstPic = (str) => {
 
 //所有图片的src
 export const getimgsrc = (htmlstr) => {
-    var reg = /<img.+?src=('|")?([^'"]+)('|")?(?:\s+|>)/gim
-    var arr = []
-    var tem = null
+    let reg = /<img.+?src=('|")?([^'"]+)('|")?(?:\s+|>)/gim
+    let arr = []
+    let tem = null
     while (tem = reg.exec(htmlstr)) {
         arr.push(tem[2])
     }
@@ -109,11 +109,11 @@ export const dateDiff = (sDate1, sDate2) => { //sDate1和sDate2是2002-12-18格�
 
 //根据经纬度计算距离
 export const distance = (la1, lo1, la2, lo2) => {
-    var La1 = la1 * Math.PI / 180.0;
-    var La2 = la2 * Math.PI / 180.0;
-    var La3 = La1 - La2;
-    var Lb3 = lo1 * Math.PI / 180.0 - lo2 * Math.PI / 180.0;
-    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
+    let La1 = la1 * Math.PI / 180.0;
+    let La2 = la2 * Math.PI / 180.0;
+    let La3 = La1 - La2;
+    let Lb3 = lo1 * Math.PI / 180.0 - lo2 * Math.PI / 180.0;
+    let s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
     s = s * 6378.137;
     s = Math.round(s * 10000) / 10000;
     s = s.toFixed(2);
@@ -131,14 +131,10 @@ export const weekDay = (date) => {
 //生成十六进制颜色值
 
 export const getColor = () => {
-    //定义数组，值为1—f
     let num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
-    //颜色的值为16进制并且开头为#，
     let str = "#";
-    //我们需要的是一个6位的十六进制所以循环6次
-    for (var i = 0; i < 6; i++) {
-        //随机产生的数做数组的索引，索引值只能为整数所以需要转换为整型通过索引获得数组的值,
-        str += num[parseInt(Math.random() * 16)];
+    for (let i = 0; i < 6; i++) {
+        str += num[Math.floor(Math.random() * 16)];
     }
     return str;
 }

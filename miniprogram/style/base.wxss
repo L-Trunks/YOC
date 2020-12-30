@@ -135,13 +135,11 @@
     -webkit-flex-direction: column;
 }
 
-
 /* 按钮背景色 */
 
 .btn_bg {
     background: #f04f48;
 }
-
 
 /* 主题色 */
 
@@ -152,7 +150,6 @@
 .main_txt {
     color: #6fb5f3;
 }
-
 
 /* 红色按钮 */
 
@@ -168,7 +165,6 @@
     font-weight: bold;
     font-size: 36rpx;
 }
-
 
 /* 文本大小 */
 
@@ -232,7 +228,6 @@
     font-size: 16rpx;
 }
 
-
 /* 字重 */
 
 .txt_bold {
@@ -250,7 +245,6 @@
 .txt_light {
     font-weight: 300;
 }
-
 
 /* 字体颜色 */
 
@@ -290,7 +284,6 @@
     color: #cccccc
 }
 
-
 /* 行内块元素 */
 
 .inline_block {
@@ -300,7 +293,6 @@
 .inline {
     display: inline
 }
-
 
 /* 已加载全部数据 */
 
@@ -319,7 +311,7 @@
     background: #f5f5f5;
 }
 
-.guidebtn{
+.guidebtn {
     position: absolute;
     left: 0;
     right: 0;

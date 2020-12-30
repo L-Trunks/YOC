@@ -1,5 +1,5 @@
 //时间戳转时间类型
-export const formatDateTime = function(inputTime, type) {
+export const formatDateTime = function (inputTime, type) {
     let date = new Date(inputTime);
     let y = date.getFullYear();
     let m = date.getMonth() + 1;
@@ -20,13 +20,13 @@ export const formatDateTime = function(inputTime, type) {
     }
     return resultMap[type];
 };
-export const randomsort = function(a, b) {
+export const randomsort = function (a, b) {
     return Math.random() > .5 ? true : false;
     //随机返回true或false
 }
 
 //日期转时间戳
-export const dateTimeStamp = function(data) {
+export const dateTimeStamp = function (data) {
     let date = new Date(data);
     let timestamp = date.getTime()
     return timestamp
@@ -36,7 +36,7 @@ export const dateTimeStamp = function(data) {
 //第一张图片src
 export const getFirstPic = (str) => {
     let data = ''
-    str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/, function(match, capture) {
+    str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/, function (match, capture) {
         data = capture
     })
     return data
@@ -140,7 +140,7 @@ export const getColor = () => {
 }
 
 //数组去重
-export const getSingleArr = (arr)=>{
+export const getSingleArr = (arr) => {
     let tempObj = {}
     let result = []
 

@@ -1,5 +1,7 @@
 <view class='tp_container'>
-	
+	<view class="" hover-class="none" hover-stop-propagation="false">
+        
+    </view>
 </view>
   
   

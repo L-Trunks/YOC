@@ -8,6 +8,7 @@
         "pages/plan/index",
         "pages/drawTravel/index",
         "pages/drawTravel/hotelList/index",
+        "pages/scenery/confirmScenery/index",
         "pages/scenery/sceneryDetail/index",
         "pages/plan/planDetail/index",
         "pages/travel/travelForm/index",

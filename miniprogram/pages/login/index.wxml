@@ -15,9 +15,9 @@
 	 binderror=""
 	 bindload=""
 	/>
-	<view class="l_main_btn_box flex">
+	<view class="l_main_btn_box flex">	
+		<view class="l_main_btn txt_30 txt_fff" catchtap="goIndex">先行浏览</view>
 		<view class="l_main_btn txt_30 txt_fff main_bg" catchtap="onLogin">立即登录</view>
-		<view class="l_main_btn txt_30 txt_fff" catchtap="goIndex">我先看看</view>
 	</view>
 	<image
 	 class=""

@@ -1,7 +1,7 @@
 //index.js
 const app = getApp()
 const db = wx.cloud.database()
-import { getSingleArr } from '../../util/util'
+import { getSingleArr,dateTimeStamp } from '../../util/util'
 Page({
   data: {
     statusBarHeight: 20,
@@ -310,6 +310,7 @@ Page({
   },
   //点击确认
   confirmScenery: function () {
+    let _this = this
     if (JSON.stringify(app.globalData.userInfo) == '{}') {
       wx.showToast({
         title: '请先登录',
@@ -322,9 +323,23 @@ Page({
       }, 500)
       return
     }
-    wx.navigateTo({
-      url: './confirmScenery/index'
+    console.log(wx.getStorageSync('selectArr'))
+    db.collection('user').where({ _openid: app.globalData.openid }).update({
+      data: {
+        travelInfo: {
+          hours: wx.getStorageSync('travelHour'),
+          selectArr: _this.data.selectArr,
+          sHUpdateTime: dateTimeStamp(new Date()) || ''
+        },
+        travelPlan: []
+      }
+    }).then(res => {
+      console.log('更新用户行程返回值:', res)
+      wx.navigateTo({
+        url: './confirmScenery/index'
+      })
     })
+  
   },
   //监听屏幕滚动 判断上下滚动  
   onPageScroll: function (ev) {

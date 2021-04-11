@@ -420,38 +420,38 @@ Page({
             isEdit: true,
             datumScenery: _this.data.markers[id]
         })
-        if (!_this.data.isShow || !_this.data.isTravel) {
-            if (!_this.data.isTravel) {
-                if (!_this.data.travelPlan[_this.data.nowIndex] || _this.data.travelPlan[_this.data.nowIndex].length === 0) {
-                    wx.showToast({
-                        title: `第${_this.data.nowDay}天行程路线未制定`,
-                        icon: 'none'
-                    });
-                    return
-                }
-                if (_this.data.travelPlan.length > 0 && _this.data.travelPlan[_this.data.nowIndex].hotelInfo && _this.data.travelPlan[_this.data.nowIndex].hotelInfo && _this.data.travelPlan[_this.data.nowIndex].hotelInfo.title) {
-                    wx.showModal({
-                        title: '提示',
-                        content: `确定重新选择第${_this.data.nowDay}天的酒店吗？`,
-                        showCancel: true,
-                        cancelText: '取消',
-                        cancelColor: '#000000',
-                        confirmText: '确定',
-                        confirmColor: '#6fb5f3',
-                        success: (result) => {
-                            if (result.confirm) {
-                                _this.enterHotel(poi)
-                            } else {
-                                return
-                            }
-                        }
-                    });
-                } else {
-                    _this.enterHotel(poi)
-                }
-            }
-            return
-        }
+        // if (!_this.data.isShow || !_this.data.isTravel) {
+        //     if (!_this.data.isTravel) {
+        //         if (!_this.data.travelPlan[_this.data.nowIndex] || _this.data.travelPlan[_this.data.nowIndex].length === 0) {
+        //             wx.showToast({
+        //                 title: `第${_this.data.nowDay}天行程路线未制定`,
+        //                 icon: 'none'
+        //             });
+        //             return
+        //         }
+        //         if (_this.data.travelPlan.length > 0 && _this.data.travelPlan[_this.data.nowIndex].hotelInfo && _this.data.travelPlan[_this.data.nowIndex].hotelInfo && _this.data.travelPlan[_this.data.nowIndex].hotelInfo.title) {
+        //             wx.showModal({
+        //                 title: '提示',
+        //                 content: `确定重新选择第${_this.data.nowDay}天的酒店吗？`,
+        //                 showCancel: true,
+        //                 cancelText: '取消',
+        //                 cancelColor: '#000000',
+        //                 confirmText: '确定',
+        //                 confirmColor: '#6fb5f3',
+        //                 success: (result) => {
+        //                     if (result.confirm) {
+        //                         _this.enterHotel(poi)
+        //                     } else {
+        //                         return
+        //                     }
+        //                 }
+        //             });
+        //         } else {
+        //             _this.enterHotel(poi)
+        //         }
+        //     }
+        //     return
+        // }
 
         polyline.map(i => {
             i.points ? i.points.map(j => {

@@ -17,10 +17,8 @@ Page({
   },
 
   onLoad: function () {
-    
-  },
-  onShow() {
     wx.showLoading()
+    console.log(1)
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -45,6 +43,9 @@ Page({
         wx.hideLoading()
       }
     })
+  },
+  onShow() {
+
   },
   onLogin() {
     this.setData({
@@ -141,7 +142,7 @@ Page({
                 wx.setStorageSync('travelHour', res.data[0].travelInfo.hours)
               }
               wx.setStorageSync('travelInfo', JSON.stringify(res.data[0].travelInfo))
-              if (app.globalData.nowIndex === 0) {
+              // if (app.globalData.nowIndex === 0) {
                 if (res.data[0].travelPlan) {
                   if (res.data[0].travelPlan.length) {
                     wx.switchTab({
@@ -166,7 +167,7 @@ Page({
                     url: '../scenery/index'
                   })
                 }
-              }
+              // }
             }
           } else {
             wx.hideLoading()

@@ -505,11 +505,11 @@ Page({
         })
         let [...tempArr] = _this.data.imageItems
         let [...tempPolyLine] = _this.data.polyline
-        for (let i = 0; i < _this.data.days; i++) {
-            _this.setData({
-                [`showPolyLine[${i}]`]: null
-            })
-        }
+        // for (let i = 0; i < _this.data.days; i++) {
+        //     _this.setData({
+        //         [`showPolyLine[${i}]`]: null
+        //     })
+        // }
         Array.from(tempArr, (i, j) => {
             if (j === index) {
                 _this.setData({

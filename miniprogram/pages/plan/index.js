@@ -23,7 +23,7 @@ Page({
     this.setData({
       userInfo:app.globalData.userInfo 
     })
-    if (wx.getStorageSync('planPage') && wx.getStorageSync('planPage')&&app.globalData.userInfo.nickname) {
+    if (wx.getStorageSync('planPage') && wx.getStorageSync('planPage')) {
       this.setData({
         showPage: false
       })
